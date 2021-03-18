@@ -14,7 +14,7 @@ public class PrimaryController {
     public void switchToSecondary() throws IOException {
         App.setRoot("secondary");
     }
-
+    @FXML
     public void testi(ActionEvent actionEvent) {
         System.out.println("tets");
     }
