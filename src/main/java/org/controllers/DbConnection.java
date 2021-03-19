@@ -4,11 +4,11 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 
 public class DbConnection {
-    MongoClient mongoClient;
+    static MongoClient mongoClient;
 
     public boolean connect() {
         try {
-            this.mongoClient = new MongoClient(new MongoClientURI("mongodb+srv://mehdi-java:Password1234@cluster0.dw27l.mongodb.net/"));
+            mongoClient = new MongoClient(new MongoClientURI("mongodb+srv://mehdi-java:Password1234@cluster0.dw27l.mongodb.net/"));
             System.out.println("Successful database connection established. \n");
             return true;
         } catch (Exception exception) {
