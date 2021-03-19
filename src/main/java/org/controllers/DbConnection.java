@@ -6,9 +6,8 @@ import com.mongodb.MongoClientURI;
 public class DbConnection {
     static MongoClient mongoClient;
 
-    public boolean connect() {
+    public static boolean connect() {
         try {
-            mongoClient = new MongoClient(new MongoClientURI("mongodb+srv://mehdi-java:Password1234@cluster0.dw27l.mongodb.net/"));
             System.out.println("Successful database connection established. \n");
             return true;
         } catch (Exception exception) {
