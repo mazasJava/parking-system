@@ -6,5 +6,5 @@ module org.example {
     opens org.views to javafx.fxml;
     exports org.views;
     exports org.controllers;
-    exports org.controllers.users;
+    exports org.controllers.userControllers;
 }

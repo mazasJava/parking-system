@@ -1,8 +1,7 @@
-package org.controllers.users;
+package org.controllers.userControllers;
 
 import com.mongodb.ErrorCategory;
 import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
 import com.mongodb.MongoWriteException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
