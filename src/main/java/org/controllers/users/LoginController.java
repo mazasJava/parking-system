@@ -20,7 +20,6 @@ public class LoginController {
     public TextField usernameTextField;
     @FXML
     public TextField passwordTextField;
-    DbConnection connection = new DbConnection();
     MongoClient mongoClient;
 
     @FXML
@@ -30,7 +29,7 @@ public class LoginController {
 
     @FXML
     public void showUser(ActionEvent event) {
-        mongoClient = connection.getConnection();
+        mongoClient = DbConnection.getConnection();
         final MongoDatabase database = mongoClient.getDatabase("PARKING_MANAGEMENT_SYSTEM");
         MongoCollection<Document> collection = database.getCollection("users");
 

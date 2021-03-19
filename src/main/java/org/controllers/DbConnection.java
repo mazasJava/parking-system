@@ -16,7 +16,7 @@ public class DbConnection {
             return false;
         }
     }
-    public MongoClient getConnection() {
+    public static MongoClient getConnection() {
         return mongoClient;
     }
     public static void main(String [] args){
