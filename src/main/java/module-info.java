@@ -3,8 +3,8 @@ module org.example {
     requires javafx.fxml;
     requires mongo.java.driver;
 
-    opens org.views to javafx.fxml;
-    exports org.views;
+    opens org.mainapp to javafx.fxml;
+    exports org.mainapp;
     exports org.controllers;
-    exports org.controllers.userControllers;
+    exports org.controllers.users;
 }

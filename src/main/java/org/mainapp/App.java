@@ -1,4 +1,4 @@
-package org.views;
+package org.mainapp;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +18,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("login"), 640, 480);
+        scene = new Scene(loadFXML("mainapp/login.fxml"), 640, 480);
         stage.setScene(scene);
         stage.show();
 //        LoginController log = new LoginController();
@@ -35,9 +35,11 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        DbConnection.connect();
-//        dbcon.connect();
+//        DbConnection.connect();
+        DbConnection dbcon = new DbConnection();
+        dbcon.connect();
         launch();
+
     }
 
 }
