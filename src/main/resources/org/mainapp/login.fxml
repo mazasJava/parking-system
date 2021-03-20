@@ -10,7 +10,7 @@
       <AnchorPane prefHeight="407.0" prefWidth="228.0" BorderPane.alignment="CENTER">
          <ImageView fitHeight="430.0" fitWidth="224.0" layoutX="2.0" layoutY="41.0" pickOnBounds="true"
                     preserveRatio="true">
-            <Image url="@../../imgs/coronavirus.jpg"/>
+<!--            <Image url="@../../imgs/Groupe 1220.png"/>-->
          </ImageView>
       </AnchorPane>
    </left>
