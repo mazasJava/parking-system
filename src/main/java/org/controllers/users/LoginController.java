@@ -1,55 +1,38 @@
 package org.controllers.users;
 
-import com.mongodb.ErrorCategory;
 import com.mongodb.MongoClient;
-import com.mongodb.MongoWriteException;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import org.bson.Document;
-import org.controllers.DbConnection;
+import org.models.User;
+
+import java.util.Arrays;
 
 public class LoginController {
-    @FXML
-    public Button loginButton;
-    @FXML
-    public TextField usernameTextField;
-    @FXML
-    public TextField passwordTextField;
-    public MongoClient mongoClient;
+
+
 
     @FXML
-    public String getUserInfo() {
-        return usernameTextField.getText().toString() + "/" + passwordTextField.getText().toString();
-    }
+    public void checkAuth(ActionEvent event)
+    {
+        User user = new User("admin","admin");
+        System.out.println("user created");
+        MongoCredential credential = MongoCredential.createCredential(user.getName(), "users", user.getPassword().toCharArray());
+        System.out.println(credential);
 
-    @FXML
-    public void showUser(ActionEvent event) {
-        mongoClient = DbConnection.getConnection();
-        MongoDatabase database = mongoClient.getDatabase("PARKING_MANAGEMENT_SYSTEM");
-        MongoCollection<Document> collection = database.getCollection("users");
-        String user = getUserInfo();
-        Document user1 = new Document();
-        user1
-                .append("name", user.split("/")[0])
-                .append("email", user.split("/")[1])
-                .append("phone", "0635808481");
         try {
-            collection.insertOne(user1);
-            System.out.println("Successfully inserted documents. \n");
-        } catch (MongoWriteException mwe) {
-            if (mwe.getError().getCategory().equals(ErrorCategory.DUPLICATE_KEY)) {
-                System.out.println("Document with that id already exists");
-            }
-        }
-    }
+            @Deprecated
+            MongoClient mongoClient = new MongoClient(new ServerAddress("mongodb+srv://mehdi-java:Password1234@cluster0.dw27l.mongodb.net/PARKING_MANAGEMENT_SYSTEM?retryWrites=true&w=majority"),Arrays.asList(credential));
 
-    @FXML
-    public int checkLoginInfo(ActionEvent event) {
-        return 0;
+        }
+        catch (Exception e)
+        {
+            System.out.println("err");
+        }
+//        MongoClient mongoClients = new MongoClient();
+
+        System.out.println("con db 2 ");
     }
 
 }

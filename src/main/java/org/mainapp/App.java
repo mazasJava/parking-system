@@ -35,9 +35,9 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-//        DbConnection.connect();
-        DbConnection dbcon = new DbConnection();
-        dbcon.connect();
+        DbConnection.connect();
+//        DbConnection dbcon = new DbConnection();
+//        dbcon.connect();
         launch();
 
     }
