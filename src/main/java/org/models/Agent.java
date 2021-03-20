@@ -2,49 +2,49 @@ package org.models;
 
 public class Agent {
 
-    private String fastName;
+    private String lastName;
     private String userName;
     private String cin;
 
     public Agent() {
     }
 
-    public Agent(String nom, String prenom, String numCin) {
-        this.fastName = nom;
-        this.userName = prenom;
-        this.cin = numCin;
+    public Agent(String lastName, String userName, String cin) {
+        this.lastName = lastName;
+        this.userName = userName;
+        this.cin = cin;
     }
 
-    public String getNom() {
-        return fastName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setNom(String fastName) {
-        this.fastName = fastName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getPrenom() {
+    public String getUserName() {
         return userName;
     }
 
-    public void setPrenom(String userName) {
+    public void setUserName(String userName) {
         this.userName = userName;
     }
 
-    public String getNumCin() {
+    public String getCin() {
         return cin;
     }
 
-    public void setNumCin(String cin) {
+    public void setCin(String cin) {
         this.cin = cin;
     }
 
     @Override
     public String toString() {
         return "Agent{" +
-                "nom='" + fastName + '\'' +
-                ", prenom='" + userName + '\'' +
-                ", numCin='" + cin + '\'' +
+                "lastName='" + lastName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", cin='" + cin + '\'' +
                 '}';
     }
 }

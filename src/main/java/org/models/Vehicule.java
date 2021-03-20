@@ -10,7 +10,7 @@ public class Vehicule {
     public Vehicule() {
     }
 
-    public Vehicule(int idVeh, String iMatricule, Date dateEntree, Date dateSortie) {
+    public Vehicule(int idVeh, String iMatricule) {
         this.idVeh = idVeh;
         this.iMatricule = iMatricule;
     }

@@ -4,38 +4,38 @@ import java.util.Date;
 
 public class Reservation {
 
-    private Date dateEntree;
-    private Date dateSortie;
+    private Date dateEntered;
+    private Date dateRelease;
 
     public Reservation() {
     }
 
-    public Reservation(Date dateEntree, Date dateSortie) {
-        this.dateEntree = dateEntree;
-        this.dateSortie = dateSortie;
+    public Reservation(Date dateEntered, Date dateRelease) {
+        this.dateEntered = dateEntered;
+        this.dateRelease = dateRelease;
     }
 
-    public Date getDateEntree() {
-        return dateEntree;
+    public Date getDateEntered() {
+        return dateEntered;
     }
 
-    public void setDateEntree(Date dateEntree) {
-        this.dateEntree = dateEntree;
+    public void setDateEntered(Date dateEntered) {
+        this.dateEntered = dateEntered;
     }
 
-    public Date getDateSortie() {
-        return dateSortie;
+    public Date getDateRelease() {
+        return dateRelease;
     }
 
-    public void setDateSortie(Date dateSortie) {
-        this.dateSortie = dateSortie;
+    public void setDateRelease(Date dateRelease) {
+        this.dateRelease = dateRelease;
     }
 
     @Override
     public String toString() {
         return "Reservation{" +
-                "dateEntree=" + dateEntree +
-                ", dateSortie=" + dateSortie +
+                "dateEntered=" + dateEntered +
+                ", dateRelease=" + dateRelease +
                 '}';
     }
 }

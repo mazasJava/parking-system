@@ -5,18 +5,18 @@ import java.util.Date;
 public class Historique {
 
     private int id;
-    private String etat;
-    private Date dateEntree;
-    private Date dateSortie;
+    private String state;
+    private Date dateEntered;
+    private Date dateRelease;
 
     public Historique() {
     }
 
-    public Historique(int id, String etat, Date dateEntree, Date dateSortie) {
+    public Historique(int id, String state, Date dateEntered, Date dateRelease) {
         this.id = id;
-        this.etat = etat;
-        this.dateEntree = dateEntree;
-        this.dateSortie = dateSortie;
+        this.state = state;
+        this.dateEntered = dateEntered;
+        this.dateRelease = dateRelease;
     }
 
     public int getId() {
@@ -27,36 +27,37 @@ public class Historique {
         this.id = id;
     }
 
-    public Date getDateEntree() {
-        return dateEntree;
+    public String getState() {
+        return state;
     }
 
-    public void setDateEntree(Date dateEntree) {
-        this.dateEntree = dateEntree;
+    public void setState(String state) {
+        this.state = state;
     }
 
-    public Date getDateSortie() {
-        return dateSortie;
+    public Date getDateEntered() {
+        return dateEntered;
     }
 
-    public void setDateSortie(Date dateSortie) {
-        this.dateSortie = dateSortie;
+    public void setDateEntered(Date dateEntered) {
+        this.dateEntered = dateEntered;
     }
 
-    public String getEtat() {
-        return etat;
+    public Date getDateRelease() {
+        return dateRelease;
     }
 
-    public void setEtat(String etat) {
-        this.etat = etat;
+    public void setDateRelease(Date dateRelease) {
+        this.dateRelease = dateRelease;
     }
 
     @Override
     public String toString() {
         return "Historique{" +
                 "id=" + id +
-                ", etat='" + etat + '\'' +
+                ", state='" + state + '\'' +
+                ", dateEntered=" + dateEntered +
+                ", dateRelease=" + dateRelease +
                 '}';
     }
-
 }
