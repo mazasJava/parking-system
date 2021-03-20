@@ -1,4 +1,4 @@
 package org.controllers;
 
-public class Dashbord {
+public class Car {
 }

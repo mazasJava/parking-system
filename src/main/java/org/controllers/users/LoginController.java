@@ -5,12 +5,19 @@ import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import org.mainapp.App;
 import org.models.User;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 public class LoginController {
 
+
+    @FXML
+    public void switchToCar() throws IOException {
+        App.setRoot("car");
+    }
 
 
     @FXML
