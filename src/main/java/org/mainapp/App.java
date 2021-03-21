@@ -18,8 +18,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("login"), 1050, 480);
+        scene = new Scene(loadFXML("login"), 760, 480);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
 //        LoginController log = new LoginController();
 //        log.connect();
