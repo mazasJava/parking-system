@@ -15,6 +15,6 @@ public class PrimaryController {
     }
     @FXML
     public void testi(ActionEvent actionEvent) {
-        System.out.println("tets");
+        System.out.println("test");
     }
 }
