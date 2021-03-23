@@ -4,38 +4,38 @@ import java.util.Date;
 
 public class Car {
 
-    private int idVeh;
-    private String iMatricule;
+    private static int idCar;
+    private String matricule;
 
     public Car() {
     }
 
-    public Car(int idVeh, String iMatricule) {
-        this.idVeh = idVeh;
-        this.iMatricule = iMatricule;
+    public Car(String matricule) {
+        this.idCar++;
+        this.matricule = matricule;
     }
 
-    public int getIdVeh() {
-        return idVeh;
+    public int getidCar() {
+        return idCar;
     }
 
-    public void setIdVeh(int idVeh) {
-        this.idVeh = idVeh;
+    public void setidCar(int idCar) {
+        this.idCar = idCar;
     }
 
-    public String getiMatricule() {
-        return iMatricule;
+    public String getmatricule() {
+        return matricule;
     }
 
-    public void setiMatricule(String iMatricule) {
-        this.iMatricule = iMatricule;
+    public void setmatricule(String matricule) {
+        this.matricule = matricule;
     }
 
     @Override
     public String toString() {
         return "Vehicule{" +
-                "idVeh=" + idVeh +
-                ", iMatricule='" + iMatricule + '\'' +
+                "idCar=" + idCar +
+                ", matricule='" + matricule + '\'' +
                 '}';
     }
 }
