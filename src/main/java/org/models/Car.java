@@ -2,15 +2,15 @@ package org.models;
 
 import java.util.Date;
 
-public class Vehicule {
+public class Car {
 
     private int idVeh;
     private String iMatricule;
 
-    public Vehicule() {
+    public Car() {
     }
 
-    public Vehicule(int idVeh, String iMatricule) {
+    public Car(int idVeh, String iMatricule) {
         this.idVeh = idVeh;
         this.iMatricule = iMatricule;
     }
