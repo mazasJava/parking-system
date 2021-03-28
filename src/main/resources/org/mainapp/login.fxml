@@ -35,27 +35,23 @@
    </left>
    <center>
       <AnchorPane prefHeight="407.0" prefWidth="528.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
-         <Label alignment="CENTER" layoutX="302.0" layoutY="300.0" prefHeight="20.0" prefWidth="111.0" text="Forgot password" textFill="#333333">
+         <Label alignment="CENTER" layoutX="308.0" layoutY="292.0" prefHeight="20.0" prefWidth="111.0" text="Forgot password" textFill="#333333">
             <font>
                <Font size="14.0" />
             </font>
          </Label>
-         <Label layoutX="164.0" layoutY="152.0" prefHeight="33.0" prefWidth="312.0" style="-fx-background-color: transparent;" text="Welcome back please login to your account" textFill="#dddddd" />
-         <ImageView fitHeight="76.0" fitWidth="71.0" layoutX="252.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+         <Label layoutX="170.0" layoutY="144.0" prefHeight="33.0" prefWidth="312.0" style="-fx-background-color: transparent;" text="Welcome back please login to your account" textFill="#dddddd" />
+         <ImageView fitHeight="76.0" fitWidth="71.0" layoutX="258.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../../imgs/logo.png" />
          </ImageView>
-         <TextField fx:id="usernameTextField" layoutX="138.0" layoutY="197.0" prefHeight="25.0" prefWidth="279.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" />
-         <PasswordField fx:id="passwordTextField" layoutX="140.0" layoutY="243.0" prefHeight="26.0" prefWidth="277.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" />
-         <Button fx:id="loginButton" layoutX="313.0" layoutY="354.0" mnemonicParsing="false" onAction="#switchToCar" prefHeight="27.0" prefWidth="100.0" style="-fx-background-color: #2CD889;" text="Login" textFill="WHITE" />
-         <CheckBox layoutX="140.0" layoutY="301.0" mnemonicParsing="false" text="Remember me" textFill="#333333">
+         <TextField fx:id="usernameTextField" layoutX="144.0" layoutY="189.0" prefHeight="25.0" prefWidth="279.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" />
+         <PasswordField fx:id="passwordTextField" layoutX="146.0" layoutY="235.0" prefHeight="26.0" prefWidth="277.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" />
+         <Button fx:id="loginButton" layoutX="319.0" layoutY="346.0" mnemonicParsing="false" onAction="#switchToCar" prefHeight="27.0" prefWidth="100.0" style="-fx-background-color: #2CD889;" text="Login" textFill="WHITE" />
+         <CheckBox layoutX="146.0" layoutY="293.0" mnemonicParsing="false" text="Remember me" textFill="#333333">
             <font>
                <Font size="14.0" />
             </font></CheckBox>
          <Button layoutX="488.0" layoutY="7.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="24.0" style="-fx-font: close; -fx-background-color: transparent;">
-
-            <!--<graphic>
-               <FontAwesomeIconView fill="#2cd889" glyphName="CLOSE" />
-            </graphic>-->
 
          </Button>
       </AnchorPane>
