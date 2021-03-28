@@ -52,7 +52,7 @@
                <Font size="14.0" />
             </font></CheckBox>
          <Button layoutX="488.0" layoutY="7.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="24.0" style="-fx-font: close; -fx-background-color: transparent;">
-            
+
          </Button>
       </AnchorPane>
    </center>
