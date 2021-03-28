@@ -9,38 +9,51 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.users.LoginController">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.users.LoginController">
    <left>
       <AnchorPane prefHeight="407.0" prefWidth="302.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView id="img_soufiane" fitHeight="131.0" fitWidth="205.0" layoutX="49.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="4.5">
+            <!--<ImageView id="img_logo" fitHeight="131.0" fitWidth="205.0" layoutX="49.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="4.5">
                <image>
                   <Image url="@../../imgs/Sign_in_bg.jpg" />
                </image>
-            </ImageView>
-         </children></AnchorPane>
+            </ImageView>-->
+
+            <VBox>
+               <ImageView fitHeight="499.0" fitWidth="569.0">
+                  <image>
+                     <Image url="@../../imgs/Sign_in_bg.jpg" />
+                  </image>
+               </ImageView>
+            </VBox>
+
+         </children>
+      </AnchorPane>
    </left>
    <center>
       <AnchorPane prefHeight="407.0" prefWidth="528.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
-         <Label alignment="CENTER" layoutX="277.0" layoutY="271.0" prefHeight="20.0" prefWidth="111.0" text="Forgot password" textFill="#333333">
+         <Label alignment="CENTER" layoutX="308.0" layoutY="292.0" prefHeight="20.0" prefWidth="111.0" text="Forgot password" textFill="#333333">
             <font>
                <Font size="14.0" />
             </font>
          </Label>
-         <Label layoutX="97.0" layoutY="123.0" prefHeight="33.0" prefWidth="312.0" style="-fx-background-color: transparent;" text="Welcome back please login to your account" textFill="#dddddd">
-            <font>
-               <Font size="16.0" />
-            </font>
-         </Label>
-         <ImageView fitHeight="76.0" fitWidth="71.0" layoutX="227.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+         <Label layoutX="170.0" layoutY="144.0" prefHeight="33.0" prefWidth="312.0" style="-fx-background-color: transparent;" text="Welcome back please login to your account" textFill="#dddddd" />
+         <ImageView fitHeight="76.0" fitWidth="71.0" layoutX="258.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../../imgs/logo.png" />
          </ImageView>
-         <TextField fx:id="usernameTextField" layoutX="113.0" layoutY="168.0" prefHeight="25.0" prefWidth="279.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" />
-         <PasswordField fx:id="passwordTextField" layoutX="115.0" layoutY="214.0" prefHeight="26.0" prefWidth="277.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" />
-         <Button fx:id="loginButton" layoutX="288.0" layoutY="325.0" mnemonicParsing="false" onAction="#switchToCar" prefHeight="27.0" prefWidth="100.0" style="-fx-background-color: #2CD889;" text="Login" textFill="WHITE" />
-         <CheckBox layoutX="115.0" layoutY="272.0" mnemonicParsing="false" text="Remember me" textFill="#333333" />
+         <TextField fx:id="usernameTextField" layoutX="144.0" layoutY="189.0" prefHeight="25.0" prefWidth="279.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" />
+         <PasswordField fx:id="passwordTextField" layoutX="146.0" layoutY="235.0" prefHeight="26.0" prefWidth="277.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" />
+         <Button fx:id="loginButton" layoutX="319.0" layoutY="346.0" mnemonicParsing="false" onAction="#switchToCar" prefHeight="27.0" prefWidth="100.0" style="-fx-background-color: #2CD889;" text="Login" textFill="WHITE" />
+         <CheckBox layoutX="146.0" layoutY="293.0" mnemonicParsing="false" text="Remember me" textFill="#333333">
+            <font>
+               <Font size="14.0" />
+            </font></CheckBox>
+         <Button layoutX="488.0" layoutY="7.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="24.0" style="-fx-font: close; -fx-background-color: transparent;">
+
+         </Button>
       </AnchorPane>
    </center>
 </BorderPane>

@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.controllers.DbConnection;
 
 import java.io.IOException;
@@ -16,11 +17,20 @@ public class App extends Application {
 
     private static Scene scene;
 
+    // soufiane
+    private double xOfsset;
+    private double yOfsset;
+
+
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("login"), 760, 480);
+        scene = new Scene(loadFXML("login"), 1150, 499);
         stage.setScene(scene);
         stage.setResizable(false);
+        //stage.initStyle(StageStyle.DECORATED.UNDECORATED);
+
+
+
         stage.show();
 //        LoginController log = new LoginController();
 //        log.connect();
@@ -36,7 +46,7 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        DbConnection.connect();
+        //DbConnection.connect();
         launch();
     }
 
