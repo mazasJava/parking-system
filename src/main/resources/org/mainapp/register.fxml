@@ -9,42 +9,27 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.users.LoginController">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.users.RegisterController">
     <left>
         <AnchorPane prefHeight="407.0" prefWidth="302.0" BorderPane.alignment="CENTER">
-            <children>
-                <!--<ImageView id="img_soufiane" fitHeight="133.0" fitWidth="205.0" layoutX="49.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true" scaleX="1.48" scaleY="4.9">
-                    <image>
-                        <Image url="@../../imgs/Sign_in_bg.jpg" />
-                    </image>
-                </ImageView>-->
-                <VBox>
-                    <ImageView fitHeight="499.0" fitWidth="569.0">
-                        <image>
-                            <Image url="@../../imgs/Sign_in_bg.jpg" />
-                        </image>
-                    </ImageView>
-                </VBox>
-            </children>
-            </AnchorPane>
+            <VBox>
+                <ImageView fitHeight="499.0" fitWidth="569.0">
+                    <Image url="@../../imgs/Sign_in_bg.jpg"/>
+                </ImageView>
+            </VBox>
+        </AnchorPane>
     </left>
     <center>
         <AnchorPane prefHeight="509.0" prefWidth="528.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
             <ImageView fitHeight="99.0" fitWidth="77.0" layoutX="227.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../../imgs/logo.png" />
             </ImageView>
-            <TextField fx:id="usernameTextField" layoutX="105.0" layoutY="160.0" prefHeight="27.0" prefWidth="130.0" promptText="First name" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" />
-            <PasswordField fx:id="passwordTextField" layoutX="106.0" layoutY="203.0" prefHeight="27.0" prefWidth="313.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" />
-            <Button fx:id="loginButton" layoutX="200.0" layoutY="389.0" mnemonicParsing="false" onAction="#switchToCar" prefHeight="30.0" prefWidth="108.0" style="-fx-background-color: #2CD889;" text="Sign Up" textFill="WHITE" />
-            <Button layoutX="488.0" layoutY="15.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="24.0" style="-fx-font: close; -fx-background-color: transparent;">
-            <graphic>
-               <!--<FontAwesomeIconView fill="#2cd889" glyphName="CLOSE" />-->
-            </graphic>
-            </Button>
-         <TextField layoutX="285.0" layoutY="160.0" prefHeight="25.0" prefWidth="131.0" promptText="Last name" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" />
-         <TextField layoutX="105.0" layoutY="247.0" prefHeight="25.0" prefWidth="313.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" />
-         <TextField layoutX="106.0" layoutY="290.0" prefHeight="25.0" prefWidth="316.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" />
-         <TextField layoutX="105.0" layoutY="333.0" prefHeight="25.0" prefWidth="318.0" promptText="Confirm password" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField layoutX="105.0" layoutY="160.0" fx:id="firstNameTextField" prefHeight="27.0" prefWidth="130.0" promptText="First name" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField layoutX="285.0" fx:id="lastNameTextField" layoutY="160.0" prefHeight="25.0" prefWidth="131.0" promptText="Last name" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField layoutX="105.0" fx:id="emailTextField" layoutY="247.0" prefHeight="25.0" prefWidth="313.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" />
+            <PasswordField layoutX="105.0" fx:id="passwordTextField" layoutY="290.0" prefHeight="25.0" prefWidth="318.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" />
+            <PasswordField layoutX="105.0" fx:id="confirmPasswordTextField" layoutY="353.0" prefHeight="25.0" prefWidth="318.0" promptText="Confirm password" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" />
+            <Button fx:id="loginButton" onAction="#creatUser" layoutX="200.0" layoutY="389.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="108.0" style="-fx-background-color: #2CD889;" text="Sign Up" textFill="WHITE" />
         </AnchorPane>
     </center>
 </BorderPane>

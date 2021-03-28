@@ -24,16 +24,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("login"), 1150, 499);
+        scene = new Scene(loadFXML("register"), 1150, 499);
         stage.setScene(scene);
         stage.setResizable(false);
-        //stage.initStyle(StageStyle.DECORATED.UNDECORATED);
-
-
 
         stage.show();
-//        LoginController log = new LoginController();
-//        log.connect();
     }
 
     public static void setRoot(String fxml) throws IOException {
@@ -46,7 +41,7 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        //DbConnection.connect();
+        DbConnection.connect();
         launch();
     }
 

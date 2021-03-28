@@ -1,17 +1,27 @@
 package org.controllers.users;
 
-import com.mongodb.MongoClient;
-import com.mongodb.MongoCredential;
-import com.mongodb.ServerAddress;
+import com.mongodb.*;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import org.bson.Document;
+import org.controllers.DbConnection;
 import org.mainapp.App;
 import org.models.User;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.*;
 
 public class LoginController {
+    public MongoClient mongoClient;
+    @FXML
+    public TextField usernameTextField;
+    @FXML
+    public PasswordField passwordTextField;
 
 
     @FXML
@@ -19,27 +29,33 @@ public class LoginController {
         App.setRoot("car");
     }
 
-
     @FXML
-    public void checkAuth(ActionEvent event)
-    {
-        User user = new User("admin","admin");
-        System.out.println("user created");
-        MongoCredential credential = MongoCredential.createCredential(user.getName(), "users", user.getPassword().toCharArray());
-        System.out.println(credential);
+    public void checkAuth(ActionEvent event) throws IOException {
+        mongoClient = DbConnection.getConnection();
+        DB db = mongoClient.getDB("PARKING_MANAGEMENT_SYSTEM");
+        DBCollection collection = db.getCollection("users");
+        selectAllRecordByRecordNumber(collection);
+    }
 
-        try {
-            @Deprecated
-            MongoClient mongoClient = new MongoClient(new ServerAddress("mongodb+srv://mehdi-java:Password1234@cluster0.dw27l.mongodb.net/PARKING_MANAGEMENT_SYSTEM?retryWrites=true&w=majority"),Arrays.asList(credential));
+    public void selectAllRecordByRecordNumber(DBCollection collection) throws IOException {
+        BasicDBObject whereQuery1 = new BasicDBObject();
+        BasicDBObject whereQuery2 = new BasicDBObject();
 
-        }
-        catch (Exception e)
+        whereQuery1.put("name", usernameTextField.getText());
+        whereQuery2.put("password", passwordTextField.getText());
+
+        DBCursor cursor = collection.find(whereQuery1,whereQuery2);
+        if(cursor.hasNext())
         {
-            System.out.println("err");
+            while(cursor.hasNext()) {
+                System.out.println(cursor.next());
+            }
+            switchToCar();
         }
-//        MongoClient mongoClients = new MongoClient();
+        else {
+            System.out.println("fail");
+        }
 
-        System.out.println("con db 2 ");
     }
 
 }

@@ -8,36 +8,41 @@ import com.mongodb.client.MongoDatabase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.bson.Document;
 import org.controllers.DbConnection;
 
 public class RegisterController {
+    public MongoClient mongoClient;
     @FXML
     public Button loginButton;
     @FXML
     public TextField usernameTextField;
     @FXML
     public TextField passwordTextField;
-    public MongoClient mongoClient;
+    @FXML
+    public TextField firstNameTextField;
+    @FXML
+    public TextField lastNameTextField;
+    @FXML
+    public TextField emailTextField;
+    @FXML
+    public PasswordField confirmPasswordTextField;
 
     @FXML
-    public String getUserInfo() {
-        return usernameTextField.getText().toString() + "/" + passwordTextField.getText().toString();
-    }
-
-    @FXML
-    public void showUser(ActionEvent event) {
+    public void creatUser(ActionEvent event) {
         mongoClient = DbConnection.getConnection();
         MongoDatabase database = mongoClient.getDatabase("PARKING_MANAGEMENT_SYSTEM");
         MongoCollection<Document> collection = database.getCollection("users");
-        String user = getUserInfo();
-        Document user1 = new Document();
-        user1
-                .append("name", user.split("/")[0])
-                .append("email", user.split("/")[1]);
+        Document user = new Document();
+        user.append("firstName", firstNameTextField.getText().toString())
+                .append("lastName", lastNameTextField.getText().toString())
+                .append("email", emailTextField.getText().toString())
+                .append("password", passwordTextField.getText().toString())
+                .append("name", confirmPasswordTextField.getText().toString());
         try {
-            collection.insertOne(user1);
+            collection.insertOne(user);
             System.out.println("Successfully inserted documents. \n");
         } catch (MongoWriteException mwe) {
             if (mwe.getError().getCategory().equals(ErrorCategory.DUPLICATE_KEY)) {
