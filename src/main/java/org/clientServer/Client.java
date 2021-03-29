@@ -19,7 +19,8 @@ public class Client {
 //                receive the matricule
                 String matricule = reader.readLine();
 //                create a new car instance
-                Car c = new Car(matricule);
+                Car c;
+                c = new Car(matricule);
                 System.out.println(c);
             }
         } catch (UnknownHostException ex) {

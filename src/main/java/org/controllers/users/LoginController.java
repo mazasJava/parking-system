@@ -1,20 +1,14 @@
 package org.controllers.users;
 
 import com.mongodb.*;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import org.bson.Document;
 import org.controllers.DbConnection;
 import org.mainapp.App;
-import org.models.User;
+import static com.mongodb.client.model.Filters.eq;
 
 import java.io.IOException;
-import java.util.*;
 
 public class LoginController {
     public MongoClient mongoClient;
@@ -30,14 +24,15 @@ public class LoginController {
     }
 
     @FXML
-    public void checkAuth(ActionEvent event) throws IOException {
+    public void login() throws IOException {
         mongoClient = DbConnection.getConnection();
+        @Deprecated
         DB db = mongoClient.getDB("PARKING_MANAGEMENT_SYSTEM");
         DBCollection collection = db.getCollection("users");
-        selectAllRecordByRecordNumber(collection);
+        checkAuth(collection);
     }
 
-    public void selectAllRecordByRecordNumber(DBCollection collection) throws IOException {
+    public void checkAuth(DBCollection collection) throws IOException {
         BasicDBObject whereQuery1 = new BasicDBObject();
         BasicDBObject whereQuery2 = new BasicDBObject();
 
@@ -45,6 +40,7 @@ public class LoginController {
         whereQuery2.put("password", passwordTextField.getText());
 
         DBCursor cursor = collection.find(whereQuery1,whereQuery2);
+
         if(cursor.hasNext())
         {
             while(cursor.hasNext()) {
@@ -57,5 +53,25 @@ public class LoginController {
         }
 
     }
+
+//    public void tst() {
+//        MongoClient mongoClient = new MongoClient(
+//                new MongoClientURI(
+//                        "mongodb+srv://mehdi-java:Password1234@cluster0.dw27l.mongodb.net/test?authSource=admin&replicaSet=atlas-v9iltu-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true"
+//                )
+//        );
+//        MongoDatabase db = mongoClient.getDatabase("PARKING_MANAGEMENT_SYSTEM");
+//
+//        FindIterable<Document> findIt = db.getCollection("users").find(eq("name","admin"));
+//
+//        MongoCursor<Document> cursor = findIt.iterator();
+//        try {
+//            while(cursor.hasNext()) {
+//                System.out.println(cursor.next());
+//            }
+//        } finally {
+//            cursor.close();
+//        }
+//    }
 
 }

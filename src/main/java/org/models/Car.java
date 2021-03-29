@@ -1,26 +1,22 @@
 package org.models;
 
-import java.util.Date;
+import org.bson.types.ObjectId;
 
 public class Car {
 
-    private static int idCar;
+    private ObjectId id;
     private String matricule;
 
     public Car() {
     }
 
-    public Car(String matricule) {
-        this.idCar++;
+    public Car(ObjectId id, String matricule) {
+        this.id = id;
         this.matricule = matricule;
     }
 
-    public int getidCar() {
-        return idCar;
-    }
-
-    public void setidCar(int idCar) {
-        this.idCar = idCar;
+    public Car(String matricule) {
+        this.matricule = matricule;
     }
 
     public String getmatricule() {
@@ -34,7 +30,7 @@ public class Car {
     @Override
     public String toString() {
         return "Vehicule{" +
-                "idCar=" + idCar +
+                "idCar=" + id +
                 ", matricule='" + matricule + '\'' +
                 '}';
     }
