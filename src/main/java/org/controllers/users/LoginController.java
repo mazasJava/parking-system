@@ -1,9 +1,13 @@
 package org.controllers.users;
 
 import com.mongodb.*;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import org.bson.Document;
 import org.controllers.DbConnection;
 import org.mainapp.App;
 import static com.mongodb.client.model.Filters.eq;

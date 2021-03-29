@@ -10,22 +10,27 @@ import org.bson.types.ObjectId;
 import org.controllers.DbConnection;
 import org.models.Historique;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
+
 public class HistoriqueController {
 
     static MongoClient mongoClient = DbConnection.getConnection();
     static MongoDatabase database = DbConnection.getDatabase();
 
 
-    public static void setCarHistorique(ObjectId carId)
-    {
+    public static void setCarHistorique(ObjectId carId) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        Date date = new Date(System.currentTimeMillis());
         MongoCollection<Document> collection = database.getCollection("historiques");
-        Historique historiqueObject = new Historique(carId,"stat","dateEntered","dateRelease");
+        Historique historiqueObject = new Historique(carId, "stat", date, date);
         Document historique = new Document();
 
-        historique.append("car_id",historiqueObject.getCarId())
-                .append("state",historiqueObject.getState())
-                .append("dateEntered",historiqueObject.getDateEntered())
-                .append("dateRelease",historiqueObject.getDateRelease());
+        historique.append("car_id", historiqueObject.getCarId())
+                .append("state", historiqueObject.getState())
+                .append("dateEntered", historiqueObject.getDateEntered())
+                .append("dateRelease", historiqueObject.getDateRelease());
 
         try {
             collection.insertOne(historique);

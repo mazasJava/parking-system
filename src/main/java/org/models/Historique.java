@@ -9,13 +9,13 @@ public class Historique {
     private ObjectId id;
     private ObjectId carId;
     private String state;
-    private String dateEntered;
-    private String dateRelease;
+    private Date dateEntered;
+    private Date dateRelease;
 
     public Historique() {
     }
 
-    public Historique( ObjectId carId, String state, String dateEntered, String dateRelease) {
+    public Historique( ObjectId carId, String state, Date dateEntered, Date dateRelease) {
         this.carId = carId;
         this.state = state;
         this.dateEntered = dateEntered;
@@ -34,11 +34,11 @@ public class Historique {
         return state;
     }
 
-    public String getDateEntered() {
+    public Date getDateEntered() {
         return dateEntered;
     }
 
-    public String getDateRelease() {
+    public Date getDateRelease() {
         return dateRelease;
     }
 
@@ -54,11 +54,11 @@ public class Historique {
         this.state = state;
     }
 
-    public void setDateEntered(String dateEntered) {
+    public void setDateEntered(Date dateEntered) {
         this.dateEntered = dateEntered;
     }
 
-    public void setDateRelease(String dateRelease) {
+    public void setDateRelease(Date dateRelease) {
         this.dateRelease = dateRelease;
     }
 }
