@@ -1,4 +1,4 @@
-package org.controllers.users;
+package org.controllers;
 
 import com.mongodb.ErrorCategory;
 import com.mongodb.MongoClient;
