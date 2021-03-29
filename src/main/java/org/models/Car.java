@@ -7,6 +7,10 @@ public class Car {
     private ObjectId id;
     private String matricule;
 
+    public ObjectId getId() {
+        return id;
+    }
+
     public Car() {
     }
 

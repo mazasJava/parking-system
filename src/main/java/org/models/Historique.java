@@ -1,63 +1,64 @@
 package org.models;
 
+import org.bson.types.ObjectId;
+
 import java.util.Date;
 
 public class Historique {
 
-    private int id;
+    private ObjectId id;
+    private ObjectId carId;
     private String state;
-    private Date dateEntered;
-    private Date dateRelease;
+    private String dateEntered;
+    private String dateRelease;
 
     public Historique() {
     }
 
-    public Historique(int id, String state, Date dateEntered, Date dateRelease) {
-        this.id = id;
+    public Historique( ObjectId carId, String state, String dateEntered, String dateRelease) {
+        this.carId = carId;
         this.state = state;
         this.dateEntered = dateEntered;
         this.dateRelease = dateRelease;
     }
 
-    public int getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public ObjectId getCarId() {
+        return carId;
     }
 
     public String getState() {
         return state;
     }
 
+    public String getDateEntered() {
+        return dateEntered;
+    }
+
+    public String getDateRelease() {
+        return dateRelease;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
+    public void setCarId(ObjectId carId) {
+        this.carId = carId;
+    }
+
     public void setState(String state) {
         this.state = state;
     }
 
-    public Date getDateEntered() {
-        return dateEntered;
-    }
-
-    public void setDateEntered(Date dateEntered) {
+    public void setDateEntered(String dateEntered) {
         this.dateEntered = dateEntered;
     }
 
-    public Date getDateRelease() {
-        return dateRelease;
-    }
-
-    public void setDateRelease(Date dateRelease) {
+    public void setDateRelease(String dateRelease) {
         this.dateRelease = dateRelease;
-    }
-
-    @Override
-    public String toString() {
-        return "Historique{" +
-                "id=" + id +
-                ", state='" + state + '\'' +
-                ", dateEntered=" + dateEntered +
-                ", dateRelease=" + dateRelease +
-                '}';
     }
 }
