@@ -1,3 +1,13 @@
+.parent{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 30px;
+}
+
+
+
+
+
+
 .button
 {
 -fx-background-color : #05071F;

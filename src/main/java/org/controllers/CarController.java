@@ -42,6 +42,7 @@ public class CarController {
             collection.insertOne(car);
             HistoriqueController.setCarHistorique(carObject.getId());
             System.out.println("Successfully inserted documents. \n");
+            getCarsWithHistorique();
         } catch (MongoWriteException mwe) {
             if (mwe.getError().getCategory().equals(ErrorCategory.DUPLICATE_KEY)) {
                 System.out.println("Document with that id already exists");

@@ -1,3 +1,21 @@
+.parent{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 30px;
+}
+.top-pane{
+    -fx-background-color: #ffffff;
+
+}
+.button-plus{
+
+    -fx-background-color: #2CD889;
+
+
+}
+
+
+
+
 .button
 {
 -fx-background-color : #05071F;
