@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.controllers.DbConnection;
@@ -20,7 +21,6 @@ public class App extends Application {
     // soufiane
     private double xOfsset;
     private double yOfsset;
-
 
     @Override
     public void start(Stage stage) throws IOException {
