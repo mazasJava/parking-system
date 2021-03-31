@@ -18,9 +18,13 @@ public class DbConnection {
             System.err.println(exception.getClass().getName() + ": " + exception.getMessage());
         }
     }
+
     public static MongoClient getConnection() {
         return mongoClient;
     }
-    public static MongoDatabase getDatabase() { return database; }
+
+    public static MongoDatabase getDatabase() {
+        return database;
+    }
 
 }

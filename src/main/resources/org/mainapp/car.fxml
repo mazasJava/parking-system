@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1096.0" styleClass="parent" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1096.0" styleClass="parent" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.CarController">
    <top>
       <AnchorPane prefHeight="40.0" prefWidth="200.0" styleClass="top-pane" BorderPane.alignment="CENTER">
          <children>
@@ -17,7 +17,7 @@
             </ImageView>
             <HBox prefHeight="65.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: #ffffff;" AnchorPane.leftAnchor="180.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="Dashboard" />
+                  <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="Dashboard" onAction="#getCarsWithHistorique"/>
                   <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="Cars Management" />
                   <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="Parking state" />
                   <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-text-fill: black;" text="Statistics" />
