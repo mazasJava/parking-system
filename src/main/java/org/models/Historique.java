@@ -12,10 +12,7 @@ public class Historique {
     private Date dateEntered;
     private Date dateRelease;
 
-    public Historique() {
-    }
-
-    public Historique( ObjectId carId, String state, Date dateEntered, Date dateRelease) {
+    public Historique(ObjectId carId, String state, Date dateEntered, Date dateRelease) {
         this.carId = carId;
         this.state = state;
         this.dateEntered = dateEntered;
