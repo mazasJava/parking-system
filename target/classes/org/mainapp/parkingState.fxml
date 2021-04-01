@@ -26,7 +26,7 @@
                 <HBox prefHeight="65.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: #ffffff;" AnchorPane.leftAnchor="180.0">
                     <children>
                         <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-text-fill: black;" styleClass="buton-border" text="Dashboard" />
-                        <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-text-fill: black;" styleClass="buton-border" text="Cars Management" />
+                        <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="115.0" style="-fx-background-color: transparent; -fx-text-fill: black;" styleClass="buton-border" text="Cars Management" />
                         <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-text-fill: black;" styleClass="buton-border" text="Parking state" />
                         <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-text-fill: black;" styleClass="buton-border" text="Statistics" />
                         <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-text-fill: black;" styleClass="buton-border" text="Error log" />
@@ -51,7 +51,7 @@
                             <font>
                                 <Font size="13.0" />
                             </font></Button>
-                        <TextField layoutX="762.0" layoutY="50.0" prefHeight="25.0" prefWidth="204.0" promptText="search" style="-fx-background-color: transparent;" styleClass="searchbar">
+                        <TextField layoutX="762.0" layoutY="50.0" prefHeight="25.0" prefWidth="204.0" promptText="search" style="-fx-background-color: transparent;" styleClass="searchbar-txt">
                             <font>
                                 <Font size="14.0" />
                             </font>
