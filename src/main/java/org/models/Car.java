@@ -6,6 +6,13 @@ public class Car {
 
     private ObjectId id;
     private String matricule;
+    private Historique carInfo;
+
+    public Car(ObjectId id, String matricule, Historique carInfo) {
+        this.id = id;
+        this.matricule = matricule;
+        this.carInfo = carInfo;
+    }
 
     public ObjectId getId() {
         return id;
@@ -33,9 +40,11 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Vehicule{" +
-                "idCar=" + id +
+        return "Car{" +
+                "id=" + id +
                 ", matricule='" + matricule + '\'' +
+                ", Date Entered=" + carInfo.getDateEntered() +
+                ", Date Release=" + carInfo.getDateRelease() +
                 '}';
     }
 }

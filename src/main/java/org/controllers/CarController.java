@@ -14,6 +14,7 @@ import org.bson.codecs.pojo.PojoCodecProvider;
 import org.bson.types.ObjectId;
 import org.mainapp.App;
 import org.models.Car;
+import org.models.Historique;
 
 import java.io.IOException;
 import java.util.*;
@@ -24,7 +25,7 @@ import static java.util.List.*;
 public class CarController {
     static MongoClient mongoClient;
     static MongoDatabase database;
-//    public MongoDatabase database = DbConnection.getDatabase();
+    //    public MongoDatabase database = DbConnection.getDatabase();
     public static final ObjectId id = new ObjectId();
 
     @FXML
@@ -38,11 +39,12 @@ public class CarController {
     }
 
     @FXML
-    public void createCar() throws IOException {
+    public static void createCar() throws IOException {
+        mongoClient = new MongoClient(new MongoClientURI("mongodb+srv://mehdi-java:Password1234@cluster0.dw27l.mongodb.net"));
+        database = mongoClient.getDatabase("PARKING_MANAGEMENT_SYSTEM");
         MongoCollection<Document> collection = database.getCollection("cars");
 
-        Car carObject;
-        carObject = new Car(id, "test103");
+        Car carObject = new Car(id, "test10HHHH3");
         Document car = new Document();
 
         car.append("_id", carObject.getId())
@@ -65,56 +67,31 @@ public class CarController {
         database = mongoClient.getDatabase("PARKING_MANAGEMENT_SYSTEM");
         System.out.println("get car list :");
         MongoCollection<Document> collection = database.getCollection("historiques");
-//        AggregateIterable<Document> result = collection.aggregate(Collections.singletonList(new Document("$lookup",
-//                new Document("from", "cars")
-//                        .append("localField", "car_id")
-//                        .append("foreignField", "_id")
-//                        .append("as", "carhistory"))));
-
-//        AggregateIterable<Document> we = collection.aggregate(
-//                Arrays.asList(
-//                        Aggregates.match(Filters.eq("categories", "Bakery")),
-//                        Aggregates.group("$stars", Accumulators.sum("count", 1))
-//                )
-//        );
-        //                        Projections.include("carhistory.matricule"),
         AggregateIterable<Document> tr = collection.aggregate(List.of(Aggregates.lookup("cars", "car_id", "_id", "carhistory"), Aggregates.project(Projections.fields(
                 Projections.excludeId(),
                 Projections.include("state"),
                 Projections.include("dateEntered"),
                 Projections.include("dateRelease"),
-//                        Projections.include("carhistory.matricule"),
                 Projections.computed(
                         "carhistory",
                         new Document("$arrayElemAt", Arrays.asList("$carhistory.matricule", 0))
                 )
         ))));
-
-//        MongoCursor<Document> cursor = collection2.find().iterator();
-//        try (MongoCursor<Document> iterator = result.iterator()) {
-//            while (iterator.hasNext()) {
-//                Document temp_doc = iterator.next();
-////                Document temp_address_doc = temp_doc.get("carhistory",Document.class);
-////                String address = temp_address_doc.getString("matricule");
-//
-//
-////                Document de = (Document) temp_doc.get("carhistory");
-//
-////                Document doc = (Document) temp_person_doc.get("carhistory");
-////                String houseNo= doc.getString("matricule");
-//                System.out.println(temp_doc);
-//            }
-//        }
-
+        Historique carHistoricList;
+        Car carList;
         for (Document document : tr) {
-            System.out.println(document);
+            carHistoricList = new Historique(id,
+                    document.getString("state"),
+                    document.getDate("dateEntered"),
+                    document.getDate("dateRelease"));
+            carList = new Car(id,
+                    document.getString("carhistory"),
+                    carHistoricList);
+            System.out.println(carList.toString());
         }
     }
-
-    public static void main(String[] args) {
-        getCarsWithHistorique();
+    public static void main(String[] args) throws IOException {
+        createCar();
+//        getCarsWithHistorique();
     }
-
-
-
 }

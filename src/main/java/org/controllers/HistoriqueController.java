@@ -2,6 +2,7 @@ package org.controllers;
 
 import com.mongodb.ErrorCategory;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import com.mongodb.MongoWriteException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -21,10 +22,12 @@ public class HistoriqueController {
 
 
     public static void setCarHistorique(ObjectId carId) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        mongoClient = new MongoClient(new MongoClientURI("mongodb+srv://mehdi-java:Password1234@cluster0.dw27l.mongodb.net"));
+        database = mongoClient.getDatabase("PARKING_MANAGEMENT_SYSTEM");
+//        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         Date date = new Date(System.currentTimeMillis());
         MongoCollection<Document> collection = database.getCollection("historiques");
-        Historique historiqueObject = new Historique(carId, "stat", date, date);
+        Historique historiqueObject = new Historique(carId, "stat", date, null);
         Document historique = new Document();
 
         historique.append("car_id", historiqueObject.getCarId())
