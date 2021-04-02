@@ -12,7 +12,7 @@ import org.controllers.DbConnection;
 import java.io.IOException;
 
 /**
- * JavaFX App
+ * JavaFX Main app entry
  */
 public class App extends Application {
     private static Scene scene;

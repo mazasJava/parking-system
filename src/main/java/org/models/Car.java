@@ -41,7 +41,6 @@ public class Car {
     @Override
     public String toString() {
         return "Car{" +
-                "id=" + id +
                 ", matricule='" + matricule + '\'' +
                 ", Date Entered=" + carInfo.getDateEntered() +
                 ", Date Release=" + carInfo.getDateRelease() +

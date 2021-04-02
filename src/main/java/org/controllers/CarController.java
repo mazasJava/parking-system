@@ -3,14 +3,8 @@ package org.controllers;
 import com.mongodb.*;
 import com.mongodb.client.*;
 import com.mongodb.client.model.*;
-import com.mongodb.client.result.UpdateResult;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import org.bson.Document;
-import org.bson.codecs.Encoder;
-import org.bson.codecs.configuration.CodecRegistry;
-import org.bson.codecs.pojo.PojoCodecProvider;
-import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import org.mainapp.App;
 import org.models.Car;
@@ -19,17 +13,9 @@ import org.models.Historique;
 import java.io.IOException;
 import java.util.*;
 
-import static java.util.List.*;
-//import static com.mongodb.client.model.Filters.*;
-//import static com.mongodb.client.model.Filters.and;
-import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Updates.*;
-
-
 public class CarController {
     static MongoClient mongoClient;
     static MongoDatabase database;
-    //    public MongoDatabase database = DbConnection.getDatabase();
     public static final ObjectId id = new ObjectId();
 
     @FXML
@@ -42,13 +28,14 @@ public class CarController {
         App.setRoot("car");
     }
 
+    /**
+     * @throws IOException Creat car object and insert object in data base
+     */
     @FXML
     public static void createCar() throws IOException {
-        mongoClient = DbConnection.getConnection();
-        database = DbConnection.getDatabase();
         MongoCollection<Document> collection = database.getCollection("cars");
 
-        Car carObject = new Car(id, "AKMRBUTTER8");
+        Car carObject = new Car(id, "test 0");
         Document car = new Document();
 
         car.append("_id", carObject.getId())
@@ -65,10 +52,11 @@ public class CarController {
         }
     }
 
+    /**
+     * @return Return car list with information about the cars
+     */
     @FXML
-    public static void getCarsWithHistorique() {
-        mongoClient = DbConnection.getConnection();
-        database = DbConnection.getDatabase();
+    public static List<Car> getCarsWithHistorique() {
         System.out.println("get car list :");
         MongoCollection<Document> collection = database.getCollection("historiques");
         AggregateIterable<Document> tr = collection.aggregate(List.of(Aggregates.lookup("cars", "car_id", "_id", "carhistory"), Aggregates.project(Projections.fields(
@@ -90,14 +78,13 @@ public class CarController {
             historiqueList.add(carHistoricList);
             carList.add(carList2);
         }
-        System.out.println(carList.toString());
-
+        return carList;
     }
 
-
+    /**
+     * Find and update car release date with current date
+     */
     public static void releaseCar() {
-        mongoClient = DbConnection.getConnection();
-        database = DbConnection.getDatabase();
         MongoCollection<Document> collection = database.getCollection("historiques");
         Date date = new Date(System.currentTimeMillis());
         collection.updateOne(Filters.eq("_id", new ObjectId("606610df1bb9d7007dce7abe")), Updates.set("dateRelease", date));
@@ -109,11 +96,10 @@ public class CarController {
         }
     }
 
-
     public static void main(String[] args) throws IOException {
         DbConnection.connect();
-//        createCar();
-//        getCarsWithHistorique();
-        releaseCar();
+        mongoClient = DbConnection.getConnection();
+        database = DbConnection.getDatabase();
+        System.out.println(getCarsWithHistorique().toString());
     }
 }
