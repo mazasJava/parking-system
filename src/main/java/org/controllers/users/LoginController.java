@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
 import org.controllers.DbConnection;
 import org.mainapp.App;
 
@@ -17,7 +16,8 @@ public class LoginController {
     public TextField usernameTextField;
     @FXML
     public PasswordField passwordTextField;
-
+    @FXML
+    public Label labelError;
 
     @FXML
     public void switchToCar() throws IOException {
@@ -36,22 +36,14 @@ public class LoginController {
     public void checkAuth(DBCollection collection) throws IOException {
         BasicDBObject whereQuery1 = new BasicDBObject();
         BasicDBObject whereQuery2 = new BasicDBObject();
-
         whereQuery1.put("name", usernameTextField.getText());
         whereQuery2.put("password", passwordTextField.getText());
-
         DBCursor cursor = collection.find(whereQuery1, whereQuery2);
-
         if (cursor.hasNext()) {
-            while (cursor.hasNext()) {
-                System.out.println(cursor.next());
-            }
+            System.out.println(cursor.next());
             switchToCar();
         } else {
-            System.out.println("fail");
-            /*Label lbl_erreur = new Label();
-            lbl_erreur.setText("Wrong password or username");
-            lbl_erreur.setTextFill(Color.web("#FF0000"));*/
+            labelError.setText("username or password is incorrect");
         }
 
     }
