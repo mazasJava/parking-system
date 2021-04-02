@@ -95,9 +95,25 @@ public class CarController {
     }
 
 
+    public static void releaseCar() {
+        mongoClient = DbConnection.getConnection();
+        database = DbConnection.getDatabase();
+        MongoCollection<Document> collection = database.getCollection("historiques");
+        Date date = new Date(System.currentTimeMillis());
+        collection.updateOne(Filters.eq("_id", new ObjectId("606610df1bb9d7007dce7abe")), Updates.set("dateRelease", date));
+        System.out.println("Document update successfully...");
+        FindIterable<Document> iterDoc = collection.find();
+        Iterator it = iterDoc.iterator();
+        while (it.hasNext()) {
+            System.out.println(it.next());
+        }
+    }
+
+
     public static void main(String[] args) throws IOException {
         DbConnection.connect();
-        createCar();
+//        createCar();
 //        getCarsWithHistorique();
+        releaseCar();
     }
 }
