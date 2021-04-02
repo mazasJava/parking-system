@@ -21,11 +21,9 @@ public class Server {
             while (true) {
                 Socket socket = serverSocket.accept();
                 System.out.println("New client connected");
-
                 OutputStream output = socket.getOutputStream();
                 PrintWriter writer = new PrintWriter(output, true);
                 for (int i = 0; i < 5; i++) {
-
                     StringBuilder result = new StringBuilder(PASSWORD_LENGTH);
 //                    City Identifier
                     for (int j = 0; j < 2; j++) {

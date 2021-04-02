@@ -19,7 +19,7 @@ public class Client {
 //                receive the matricule
                 String matricule = reader.readLine();
 //                create a new car instance
-                Car c;
+                Car c ;
                 c = new Car(matricule);
                 System.out.println(c);
             }

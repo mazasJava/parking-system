@@ -15,19 +15,16 @@ import java.io.IOException;
  * JavaFX App
  */
 public class App extends Application {
-
     private static Scene scene;
-
     // soufiane
     private double xOfsset;
     private double yOfsset;
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("car"), 1150, 499);
+        scene = new Scene(loadFXML("login"), 1150, 499);
         stage.setScene(scene);
         stage.setResizable(false);
-
         stage.show();
     }
 
@@ -41,7 +38,7 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        // DbConnection.connect();
+         DbConnection.connect();
         launch();
     }
 
