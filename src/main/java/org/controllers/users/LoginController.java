@@ -2,8 +2,10 @@ package org.controllers.users;
 
 import com.mongodb.*;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import org.controllers.DbConnection;
 import org.mainapp.App;
 
@@ -47,6 +49,9 @@ public class LoginController {
             switchToCar();
         } else {
             System.out.println("fail");
+            /*Label lbl_erreur = new Label();
+            lbl_erreur.setText("Wrong password or username");
+            lbl_erreur.setTextFill(Color.web("#FF0000"));*/
         }
 
     }
