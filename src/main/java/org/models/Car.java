@@ -1,10 +1,12 @@
 package org.models;
 
+import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
 
 public class Car {
 
     private ObjectId id;
+    @BsonProperty(value = "matricule")
     private String matricule;
     private Historique carInfo;
 
