@@ -45,6 +45,7 @@ public class Car {
                 ", matricule='" + matricule + '\'' +
                 ", Date Entered=" + carInfo.getDateEntered() +
                 ", Date Release=" + carInfo.getDateRelease() +
+                "\n"+
                 '}';
     }
 }

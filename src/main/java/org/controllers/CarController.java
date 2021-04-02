@@ -2,15 +2,15 @@ package org.controllers;
 
 import com.mongodb.*;
 import com.mongodb.client.*;
-import com.mongodb.client.model.Accumulators;
-import com.mongodb.client.model.Aggregates;
-import com.mongodb.client.model.Filters;
-import com.mongodb.client.model.Projections;
+import com.mongodb.client.model.*;
+import com.mongodb.client.result.UpdateResult;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import org.bson.Document;
 import org.bson.codecs.Encoder;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import org.mainapp.App;
 import org.models.Car;
@@ -20,6 +20,10 @@ import java.io.IOException;
 import java.util.*;
 
 import static java.util.List.*;
+//import static com.mongodb.client.model.Filters.*;
+//import static com.mongodb.client.model.Filters.and;
+import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Updates.*;
 
 
 public class CarController {
@@ -40,11 +44,11 @@ public class CarController {
 
     @FXML
     public static void createCar() throws IOException {
-        mongoClient = new MongoClient(new MongoClientURI("mongodb+srv://mehdi-java:Password1234@cluster0.dw27l.mongodb.net"));
-        database = mongoClient.getDatabase("PARKING_MANAGEMENT_SYSTEM");
+        mongoClient = DbConnection.getConnection();
+        database = DbConnection.getDatabase();
         MongoCollection<Document> collection = database.getCollection("cars");
 
-        Car carObject = new Car(id, "test10HHHH3");
+        Car carObject = new Car(id, "AKMRBUTTER8");
         Document car = new Document();
 
         car.append("_id", carObject.getId())
@@ -63,8 +67,8 @@ public class CarController {
 
     @FXML
     public static void getCarsWithHistorique() {
-        mongoClient = new MongoClient(new MongoClientURI("mongodb+srv://mehdi-java:Password1234@cluster0.dw27l.mongodb.net"));
-        database = mongoClient.getDatabase("PARKING_MANAGEMENT_SYSTEM");
+        mongoClient = DbConnection.getConnection();
+        database = DbConnection.getDatabase();
         System.out.println("get car list :");
         MongoCollection<Document> collection = database.getCollection("historiques");
         AggregateIterable<Document> tr = collection.aggregate(List.of(Aggregates.lookup("cars", "car_id", "_id", "carhistory"), Aggregates.project(Projections.fields(
@@ -77,20 +81,22 @@ public class CarController {
                         new Document("$arrayElemAt", Arrays.asList("$carhistory.matricule", 0))
                 )
         ))));
-        Historique carHistoricList;
-        Car carList;
+        List<Car> carList = new ArrayList<>();
+        List<Historique> historiqueList = new ArrayList<>();
+
         for (Document document : tr) {
-            carHistoricList = new Historique(id,
-                    document.getString("state"),
-                    document.getDate("dateEntered"),
-                    document.getDate("dateRelease"));
-            carList = new Car(id,
-                    document.getString("carhistory"),
-                    carHistoricList);
-            System.out.println(carList.toString());
+            Historique carHistoricList = new Historique(id, document.getString("state"), document.getDate("dateEntered"), document.getDate("dateRelease"));
+            Car carList2 = new Car(id, document.getString("carhistory"), carHistoricList);
+            historiqueList.add(carHistoricList);
+            carList.add(carList2);
         }
+        System.out.println(carList.toString());
+
     }
+
+
     public static void main(String[] args) throws IOException {
+        DbConnection.connect();
         createCar();
 //        getCarsWithHistorique();
     }
