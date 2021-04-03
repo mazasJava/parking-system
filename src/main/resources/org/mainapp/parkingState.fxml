@@ -29,11 +29,11 @@
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Button>
-                        <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="129.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;" styleClass="buton-border" text="Cars Management">
+                        <Button mnemonicParsing="false" onAction="#switchToParkingCar" prefHeight="62.0" prefWidth="129.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;" styleClass="buton-border" text="Cars Management">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Button>
-                        <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="105.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;" styleClass="buton-border" text="Parking state">
+                        <Button mnemonicParsing="false" onAction="#switchToParkingState" prefHeight="62.0" prefWidth="105.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;" styleClass="buton-border" text="Parking state">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Button>
@@ -69,12 +69,12 @@
                             <font>
                                 <Font size="13.0" />
                             </font></Button>
-                        <TextField layoutX="853.0" layoutY="50.0" prefHeight="25.0" prefWidth="204.0" promptText="search" style="-fx-background-color: transparent;" styleClass="searchbar-txt">
+                        <TextField layoutX="853.0" layoutY="50.0" prefHeight="25.0" prefWidth="204.0" promptText="search" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 5 5 5 5; -fx-border-radius: 5 5 5 5;" styleClass="searchbar-txt">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </TextField>
-                        <ImageView fitHeight="25.0" fitWidth="26.0" layoutX="1024.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="25.0" fitWidth="26.0" layoutX="1024.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@../../imgs/loupe.png" />
                         </ImageView>
                         <!--<FontAwesomeIconView fill="#43425d" glyphName="SEARCH" layoutX="945.0" layoutY="69.0" />-->

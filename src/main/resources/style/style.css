@@ -195,3 +195,8 @@
     -fx-border-width: 1;
 }
 
+/* progress */
+.progress-bar .bar {
+    -fx-progress-color: red;
+}
+

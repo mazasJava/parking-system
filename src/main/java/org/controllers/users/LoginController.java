@@ -1,9 +1,11 @@
 package org.controllers.users;
 
 import com.mongodb.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import org.controllers.DbConnection;
 import org.mainapp.App;
@@ -20,17 +22,23 @@ public class LoginController {
     public Label labelError;
 
     @FXML
+    ProgressIndicator logProg;
+
+    @FXML
     public void switchToCar() throws IOException {
         App.setRoot("car");
     }
 
     @FXML
     public void login() throws IOException {
-        mongoClient = DbConnection.getConnection();
+
+        logProg.setVisible(true);
+
+        /*mongoClient = DbConnection.getConnection();
         @Deprecated
         DB db = mongoClient.getDB("PARKING_MANAGEMENT_SYSTEM");
         DBCollection collection = db.getCollection("users");
-        checkAuth(collection);
+        checkAuth(collection);*/
     }
 
     public void checkAuth(DBCollection collection) throws IOException {
@@ -41,10 +49,15 @@ public class LoginController {
         DBCursor cursor = collection.find(whereQuery1, whereQuery2);
         if (cursor.hasNext()) {
             System.out.println(cursor.next());
-            switchToCar();
+            //switchToCar();
         } else {
             labelError.setText("username or password is incorrect");
         }
 
+    }
+
+    // Add focus Enter . 
+    public void clickEnterUserName(ActionEvent actionEvent) {
+        passwordTextField.requestFocus();
     }
 }
