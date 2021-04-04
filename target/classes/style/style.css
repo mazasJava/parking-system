@@ -63,7 +63,7 @@
 
 
 
-//pagination
+/*pagination*/
 /* Remove spacing */
 .pagination > .pagination-control > .control-box {
     -fx-spacing: 10;
@@ -100,7 +100,7 @@
     -fx-page-information-visible: false;
 }
 
-///// Pie
+/*Pie*/
 .chart-pie-label-line {
     -fx-stroke: #8b4513;
     -fx-fill: #8b4513;
@@ -115,7 +115,14 @@
    -fx-stroke: #daa520;
 }
 
-.buton-border: focused{
+
+/*.buton-border:focused,.buton-border:pressed {*/
+/*    -fx-border-width: 0 0 2 0;*/
+/*    -fx-border-color: #2CD889;*/
+
+/*}*/
+
+.buton-border:focused{
     -fx-border-width: 0 0 2 0;
     -fx-border-color: #2CD889;
 }
@@ -125,7 +132,7 @@
     -fx-border-color: #2CD889;
 }
 
-// serachBar
+/*serachBar*/
 .searchbar-txt{
     -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%) !important;
 }
@@ -193,5 +200,10 @@
 .table-cell {
     -fx-border-color: transparent; /* Vertical Lines*/
     -fx-border-width: 1;
+}
+
+/* progress */
+.progress-bar .bar {
+    -fx-progress-color: red;
 }
 

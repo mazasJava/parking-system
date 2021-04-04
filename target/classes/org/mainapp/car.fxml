@@ -21,43 +21,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1150.0" styleClass="parent" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <AnchorPane prefHeight="40.0" prefWidth="200.0" styleClass="top-pane" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="5.0">
-               <Image url="@../../imgs/logor.png" />
-            </ImageView>
-            <HBox prefHeight="65.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: #ffffff;" AnchorPane.leftAnchor="180.0">
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;;" styleClass="buton-border" text="Dashboard">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font></Button>
-                  <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="133.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;" styleClass="buton-border" text="Cars Management">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font></Button>
-                  <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="127.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;" styleClass="buton-border" text="Parking state">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font></Button>
-                  <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;" styleClass="buton-border" text="Statistics">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font></Button>
-                  <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;" styleClass="buton-border" text="Error log">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font></Button>
-               </children>
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-            </HBox>
-            <Button layoutX="837.0" layoutY="17.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="134.0" style="-fx-background-color: #2CD889;" text="SETTINGS" />
-            <ImageView fitHeight="44.0" fitWidth="52.0" layoutX="1084.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@../../images/users_car.png" />
-            </ImageView>
-         </children></AnchorPane>
+      <fx:include source="./commun/menuBar.fxml"/>
    </top>
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F0FAF8;" BorderPane.alignment="CENTER">
