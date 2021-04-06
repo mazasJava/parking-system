@@ -1,105 +1,104 @@
 package org.controllers;
 
-import com.mongodb.*;
 import com.mongodb.client.*;
-import com.mongodb.client.model.*;
+import com.mongodb.client.model.Aggregates;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Projections;
+import com.mongodb.client.model.Updates;
 import javafx.fxml.FXML;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import org.mainapp.App;
 import org.models.Car;
-import org.models.Historique;
+import org.models.History;
 
 import java.io.IOException;
 import java.util.*;
 
+import static com.mongodb.client.model.Projections.fields;
+
+
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
+import org.bson.conversions.Bson;
+import org.bson.json.JsonWriterSettings;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Consumer;
+
+import static com.mongodb.client.model.Accumulators.push;
+import static com.mongodb.client.model.Accumulators.sum;
+import static com.mongodb.client.model.Aggregates.*;
+import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Projections.*;
+import static com.mongodb.client.model.Sorts.descending;
+
 public class CarController {
-    static MongoClient mongoClient;
-    static MongoDatabase database;
     public static final ObjectId id = new ObjectId();
-
-    @FXML
-    public void switchToParkingState() throws IOException {
-        App.setRoot("parkingState");
-    }
-
-    @FXML
-    public void switchToParkingCar() throws IOException {
-        App.setRoot("car");
-    }
 
     /**
      * @throws IOException Creat car object and insert object in data base
      */
     @FXML
-    public static void createCar() throws IOException {
-        MongoCollection<Document> collection = database.getCollection("cars");
+    public static Car createCar(ObjectId id,String matricule) throws IOException {
 
-        Car carObject = new Car(id, "LO0RVU");
-        Document car = new Document();
+        MongoCollection<Car> carMongoCollection = DbConnection.database.getCollection("cars", Car.class);
 
-        car.append("_id", carObject.getId())
-                .append("matricule", carObject.getmatricule());
+        Car newCar = new Car().setId(id).setMatricule(matricule);
         try {
-            collection.insertOne(car);
-            HistoriqueController.setCarHistorique(carObject.getId());
-            System.out.println("Successfully inserted documents. \n");
-        } catch (MongoWriteException mwe) {
-            if (mwe.getError().getCategory().equals(ErrorCategory.DUPLICATE_KEY)) {
-                System.out.println("Document with that id already exists");
-            }
+            carMongoCollection.insertOne(newCar);
+            System.out.println("Successfully inserted Car documents. \n");
+            HistoryController.setCarHistorique(newCar.getId());
+            return newCar;
+        } catch (Exception e) {
+            return  null;
         }
     }
 
     /**
      * @return Return car list with information about the cars
      */
-    @FXML
-    public static List<Car> getCarsWithHistorique() {
-        System.out.println("get car list :");
-        MongoCollection<Document> collection = database.getCollection("historiques");
-        AggregateIterable<Document> tr = collection.aggregate(List.of(Aggregates.lookup("cars", "car_id", "_id", "carhistory"), Aggregates.project(Projections.fields(
-                Projections.excludeId(),
-                Projections.include("state"),
+    private static List<History> getCarsWithHistorique() {
+        MongoCollection<History> historyMongoCollection = DbConnection.database.getCollection("historys", History.class);
+        Bson project = project(fields(
+                Projections.include("carId"),
                 Projections.include("dateEntered"),
                 Projections.include("dateRelease"),
                 Projections.computed(
-                        "carhistory",
-                        new Document("$arrayElemAt", Arrays.asList("$carhistory.matricule", 0))
+                        "matricule",
+                        new Document("$arrayElemAt", Arrays.asList("$matricule.matricule", 0))
                 )
-        ))));
-        List<Car> carList = new ArrayList<>();
-        List<Historique> historiqueList = new ArrayList<>();
-
-        for (Document document : tr) {
-            Historique carHistoricList = new Historique(id, document.getString("state"), document.getDate("dateEntered"), document.getDate("dateRelease"));
-            Car carList2 = new Car(id, document.getString("carhistory"), carHistoricList);
-            historiqueList.add(carHistoricList);
-            carList.add(carList2);
-        }
-        return carList;
+        ));
+        List<History> results = historyMongoCollection.aggregate(Arrays.asList(Aggregates.lookup("cars", "carId", "_id", "matricule"), project)).into(new ArrayList<>());
+        System.out.println("==> 3 most densely populated cities in Texas");
+        return results;
     }
 
     /**
      * Find and update car release date with current date
      */
-    public static void releaseCar() {
-        MongoCollection<Document> collection = database.getCollection("historiques");
+    public static void releaseCarFromDataBase(ObjectId id) {
         Date date = new Date(System.currentTimeMillis());
-        collection.updateOne(Filters.eq("_id", new ObjectId("606610df1bb9d7007dce7abe")), Updates.set("dateRelease", date));
+
+        MongoCollection<History> collection = DbConnection.database.getCollection("historys", History.class);
+        collection.updateOne(Filters.eq("_id", id), Updates.set("dateRelease", date));
         System.out.println("Document update successfully...");
-        FindIterable<Document> iterDoc = collection.find();
-        Iterator it = iterDoc.iterator();
-        while (it.hasNext()) {
-            System.out.println(it.next());
-        }
     }
 
     public static void main(String[] args) throws IOException {
         DbConnection.connect();
-        mongoClient = DbConnection.getConnection();
-        database = DbConnection.getDatabase();
-        createCar();
-        System.out.println(getCarsWithHistorique().toString());
+
+
+        System.out.println(threeMostPopulatedCitiesInTexas().toString());
+//        releaseCarFromDataBase();
+//        createCar();
+//        System.out.println(getCarsWithHistorique().toString());
+//        threeMostPopulatedCitiesInTexas(historyMongoCollection);
     }
 }

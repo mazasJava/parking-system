@@ -9,4 +9,5 @@ module org.example {
     exports org.mainapp;
     exports org.controllers;
     exports org.controllers.users;
+    exports org.models;
 }

@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="@cluster0.dw27l.mongodb.net" uuid="3b690e82-43d4-4470-80ec-d4e58a3b4778">
+    <data-source source="LOCAL" name="Parking db" uuid="3efe39a3-5e6e-48ad-b838-cec007ea7ed6">
       <driver-ref>mongo</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.dbschema.MongoJdbcDriver</jdbc-driver>
-      <jdbc-url>mongodb+srv://cluster0.dw27l.mongodb.net</jdbc-url>
-    </data-source>
-    <data-source source="LOCAL" name="test@cluster0.dw27l.mongodb.net" uuid="57feee16-3b65-4ffd-b521-b59c7b1f79f8">
-      <driver-ref>mongo</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.dbschema.MongoJdbcDriver</jdbc-driver>
-      <jdbc-url>mongodb+srv://cluster0.dw27l.mongodb.net/test?authSource=admin&amp;replicaSet=atlas-v9iltu-shard-0&amp;readPreference=primary&amp;appname=MongoDB%20Compass&amp;ssl=true</jdbc-url>
+      <jdbc-url>mongodb+srv://cluster0.dw27l.mongodb.net/?retryWrites=true&amp;w=majority</jdbc-url>
     </data-source>
   </component>
 </project>
