@@ -17,7 +17,7 @@
    <left>
       <AnchorPane prefHeight="407.0" prefWidth="302.0" BorderPane.alignment="CENTER">
          <VBox>
-            <ImageView fitHeight="499.0" fitWidth="569.0">
+            <ImageView fitHeight="600" fitWidth="569.0">
                <Image url="@../../imgs/Sign_in_bg.jpg" />
             </ImageView>
          </VBox>
@@ -46,7 +46,7 @@
          <Button layoutX="488.0" layoutY="7.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="24.0" style="-fx-font: close; -fx-background-color: transparent;">
 
          </Button>
-         <ProgressIndicator fx:id="logProg" layoutX="251.0" layoutY="413.0" prefHeight="42.0" prefWidth="38.0" style="-fx-progress-color: #2CD889;" visible="false" />
+         <ProgressIndicator fx:id="logProg" layoutX="251.0" layoutY="413.0" prefHeight="42.0" prefWidth="38.0" progress="0.0" style="-fx-progress-color: #2CD889;" visible="false" />
 
          
       </AnchorPane>

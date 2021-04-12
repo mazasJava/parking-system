@@ -95,7 +95,7 @@ public class CarController {
         DbConnection.connect();
 
 
-        System.out.println(threeMostPopulatedCitiesInTexas().toString());
+        //System.out.println(threeMostPopulatedCitiesInTexas().toString());
 //        releaseCarFromDataBase();
 //        createCar();
 //        System.out.println(getCarsWithHistorique().toString());
