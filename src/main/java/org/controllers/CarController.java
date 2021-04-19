@@ -1,6 +1,10 @@
 package org.controllers;
 
-import com.mongodb.client.*;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
@@ -9,7 +13,6 @@ import javafx.fxml.FXML;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
-import org.mainapp.App;
 import org.models.Car;
 import org.models.History;
 
@@ -19,46 +22,48 @@ import java.util.*;
 import static com.mongodb.client.model.Projections.fields;
 
 
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
-import org.bson.conversions.Bson;
-import org.bson.json.JsonWriterSettings;
+
+import static com.mongodb.client.model.Filters.eq;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
 
-import static com.mongodb.client.model.Accumulators.push;
-import static com.mongodb.client.model.Accumulators.sum;
 import static com.mongodb.client.model.Aggregates.*;
-import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Projections.*;
-import static com.mongodb.client.model.Sorts.descending;
 
 public class CarController {
-    public static final ObjectId id = new ObjectId();
 
     /**
      * @throws IOException Creat car object and insert object in data base
      */
     @FXML
-    public static Car createCar(ObjectId id,String matricule) throws IOException {
+    public static Car createCar(ObjectId id, String matricule) throws IOException {
 
         MongoCollection<Car> carMongoCollection = DbConnection.database.getCollection("cars", Car.class);
 
         Car newCar = new Car().setId(id).setMatricule(matricule);
-        try {
-            carMongoCollection.insertOne(newCar);
-            System.out.println("Successfully inserted Car documents. \n");
-            HistoryController.setCarHistorique(newCar.getId());
-            return newCar;
-        } catch (Exception e) {
-            return  null;
+        BasicDBObject checkMatriculIfExists = new BasicDBObject("matricule", matricule);
+
+        FindIterable<Car> test = carMongoCollection.find(checkMatriculIfExists);
+
+        if (test.cursor().hasNext()) {
+            System.out.println(test.cursor().next().getId());
+            HistoryController.setCarHistorique(test.cursor().next().getId());
+            System.out.println("exist");
+            return null;
+        } else {
+            try {
+                carMongoCollection.insertOne(newCar);
+                System.out.println("Successfully inserted Car documents. \n");
+                HistoryController.setCarHistorique(newCar.getId());
+                return newCar;
+            } catch (Exception e) {
+                return null;
+            }
         }
+
+
     }
 
     /**
@@ -75,30 +80,31 @@ public class CarController {
                         new Document("$arrayElemAt", Arrays.asList("$matricule.matricule", 0))
                 )
         ));
-        List<History> results = historyMongoCollection.aggregate(Arrays.asList(Aggregates.lookup("cars", "carId", "_id", "matricule"), project)).into(new ArrayList<>());
-        System.out.println("==> 3 most densely populated cities in Texas");
-        return results;
+        List<History> cars = historyMongoCollection
+                .aggregate(Arrays.asList(Aggregates.lookup("cars", "carId", "_id", "matricule"), project))
+                .into(new ArrayList<>());
+
+        System.out.println("==> Car List with history");
+
+
+//          retrieve selected element
+//        for (History car : cars) System.out.println(car.getMatricule());
+        return cars;
     }
 
-    /**
-     * Find and update car release date with current date
-     */
-    public static void releaseCarFromDataBase(ObjectId id) {
-        Date date = new Date(System.currentTimeMillis());
-
-        MongoCollection<History> collection = DbConnection.database.getCollection("historys", History.class);
-        collection.updateOne(Filters.eq("_id", id), Updates.set("dateRelease", date));
-        System.out.println("Document update successfully...");
-    }
+    
 
     public static void main(String[] args) throws IOException {
         DbConnection.connect();
+//        for (History history : getCarsWithHistorique()) history.getMatricule();
+//        createCar(new ObjectId(), "1293N");
+//        createCar(new ObjectId(), "22KSI");
+//        createCar(new ObjectId(), "912WN");
+//        createCar(new ObjectId(), "33267");
+//        createCar(new ObjectId(), "88995");
+//        createCar(new ObjectId(), "135G6");
+//        createCar(new ObjectId(), "001F3");
 
-
-        //System.out.println(threeMostPopulatedCitiesInTexas().toString());
-//        releaseCarFromDataBase();
-//        createCar();
-//        System.out.println(getCarsWithHistorique().toString());
-//        threeMostPopulatedCitiesInTexas(historyMongoCollection);
+        releaseCarFromDataBase("22KSI");
     }
 }

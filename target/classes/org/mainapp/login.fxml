@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.users.LoginController">
+<BorderPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.users.LoginController">
    <left>
       <AnchorPane prefHeight="407.0" prefWidth="302.0" BorderPane.alignment="CENTER">
          <VBox>
@@ -46,7 +46,7 @@
          <Button layoutX="488.0" layoutY="7.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="24.0" style="-fx-font: close; -fx-background-color: transparent;">
 
          </Button>
-         <ProgressIndicator fx:id="logProg" layoutX="251.0" layoutY="413.0" prefHeight="42.0" prefWidth="38.0" progress="0.0" style="-fx-progress-color: #2CD889;" visible="false" />
+         <ProgressIndicator fx:id="progID" layoutX="244.0" layoutY="240.0" opacity="0.0" prefHeight="68.0" prefWidth="130.0" progress="0.0" />
 
          
       </AnchorPane>

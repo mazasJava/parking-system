@@ -51,7 +51,7 @@ public class LoginController implements Initializable {
                     System.out.println("user: " + usernameTextField.getText() + ", mdp: " + passwordTextField.getText());
                     updateProgress(5,10);
                     Thread.sleep(500);
-            //put the script to fetch database here
+                    //put the script to fetch database here
 
                     if(usernameTextField.getText().equals("admin") && passwordTextField.getText().equals("admin")){
                         updateProgress(10,10);
@@ -98,13 +98,6 @@ public class LoginController implements Initializable {
         //DBCollection collection = db.getCollection("users");
         //checkAuth(collection);
     }
-
-
-
-
-
-
-
 
     public void checkAuth(DBCollection collection) throws IOException {
         BasicDBObject whereQuery1 = new BasicDBObject();
