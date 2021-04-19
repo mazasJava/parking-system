@@ -91,8 +91,23 @@ public class CarController {
 //        for (History car : cars) System.out.println(car.getMatricule());
         return cars;
     }
+    /**
+     * Find and update car release date with current date
+     */
+    public static void releaseCarFromDataBase(String mat) {
+        Date date = new Date(System.currentTimeMillis());
 
-    
+        MongoCollection<Car> carMongoCollection = DbConnection.database.getCollection("cars", Car.class);
+        MongoCollection<History> historyMongoCollection = DbConnection.database.getCollection("historys", History.class);
+
+        Car carMat = carMongoCollection.find(eq("matricule", mat)).first();
+
+        assert carMat != null;
+        ObjectId id = new ObjectId(String.valueOf(carMat.getId()));
+        historyMongoCollection.updateOne(Filters.eq("carId", id), Updates.set("dateRelease", date));
+        System.out.println("Document update successfully...");
+    }
+
 
     public static void main(String[] args) throws IOException {
         DbConnection.connect();
