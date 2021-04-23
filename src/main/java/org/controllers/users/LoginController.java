@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import org.controllers.DbConnection;
 import org.mainapp.App;
 
@@ -37,37 +38,40 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println(888888);
     }
+
     class getUserTask extends Task<Integer> {
 
         @Override
         protected Integer call() throws Exception {
 
-            updateProgress(0,10);
+            updateProgress(0, 10);
             Thread.sleep(500);
             try {
-                if (!usernameTextField.getText().equals("") && !passwordTextField.getText().equals("")){
+                if (!usernameTextField.getText().equals("") && !passwordTextField.getText().equals("")) {
                     logProg.setVisible(true);
                     System.out.println("user: " + usernameTextField.getText() + ", mdp: " + passwordTextField.getText());
-                    updateProgress(5,10);
+                    updateProgress(5, 10);
                     Thread.sleep(500);
-            //put the script to fetch database here
+                    //put the script to fetch database here
 
-                    if(usernameTextField.getText().equals("admin") && passwordTextField.getText().equals("admin")){
-                        updateProgress(10,10);
+                    if (usernameTextField.getText().equals("admin") && passwordTextField.getText().equals("admin")) {
+                        updateProgress(10, 10);
                         Thread.sleep(500);
                         switchToCar();
-                    }else{
-                        updateProgress(10,10);
+                    } else {
+                        updateProgress(10, 10);
                         Thread.sleep(500);
                         System.out.println("Aucun utisateur corresponde avec ce login!!!");
                         logProg.setVisible(false);
                     }
-                }else{
+                } else {
                     System.out.println("Inputs vides!!!");
                     logProg.setVisible(false);
                 }
-            }catch(Exception e) {}
+            } catch (Exception e) {
+            }
             return 1;
         }
 
@@ -79,7 +83,7 @@ public class LoginController implements Initializable {
 
         @Override
         protected void updateProgress(double workDone, double max) {
-            updateMessage("progresse! "+ workDone);
+            updateMessage("progresse! " + workDone);
             super.updateProgress(workDone, max);
         }
     }
@@ -98,12 +102,6 @@ public class LoginController implements Initializable {
         //DBCollection collection = db.getCollection("users");
         //checkAuth(collection);
     }
-
-
-
-
-
-
 
 
     public void checkAuth(DBCollection collection) throws IOException {

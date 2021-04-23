@@ -6,7 +6,7 @@ import org.bson.types.ObjectId;
 import java.util.Date;
 
 public class History {
-
+    private int counter;
     private ObjectId id;
     private ObjectId carId;
     private Date dateEntered;
@@ -38,7 +38,6 @@ public class History {
     }
 
     public History() {
-
     }
 
     public ObjectId getId() {

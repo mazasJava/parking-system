@@ -5,24 +5,37 @@ import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
 import com.mongodb.client.model.Updates;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.scene.Group;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.control.cell.TreeItemPropertyValueFactory;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.util.Callback;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
-import org.mainapp.App;
 import org.models.Car;
 import org.models.History;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.*;
 
 import static com.mongodb.client.model.Projections.fields;
 
 
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.json.JsonWriterSettings;
@@ -39,17 +52,44 @@ import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Projections.*;
 import static com.mongodb.client.model.Sorts.descending;
 
-public class CarController {
+public class CarController implements Initializable {
+    public static List<History> results;
     public static final ObjectId id = new ObjectId();
+    String Number, CarPlate, DateEntree, DateSortie;
+    @FXML
+    TableView<History> tableView;
+    @FXML
+    TableColumn<History, String> colNumber, colCarPlate, colDateEntree, colDateSortie;
+    ObservableList<History> data;
+    MongoCollection coll = DbConnection.database.getCollection("historys");
+    MongoCursor<Document> cursor = coll.find().iterator();
+    public List attend = new ArrayList();
+
+    public void show() {
+        attend.clear();
+        List<History> result = getCarsWithHistorique();
+        data = FXCollections.observableArrayList(result);
+        tableView.setItems(data);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+//        colNumber.setCellValueFactory(new PropertyValueFactory<History, String>("colNumber"));
+        colCarPlate.setCellValueFactory(new PropertyValueFactory<History, String>("matricule"));
+        colDateEntree.setCellValueFactory(new PropertyValueFactory<History, String>("dateEntered"));
+        colDateSortie.setCellValueFactory(new PropertyValueFactory<History, String>("dateRelease"));
+//        data = FXCollections.observableArrayList(attend);
+//        tableView.setItems(data);
+        show();
+    }
 
     /**
      * @throws IOException Creat car object and insert object in data base
      */
     @FXML
-    public static Car createCar(ObjectId id,String matricule) throws IOException {
+    public static Car createCar(ObjectId id, String matricule) throws IOException {
 
         MongoCollection<Car> carMongoCollection = DbConnection.database.getCollection("cars", Car.class);
-
         Car newCar = new Car().setId(id).setMatricule(matricule);
         try {
             carMongoCollection.insertOne(newCar);
@@ -57,7 +97,7 @@ public class CarController {
             HistoryController.setCarHistorique(newCar.getId());
             return newCar;
         } catch (Exception e) {
-            return  null;
+            return null;
         }
     }
 
@@ -75,7 +115,7 @@ public class CarController {
                         new Document("$arrayElemAt", Arrays.asList("$matricule.matricule", 0))
                 )
         ));
-        List<History> results = historyMongoCollection.aggregate(Arrays.asList(Aggregates.lookup("cars", "carId", "_id", "matricule"), project)).into(new ArrayList<>());
+        results = historyMongoCollection.aggregate(Arrays.asList(Aggregates.lookup("cars", "carId", "_id", "matricule"), project)).into(new ArrayList<>());
         System.out.println("==> 3 most densely populated cities in Texas");
         return results;
     }
@@ -91,14 +131,5 @@ public class CarController {
         System.out.println("Document update successfully...");
     }
 
-    public static void main(String[] args) throws IOException {
-        DbConnection.connect();
 
-
-        //System.out.println(threeMostPopulatedCitiesInTexas().toString());
-//        releaseCarFromDataBase();
-//        createCar();
-//        System.out.println(getCarsWithHistorique().toString());
-//        threeMostPopulatedCitiesInTexas(historyMongoCollection);
-    }
 }
