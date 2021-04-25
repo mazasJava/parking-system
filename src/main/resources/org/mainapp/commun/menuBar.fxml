@@ -6,40 +6,40 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-    <AnchorPane prefHeight="40.0" prefWidth="200.0" styleClass="top-pane" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.MenuBarController">
-        <children>
-            <ImageView fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="5.0">
-                <Image url="@../../../imgs/logor.png" />
-            </ImageView>
-            <HBox prefHeight="65.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: #ffffff;" AnchorPane.leftAnchor="180.0">
-                <children>
-                    <Button mnemonicParsing="false" onAction="#switchToParkingDashboard" prefHeight="62.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;;" styleClass="buton-border" text="Dashboard">
-                        <font>
-                            <Font name="System Bold" size="12.0" />
-                        </font></Button>
-                    <Button mnemonicParsing="false" onAction="#switchToParkingCar" prefHeight="62.0" prefWidth="133.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;" styleClass="buton-border" text="Cars Management">
-                        <font>
-                            <Font name="System Bold" size="12.0" />
-                        </font></Button>
-                    <Button  mnemonicParsing="false" onAction="#switchToParkingState" prefHeight="62.0" prefWidth="127.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;" styleClass="buton-border" text="Parking state">
-                        <font>
-                            <Font name="System Bold" size="12.0" />
-                        </font></Button>
-                    <Button mnemonicParsing="false" onAction="#switchToParkingStatistics" prefHeight="62.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;" styleClass="buton-border" text="Statistics">
-                        <font>
-                            <Font name="System Bold" size="12.0" />
-                        </font></Button>
-                    <Button mnemonicParsing="false" onAction="#switchToErrLog" prefHeight="62.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;" styleClass="buton-border" text="Error log">
-                        <font>
-                            <Font name="System Bold" size="12.0" />
-                        </font></Button>
-                </children>
-                <padding>
-                    <Insets left="20.0" />
-                </padding>
-            </HBox>
-            <Button layoutX="837.0" layoutY="17.0" mnemonicParsing="false" onAction="#switchToSettings" prefHeight="31.0" prefWidth="134.0" style="-fx-background-color: #2CD889;" text="SETTINGS" />
-            <ImageView fitHeight="44.0" fitWidth="52.0" layoutX="1084.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                <Image url="@../../../images/users_car.png" />
-            </ImageView>
-        </children></AnchorPane>
+<AnchorPane prefHeight="40.0" prefWidth="200.0" styleClass="top-pane" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.MenuBarController">
+    <children>
+        <ImageView fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="5.0">
+            <Image url="@../../../imgs/logor.png" />
+        </ImageView>
+        <HBox prefHeight="65.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: #ffffff;" AnchorPane.leftAnchor="180.0">
+            <children>
+                <Button fx:id="btnswitchToParkingDashboard" onMouseClicked="#handleClick" mnemonicParsing="false"  prefHeight="62.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;"   text="Dashboard">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font></Button>
+                <Button fx:id="btnswitchToParkingCar" onMouseClicked="#handleClick" mnemonicParsing="false" prefHeight="62.0" prefWidth="133.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;"  text="Cars Management">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font></Button>
+                <Button fx:id="btnswitchToParkingState" onMouseClicked="#handleClick"  mnemonicParsing="false"  prefHeight="62.0" prefWidth="127.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;"  text="Parking state">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font></Button>
+                <Button fx:id="btnswitchToParkingStatistics" onMouseClicked="#handleClick" mnemonicParsing="false"  prefHeight="62.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;"  text="Statistics">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font></Button>
+                <Button fx:id="btnswitchToErrLog" onMouseClicked="#handleClick" mnemonicParsing="false"  prefHeight="62.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;"  text="Error log">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font></Button>
+            </children>
+            <padding>
+                <Insets left="20.0" />
+            </padding>
+        </HBox>
+        <Button fx:id="btnswitchToSettings" layoutX="837.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#handleClick" prefHeight="31.0" prefWidth="134.0" style="-fx-background-color: #2CD889;" text="SETTINGS" />
+        <ImageView fitHeight="44.0" fitWidth="52.0" layoutX="1084.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../../../images/users_car.png" />
+        </ImageView>
+    </children></AnchorPane>
