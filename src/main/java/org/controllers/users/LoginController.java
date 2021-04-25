@@ -2,16 +2,28 @@ package org.controllers.users;
 
 import com.mongodb.*;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import org.bson.Document;
+import org.bson.json.JsonReader;
 import org.controllers.DbConnection;
 import org.mainapp.App;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -20,12 +32,14 @@ import java.util.ResourceBundle;
 
 
 public class LoginController implements Initializable {
+    public MongoClient mongoClient;
     @FXML
     public TextField usernameTextField;
     @FXML
     public PasswordField passwordTextField;
     @FXML
     public Label labelError;
+
     @FXML
     ProgressIndicator logProg;
 
@@ -34,11 +48,13 @@ public class LoginController implements Initializable {
         App.setRoot("car");
 
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         logProg.setVisible(false);
 
     }
+
     public void alert(String title,String message,String header){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -46,10 +62,13 @@ public class LoginController implements Initializable {
         alert.setHeaderText(header);
         alert.showAndWait();
     }
+
     public void createCount(MouseEvent mouseEvent) throws IOException {
-        //App.setRoot("register");
+        App.setRoot("register");
     }
+
     class getUserTask extends Task<Integer> {
+
         @Override
         protected Integer call() throws Exception {
             Thread thread = new Thread();
@@ -67,6 +86,7 @@ public class LoginController implements Initializable {
                     updateProgress(6,10);
                     List<BasicDBObject> fd = col.find().into(new ArrayList<BasicDBObject>());
                     updateProgress(7,10);
+
                     boolean tr = false;
 
                     for (BasicDBObject bo : fd){
@@ -91,6 +111,7 @@ public class LoginController implements Initializable {
                         Platform.runLater(() -> {
                             alert("WARNING","EMAIL OR PASSWORD IS INCORRECT!","LOGIN ERROR");
                         });
+
                     }
                 }else{
                     updateProgress(10,10);
@@ -99,6 +120,7 @@ public class LoginController implements Initializable {
                         alert("WARNING","EMAIL OR PASSWORD IS EMPTY","LOGIN ERROR");
                     });
                 }
+
             }catch (Exception e) {
                 System.out.println("exception"+e.getMessage());
             }
@@ -115,22 +137,28 @@ public class LoginController implements Initializable {
             updateMessage("Cancelled!!");
             return super.cancel(mayInterruptIfRunning);
         }
+
         @Override
         protected void updateProgress(double workDone, double max) {
             updateMessage("progresse! "+ workDone);
             super.updateProgress(workDone, max);
         }
     }
+
     @FXML
     public void login() throws IOException {
 
         getUserTask task = new getUserTask();
         logProg.progressProperty().bind(task.progressProperty());
-        new Thread(task).start();    }
+        new Thread(task).start();
+        /*switchToCar();
+        System.out.println("Exit");*/
+    }
 
     // Add focus Enter .
     public void clickEnterUserName(ActionEvent actionEvent) {
         passwordTextField.requestFocus();
     }
+
 
 }
