@@ -20,9 +20,6 @@ import java.io.IOException;
  */
 public class App extends Application {
     private static Scene scene;
-    // soufiane
-    private double xOfsset;
-    private double yOfsset;
 
     @Override
     public void start(Stage stage) throws IOException {

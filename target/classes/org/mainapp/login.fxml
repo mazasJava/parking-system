@@ -13,8 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.users.LoginController">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.users.LoginController">
    <left>
       <AnchorPane prefHeight="407.0" prefWidth="302.0" BorderPane.alignment="CENTER">
          <VBox>
@@ -35,10 +34,10 @@
          <ImageView fitHeight="76.0" fitWidth="71.0" layoutX="258.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../../imgs/logo.png" />
          </ImageView>
-         <TextField fx:id="usernameTextField" layoutX="144.0" layoutY="189.0" onAction="#clickEnterUserName" prefHeight="25.0" prefWidth="279.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" />
-         <PasswordField fx:id="passwordTextField" layoutX="146.0" layoutY="235.0" onAction="#login" prefHeight="26.0" prefWidth="277.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" />
+         <TextField fx:id="usernameTextField" layoutX="144.0" layoutY="189.0" onAction="#clickEnterUserName" prefHeight="25.0" prefWidth="279.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" styleClass="prompt-txt" stylesheets="@../../style/style.css" />
+         <PasswordField fx:id="passwordTextField" layoutX="146.0" layoutY="235.0" onAction="#login" prefHeight="26.0" prefWidth="277.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" styleClass="prompt-txt" stylesheets="@../../style/style.css" />
          <Label fx:id="labelError" layoutX="146.0" layoutY="269.0" prefHeight="17" prefWidth="280" textFill="red" />
-         <Label layoutX="146.0" layoutY="354.0" onMouseClicked="#createCount" text="Create Count?" />
+         <Label layoutX="146.0" layoutY="354.0" onMouseClicked="#createCount" text="Create Count?" textFill="#333333" />
          <Button layoutX="319.0" layoutY="346.0" mnemonicParsing="false" onAction="#login" prefHeight="33.0" prefWidth="100.0" style="-fx-background-color: #2CD889;" text="Login" textFill="WHITE" />
          <CheckBox layoutX="146.0" layoutY="293.0" mnemonicParsing="false" text="Remember me" textFill="#333333">
             <font>

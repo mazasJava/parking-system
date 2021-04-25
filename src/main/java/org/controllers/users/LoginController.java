@@ -151,8 +151,6 @@ public class LoginController implements Initializable {
         getUserTask task = new getUserTask();
         logProg.progressProperty().bind(task.progressProperty());
         new Thread(task).start();
-        /*switchToCar();
-        System.out.println("Exit");*/
     }
 
     // Add focus Enter .
