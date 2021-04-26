@@ -1,6 +1,5 @@
 package org.models;
 
-import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
 
 import java.util.Objects;
@@ -85,8 +84,8 @@ public final class Car {
                 ", matricule='" + matricule + '\'' +
                 ",Entered Date=" + carInfo.getDateEntered() +
                 ", Release Date=" + carInfo.getDateRelease() +
-                '}' +
-                "\n";
+                "\n" +
+                '}';
     }
 
 }

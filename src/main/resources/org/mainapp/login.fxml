@@ -34,21 +34,16 @@
          <ImageView fitHeight="76.0" fitWidth="71.0" layoutX="258.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../../imgs/logo.png" />
          </ImageView>
-         <TextField fx:id="usernameTextField" layoutX="144.0" layoutY="189.0" onAction="#clickEnterUserName" prefHeight="25.0" prefWidth="279.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" />
-         <PasswordField fx:id="passwordTextField" layoutX="146.0" layoutY="235.0" onAction="#login" prefHeight="26.0" prefWidth="277.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" />
-         <Label fx:id="labelError" layoutX="146.0" layoutY="269.0" prefHeight="17" prefWidth="280" textFill="red" />
-         <Button fx:id="loginButton" layoutX="319.0" layoutY="346.0" mnemonicParsing="false" onAction="#login" prefHeight="33.0" prefWidth="100.0" style="-fx-background-color: #2CD889;" text="Login" textFill="WHITE" />
+         <TextField fx:id="emailTextField" layoutX="144.0" layoutY="189.0" onAction="#clickEnterUserName" prefHeight="25.0" prefWidth="279.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" styleClass="prompt-txt" stylesheets="@../../style/style.css" />
+         <PasswordField fx:id="passwordTextField" layoutX="146.0" layoutY="235.0" onAction="#login" prefHeight="26.0" prefWidth="277.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" styleClass="prompt-txt" stylesheets="@../../style/style.css" />
+         <Label layoutX="146.0" layoutY="354.0" onMouseClicked="#createCount" text="Create Count?" textFill="#333333" />
+         <Button layoutX="319.0" layoutY="346.0" mnemonicParsing="false" onAction="#login" prefHeight="33.0" prefWidth="100.0" style="-fx-background-color: #2CD889;" text="Login" textFill="WHITE" />
          <CheckBox layoutX="146.0" layoutY="293.0" mnemonicParsing="false" text="Remember me" textFill="#333333">
             <font>
                <Font size="14.0" />
             </font>
          </CheckBox>
-         <Button layoutX="488.0" layoutY="7.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="24.0" style="-fx-font: close; -fx-background-color: transparent;">
-
-         </Button>
-         <ProgressIndicator fx:id="logProg" layoutX="251.0" layoutY="413.0" prefHeight="42.0" prefWidth="38.0" progress="0.0" style="-fx-progress-color: #2CD889;" visible="false" />
-
-         
+         <ProgressIndicator fx:id="logProg" layoutX="244.0" layoutY="418.0" prefHeight="68.0" prefWidth="130.0" progress="0.0" visible="false" />
       </AnchorPane>
    </center>
 </BorderPane>

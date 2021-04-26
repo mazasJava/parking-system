@@ -1,46 +1,53 @@
 package org.controllers;
 
-import javafx.event.ActionEvent;
+
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import org.mainapp.App;
 
 import java.io.IOException;
 
 public class MenuBarController {
 
-
-
+    @FXML
+    private Button btnswitchToParkingDashboard;
 
     @FXML
-    public void switchToParkingDashboard() throws IOException {
-        App.setRoot("dashboard");
-    }
+    private Button btnswitchToParkingCar;
 
     @FXML
-    public void switchToParkingCar() throws IOException {
-        App.setRoot("car");
-    }
+    private Button btnswitchToParkingState;
 
     @FXML
-    public void switchToParkingState() throws IOException {
-        App.setRoot("parkingState");
-    }
+    private Button btnswitchToParkingStatistics;
 
     @FXML
-    public void switchToParkingStatistics() throws IOException {
-        //App.setRoot("");
-    }
+    private Button btnswitchToErrLog;
 
     @FXML
-    public void switchToErrLog() throws IOException {
-        //App.setRoot("");
+    private Button btnswitchToSettings;
+
+    public void handleClick(MouseEvent event) throws IOException {
+        if(event.getSource() == btnswitchToParkingDashboard){
+            App.setRoot("dashboard");
+        }
+        else if(event.getSource() == btnswitchToParkingCar){
+            App.setRoot("car");
+        }
+        else if(event.getSource() == btnswitchToParkingState){
+            App.setRoot("parkingState");
+        }
+        else if(event.getSource() == btnswitchToParkingStatistics){
+            App.setRoot("dashboard");
+        }
+        else if(event.getSource() == btnswitchToErrLog){
+            App.setRoot("dashboard");
+        }
+        else if(event.getSource() == btnswitchToSettings){
+            App.setRoot("dashboard");
+        }
+
     }
-
-    @FXML
-    public void switchToSettings(ActionEvent actionEvent) {
-        //App.setRoot("");
-    }
-
-
 }

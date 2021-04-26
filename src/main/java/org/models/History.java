@@ -80,10 +80,13 @@ public class History {
     @Override
     public String toString() {
         return "History{" +
+                "\n"+
                 "id=" + id +
                 ", carId=" + carId +
                 ", dateEntered=" + dateEntered +
                 ", dateRelease=" + dateRelease +
-                '}';
+                ", mat=" + matricule +
+                '}'+
+                "\n";
     }
 }
