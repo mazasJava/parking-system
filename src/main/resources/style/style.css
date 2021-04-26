@@ -1,75 +1,69 @@
+/*PARENT*/
 .parent{
     -fx-background-color: #ffffff;
     -fx-background-radius: 30px;
+}
+
+/*--MENUBAR--*/
+.btn-menuchoises{
+    -fx-background-color : white ;
+    -fx-text-fill :  #646D82;
+}
+.btn-menuchoises:hover{
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: #2CD889;
+    -fx-text-fill :  #2CD889;
+}
+
+/*--SEARCH BAR--*/
+.searchbar-txt{
+    -fx-border-radius : 5 5 5 5;
+    -fx-background-color: white;
+    -fx-border-color :  white;
+    -fx-border-width : 5 5 5 5;
+    -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%) !important;
+}
+
+.prompt-txt{
+    -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%) !important;
 }
 
 .top-pane{
     -fx-background-color: #ffffff;
 }
 
-.button-plus{
-
+/*--SORTING BUTTON--*/
+.btn-green{
     -fx-background-color: #2CD889;
+    -fx-text-fill: white;
+    -fx-border-radius: 5 5 5 5;
 }
-
-.log{
+.btn-green:hover{
+    -fx-background-color: white;
+    -fx-text-fill: #2CD889;
+    -fx-border-width: 1 1 1 1;
+    -fx-border-color:  #2CD889;
 }
-
-
-
-
-.button
-{
--fx-background-color : #05071F;
--fx-text-fill : #e7e5e5;
+/*--VBOX--*/
+.vbox-carde{
+    -fx-border-radius: 7 7 7 7;
+    -fx-background-color: #F5FCF9;
+    -fx-padding: 5px 5px 5px 5px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
 }
-.button:hover{
--fx-background-color : #10165F;
+.pane-card-table{
+    -fx-border-radius: 5 5 5 5;
+    -fx-border-color: lightgray;
+    -fx-background-color: white;
 }
-.button:pressed
-{
--fx-background-color : #1620A1;
-}
-
-.scroll-pane {
-    -fx-background-color: #02030A;
-}
-
-.scroll-bar:horizontal, .scroll-bar:vertical{
-    -fx-background-color:transparent;
-}
-
-.increment-button, .decrement-button {
-    -fx-background-color: green;
-    -fx-border-color: black;
-}
-
-.scroll-bar:horizontal .track,
-.scroll-bar:vertical .track{
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-    -fx-background-radius: 0em;
-}
-
-.scroll-bar:horizontal .thumb,
-.scroll-bar:vertical .thumb {
-    -fx-background-color: #10165F;
-    -fx-background-radius: 5em;
-}
-
-.scroll-pane > .corner {
-    -fx-background-color: black;
-}
-
-
-
-/*pagination*/
-/* Remove spacing */
+/*--PAGINATION--*/
+/*--REMOVE SPACING--*/
 .pagination > .pagination-control > .control-box {
     -fx-spacing: 10;
 }
 
-/* You can control the actual button sizes here */
+/*--YOU CAN CONTROL THE ACTUAL BUTTON HERE--*/
 .pagination > .pagination-control > .control-box > .number-button,
 .pagination > .pagination-control > .control-box > .bullet-button,
 .pagination > .pagination-control > .control-box > .left-arrow-button,
@@ -80,7 +74,7 @@
     -fx-min-height: 30;
 }
 
-/* Colors on hover */
+/*--COLORS ON HOVER--*/
 .pagination > .pagination-control > .control-box > .number-button:hover,
 .pagination > .pagination-control > .control-box > .bullet-button:hover,
 .pagination > .pagination-control > .control-box > .left-arrow-button:hover,
@@ -89,7 +83,7 @@
     -fx-background-color: lightgray;
 }
 
-/* Selected toggle color */
+/*--SELECT TOGGLE COLOR--*/
 .pagination > .pagination-control > .control-box > .number-button:selected,
 .pagination > .pagination-control > .control-box > .bullet-button:selected{
     -fx-background-insets: 0;
@@ -100,7 +94,35 @@
     -fx-page-information-visible: false;
 }
 
-/*Pie*/
+/*--SCROLLING--*/
+.scroll-pane {
+    -fx-background-color: #02030A;
+}
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #10165F;
+    -fx-background-radius: 5em;
+}
+.scroll-pane > .corner {
+    -fx-background-color: black;
+}
+
+/*-- PAGINATION INCREMENTE --*/
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/*--PIE CHART--*/
 .chart-pie-label-line {
     -fx-stroke: #8b4513;
     -fx-fill: #8b4513;
@@ -111,51 +133,11 @@
     -fx-font-size: 1em;
 }
 .chart-legend {
-   -fx-background-color:  #fafad2;
-   -fx-stroke: #daa520;
+    -fx-background-color:  #fafad2;
+    -fx-stroke: #daa520;
 }
 
-
-/*.buton-border:focused,.buton-border:pressed {*/
-/*    -fx-border-width: 0 0 2 0;*/
-/*    -fx-border-color: #2CD889;*/
-
-/*}*/
-
-.buton-border:focused{
-    -fx-border-width: 0 0 2 0;
-    -fx-border-color: #2CD889;
-}
-
-.buton-border:pressed{
-    -fx-border-width: 0 0 2 0;
-    -fx-border-color: #2CD889;
-}
-
-/*serachBar*/
-.searchbar-txt{
-    -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%) !important;
-}
-/*.searchbar-txt: focused {
-    -fx-prompt-text-fill: transparent;
-}*/
-
-.vbox-carde{
-
-    -fx-border-radius: 7 7 7 7;
-    -fx-background-color: #F5FCF9;
-    -fx-padding: 5px 5px 5px 5px;
-    -fx-border-insets: 5px;
-    -fx-background-insets: 5px;
-
-}
-.pane-card-table{
-    -fx-border-radius: 5 5 5 5;
-    -fx-border-width: 5 5 5 5;
-    -fx-border-color: white;
-}
-
-/* Table biew*/
+/*--TABLE VIEW--*/
 .table-view, .tree-table-view {
     /* Constants used throughout the tableview. */
     -fx-table-header-border-color: transparent;
@@ -163,23 +145,20 @@
     -fx-background-color: transparent;
 }
 
-/* The column header row is made up of a number of column-header, one for each
+/*--The column header row is made up of a number of column-header, one for each
    TableColumn, and a 'filler' area that extends from the right-most column
-   to the edge of the tableview, or up to the 'column control' button. */
+   to the edge of the tableview, or up to the 'column control' button.--*/
 .table-view .filler, .tree-table-view .filler, .table-view .column-header,
 .tree-table-view .column-header {
-    -fx-size: 65;
+    -fx-size: 65px;
     -fx-border-style: null;
-    -fx-border-color: -swatch-grey;
     -fx-border-width: 0 0 2 0;
     -fx-background-color: transparent;
 }
-
 .table-view .show-hide-columns-button, .tree-table-view .show-hide-columns-button
 {
     -fx-background-color: transparent;
 }
-
 .table-view .column-header .label, .table-view .filler .label,
 .table-view .column-drag-header .label, .tree-table-view .column-header .label,
 .tree-table-view .filler .label, .tree-table-view .column-drag-header .label
@@ -187,23 +166,14 @@
     -fx-alignment: center;
     -fx-text-fill:  #646D82;
 }
-
 .table-view .column-header-background, .tree-table-view .column-header-background
 {
     -fx-background-color: transparent;
 }
-
 .table-row-cell, .tree-table-row-cell {
     -fx-cell-size: 40px;
 }
-
 .table-cell {
     -fx-border-color: transparent; /* Vertical Lines*/
     -fx-border-width: 1;
 }
-
-/* progress */
-.progress-bar .bar {
-    -fx-progress-color: red;
-}
-
