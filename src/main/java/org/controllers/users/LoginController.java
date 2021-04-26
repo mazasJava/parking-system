@@ -2,28 +2,16 @@ package org.controllers.users;
 
 import com.mongodb.*;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import org.bson.Document;
-import org.bson.json.JsonReader;
 import org.controllers.DbConnection;
 import org.mainapp.App;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -32,21 +20,16 @@ import java.util.ResourceBundle;
 
 
 public class LoginController implements Initializable {
-    public MongoClient mongoClient;
     @FXML
-    public TextField usernameTextField;
+    public TextField emailTextField;
     @FXML
     public PasswordField passwordTextField;
-    @FXML
-    public Label labelError;
-
     @FXML
     ProgressIndicator logProg;
 
     @FXML
     public void switchToCar() throws IOException {
         App.setRoot("car");
-
     }
 
     @Override
@@ -74,7 +57,7 @@ public class LoginController implements Initializable {
             Thread thread = new Thread();
             updateProgress(4,10);
             try {
-                if (!usernameTextField.getText().equals("") && !passwordTextField.getText().equals("")){
+                if (!emailTextField.getText().equals("") && !passwordTextField.getText().equals("")){
                     logProg.setVisible(true);
                     updateProgress(2,10);
                     thread.sleep(250);
@@ -90,7 +73,7 @@ public class LoginController implements Initializable {
                     boolean tr = false;
 
                     for (BasicDBObject bo : fd){
-                        if(usernameTextField.getText().equals(bo.get("name")) && passwordTextField.getText().equals(bo.get("password"))){
+                        if(emailTextField.getText().equals(bo.get("email")) && passwordTextField.getText().equals(bo.get("password"))){
                             updateProgress(8,10);
                             thread.sleep(250);
                             updateProgress(10,10);
@@ -157,6 +140,5 @@ public class LoginController implements Initializable {
     public void clickEnterUserName(ActionEvent actionEvent) {
         passwordTextField.requestFocus();
     }
-
 
 }
