@@ -6,30 +6,51 @@ import java.net.*;
 import java.io.*;
 
 public class Client {
+    private Socket socket;
+    private BufferedReader reader;
 
-    public static void main(String[] args) {
+    public Socket getSocket() {
+        return socket;
+    }
+
+    public BufferedReader getReader() {
+        return reader;
+    }
+
+    public void readMEssage(BufferedReader reader,int number) throws IOException {
+        for (int i = 0; i < number; i++) {
+//                receive the matricule
+            String matricule = reader.readLine();
+            System.out.println(matricule);
+        }
+    }
+
+    public BufferedReader getReader(Socket socket) {
+        InputStream input = null;
+        try {
+            input = socket.getInputStream();
+            reader = new BufferedReader(new InputStreamReader(input));
+            return reader;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Client(String hostname, int port) {
+        try {
+            this.socket = new Socket(hostname, port);
+        } catch (IOException ex) {
+            System.out.println("I/O error: " + ex.getMessage());
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
 
         String hostname = "localhost";
         int port = Integer.parseInt(String.valueOf(8081));
+        Client c = new Client(hostname, port);
+        c.readMEssage(c.getReader(c.getSocket()),10);
 
-        try (Socket socket = new Socket(hostname, port)) {
-            InputStream input = socket.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-            for (int i=0;i<5;i++) {
-//                receive the matricule
-                String matricule = reader.readLine();
-//                create a new car instance
-                Car c ;
-                c = new Car(matricule);
-                System.out.println(c);
-            }
-        } catch (UnknownHostException ex) {
-
-            System.out.println("Server not found: " + ex.getMessage());
-
-        } catch (IOException ex) {
-
-            System.out.println("I/O error: " + ex.getMessage());
-        }
     }
 }

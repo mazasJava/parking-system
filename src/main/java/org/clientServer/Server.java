@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class Server {
 
-    public static void main(String[] args) {
+    public static void doIt(int number, long delay) {
 
         int port = 8081;
         final String CHAR_UPPERCASE = "abcdefghijklmnopqrstuvwxyz".toUpperCase();
@@ -23,7 +23,7 @@ public class Server {
                 System.out.println("New client connected");
                 OutputStream output = socket.getOutputStream();
                 PrintWriter writer = new PrintWriter(output, true);
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < number; i++) {
                     StringBuilder result = new StringBuilder(PASSWORD_LENGTH);
 //                    City Identifier
                     for (int j = 0; j < 2; j++) {
@@ -46,7 +46,7 @@ public class Server {
 //                    ***********************
                     writer.println(result);
 //                    writer.println(result + " =>" + idCar);
-                    Thread.sleep(4000);
+                    Thread.sleep(delay);
                 }
             }
 
@@ -54,5 +54,9 @@ public class Server {
             System.out.println("Server exception: " + ex.getMessage());
             ex.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        Server.doIt(10, 4000);
     }
 }

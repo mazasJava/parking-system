@@ -74,7 +74,7 @@ public class CarController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        colNumber.setCellValueFactory(new PropertyValueFactory<History, String>("colNumber"));
+        colNumber.setCellValueFactory(new PropertyValueFactory<History, String>("counterId"));
         colCarPlate.setCellValueFactory(new PropertyValueFactory<History, String>("matricule"));
         colDateEntree.setCellValueFactory(new PropertyValueFactory<History, String>("dateEntered"));
         colDateSortie.setCellValueFactory(new PropertyValueFactory<History, String>("dateRelease"));
@@ -116,7 +116,6 @@ public class CarController implements Initializable {
                 )
         ));
         results = historyMongoCollection.aggregate(Arrays.asList(Aggregates.lookup("cars", "carId", "_id", "matricule"), project)).into(new ArrayList<>());
-        System.out.println("==> 3 most densely populated cities in Texas");
         return results;
     }
 
