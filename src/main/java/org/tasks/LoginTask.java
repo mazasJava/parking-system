@@ -34,16 +34,17 @@ public class LoginTask extends Task<Integer> {
     }
     @Override
     protected Integer call() throws Exception {
+        Thread thread = new Thread();
         updateProgress(4,10);
         try {
             if (!emailTextField.equals("") && !passwordTextField.equals("")){
-                if(!emailTextField.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")){
+                if(!emailTextField.matches("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")){
                     alert("WARNING","EMAIL NON VALID!","LOGIN ERROR");
                 }
                 else{
                     logProg.setVisible(true);
                     updateProgress(2,10);
-                    Thread.sleep(250);
+                    thread.sleep(250);
                     DbConnection.connect();
                     updateProgress(4,10);
                     MongoDatabase database = DbConnection.database;
@@ -55,7 +56,7 @@ public class LoginTask extends Task<Integer> {
                     for (BasicDBObject bo : fd){
                         if(emailTextField.equals(bo.get("email")) && passwordTextField.equals(bo.get("password"))){
                             updateProgress(8,10);
-                            Thread.sleep(250);
+                            thread.sleep(250);
                             updateProgress(10,10);
                             try{
                                 App.setRoot("car");
@@ -67,7 +68,7 @@ public class LoginTask extends Task<Integer> {
                         updateProgress(9,10);
                     }
                     updateProgress(8,10);
-                    Thread.sleep(250);
+                    thread.sleep(250);
                     updateProgress(10,10);
                     logProg.setVisible(false);
                     alert("WARNING","EMAIL OR PASSWORD IS INCORRECT!","LOGIN ERROR");
