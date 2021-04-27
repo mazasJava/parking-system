@@ -59,7 +59,7 @@ public class LoginTask extends Task<Integer> {
                             thread.sleep(250);
                             updateProgress(10,10);
                             try{
-                                App.setRoot("car");
+                                App.setRoot("dashboard");
                             }catch(Exception e ){
                                 System.out.println("eeexception"+e.getMessage());
                             }

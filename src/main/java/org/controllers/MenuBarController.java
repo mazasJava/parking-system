@@ -40,14 +40,13 @@ public class MenuBarController {
             App.setRoot("parkingState");
         }
         else if(event.getSource() == btnswitchToParkingStatistics){
-            App.setRoot("dashboard");
+            App.setRoot("statistics");
         }
         else if(event.getSource() == btnswitchToErrLog){
-            App.setRoot("dashboard");
+            App.setRoot("logProgError");
         }
         else if(event.getSource() == btnswitchToSettings){
-            App.setRoot("dashboard");
+            App.setRoot("settings");
         }
-
     }
 }
