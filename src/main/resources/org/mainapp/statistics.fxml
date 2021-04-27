@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1150.0" styleClass="parent" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.StatisticsController">
+    <top>
+        <fx:include source="./commun/menuBar.fxml" />
+    </top>
+    <center>
+        <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F0FAF8;" BorderPane.alignment="CENTER">
+            <Label layoutX="403.0" layoutY="206.0" prefHeight="50.0" prefWidth="344.0" text="Welcome to statistics">
+            <font>
+               <Font size="34.0" />
+            </font></Label>
+        </Pane>
+    </center>
+</BorderPane>
