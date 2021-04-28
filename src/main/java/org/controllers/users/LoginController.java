@@ -1,5 +1,4 @@
 package org.controllers.users;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -7,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import org.mainapp.App;
 import org.tasks.LoginTask;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,27 +21,20 @@ public class LoginController implements Initializable {
     ProgressIndicator logProg;
 
     @FXML
-    public void switchToCar() throws IOException {
-        App.setRoot("car");
-    }
+    CheckBox chkRememberMe;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         logProg.setVisible(false);
 
-    }
-    public void alert(String title,String message,String header){
-        Platform.runLater(() -> {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle(title);
-            alert.setContentText(message);
-            alert.setHeaderText(header);
-            alert.showAndWait();
-        });
-    }
-
-    public void createCount() throws IOException {
-        App.setRoot("register");
+        if(!App.emailRemem.equals("") || !App.passRemem.equals("")){
+            chkRememberMe.setSelected(true);
+            emailTextField.setText(App.emailRemem);
+            passwordTextField.setText(App.passRemem);
+        }
+        else {
+            chkRememberMe.setSelected(false);
+        }
     }
 
     @FXML
@@ -49,14 +42,24 @@ public class LoginController implements Initializable {
         LoginTask task = new LoginTask(emailTextField.getText(),passwordTextField.getText(),logProg);
         logProg.progressProperty().bind(task.progressProperty());
         new Thread(task).start();
+
+        if(chkRememberMe.isSelected()){
+            App.emailRemem = emailTextField.getText();
+            App.passRemem = passwordTextField.getText();
+            System.out.println("is checked" + chkRememberMe.isSelected());
+        }else {
+            App.emailRemem = "";
+            App.passRemem = "";
+        }
+
     }
 
     // Add focus Enter .
-    public void clickEnterUserName(ActionEvent actionEvent) {
+    public void clickEnterUserName() {
         passwordTextField.requestFocus();
     }
 
-    public void iconClicked(MouseEvent mouseEvent) {
-        passwordTextField.setVisible(true);
+    public void createCount(MouseEvent mouseEvent) throws IOException {
+        App.setRoot("register");
     }
 }

@@ -48,4 +48,5 @@
     <ImageView fitHeight="44.0" fitWidth="52.0" layoutX="1084.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
         <Image url="@../../../images/users_car.png" />
     </ImageView>
+    <Button fx:id="btnClose" onMouseClicked="#handleClick" layoutX="998.0" layoutY="21.0" mnemonicParsing="false" text="close" />
 </AnchorPane>
