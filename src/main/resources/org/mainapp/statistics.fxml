@@ -1,20 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1150.0" styleClass="parent" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.StatisticsController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1150.0" styleClass="parent" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.StatisticsController">
     <top>
         <fx:include source="./commun/menuBar.fxml" />
     </top>
-    <center>
-        <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F0FAF8;" BorderPane.alignment="CENTER">
-            <Label layoutX="403.0" layoutY="206.0" prefHeight="50.0" prefWidth="344.0" text="Welcome to statistics">
-            <font>
-               <Font size="34.0" />
-            </font></Label>
-        </Pane>
-    </center>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="253.0" prefWidth="1004.0">
+               <children>
+                  <Pane prefHeight="252.0" prefWidth="575.0">
+                     <children>
+                        <AreaChart fx:id="areaChart" layoutX="2.0" layoutY="2.0" prefHeight="249.0" prefWidth="567.0" title="Number visits">
+                            <xAxis>
+                                <NumberAxis side="BOTTOM" fx:id="x" />
+                            </xAxis>
+                            <yAxis>
+                                <NumberAxis fx:id="y" side="LEFT" />
+                            </yAxis>
+                        </AreaChart>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="252.0" prefWidth="576.0">
+                     <children>
+                        <BarChart fx:id="barChart" prefHeight="253.0" prefWidth="574.0" title="Number visits">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" fx:id="xB" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis fx:id="yB" side="LEFT" />
+                          </yAxis>
+                        </BarChart>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <HBox prefHeight="262.0" prefWidth="1150.0">
+               <children>
+                  <Pane prefHeight="261.0" prefWidth="575.0">
+                     <children>
+                         <LineChart fx:id="lineChart" prefHeight="261.0" prefWidth="573.0" title="Number visits">
+                             <xAxis>
+                                 <NumberAxis side="BOTTOM" fx:id="xAxis" />
+                             </xAxis>
+                             <yAxis>
+                                 <NumberAxis fx:id="yAxis" side="LEFT" />
+                             </yAxis>
+                         </LineChart>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="261.0" prefWidth="575.0">
+                     <children>
+                         <PieChart fx:id="pieChart" layoutX="2.0" layoutY="10.0" prefHeight="241.0" prefWidth="572.0" title="Parking state" />
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
 </BorderPane>
