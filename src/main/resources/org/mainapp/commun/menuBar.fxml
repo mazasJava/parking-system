@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="40.0" prefWidth="200.0" styleClass="top-pane" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.MenuBarController" stylesheets="@../../../style/style.css" >
+<AnchorPane prefHeight="40.0" prefWidth="200.0" styleClass="top-pane" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.MenuBarController">
 
     <ImageView fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="5.0">
         <Image url="@../../../imgs/logor.png" />

@@ -9,7 +9,7 @@
     -fx-background-color : white ;
     -fx-text-fill :  #646D82;
 }
-.btn-menuchoises:focused{
+.btn-menuchoises:hover{
     -fx-border-width: 0 0 2 0;
     -fx-border-color: #2CD889;
     -fx-text-fill :  #2CD889;

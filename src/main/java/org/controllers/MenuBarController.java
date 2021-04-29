@@ -29,6 +29,9 @@ public class MenuBarController {
     @FXML
     private Button btnswitchToSettings;
 
+    @FXML
+    private Button btnClose;
+
     public void handleClick(MouseEvent event) throws IOException {
         if(event.getSource() == btnswitchToParkingDashboard){
             App.setRoot("dashboard");
@@ -40,14 +43,15 @@ public class MenuBarController {
             App.setRoot("parkingState");
         }
         else if(event.getSource() == btnswitchToParkingStatistics){
-            App.setRoot("dashboard");
+            App.setRoot("statistics");
         }
         else if(event.getSource() == btnswitchToErrLog){
-            App.setRoot("dashboard");
+            App.setRoot("logProgError");
         }
         else if(event.getSource() == btnswitchToSettings){
-            App.setRoot("dashboard");
+            App.setRoot("settings");
+        }else if(event.getSource() == btnClose){
+            App.setRoot("login");
         }
-
     }
 }
