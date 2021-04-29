@@ -53,8 +53,8 @@ public class Dashboard implements Initializable {
     }
     public void iniPieChart(){
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("Saturé",14),
-                new PieChart.Data("Libre",36)
+                new PieChart.Data("free",14),
+                new PieChart.Data("full",36)
         );
         pieChart.setData(pieChartData);
     }
