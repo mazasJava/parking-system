@@ -1,11 +1,18 @@
 package org.mainapp;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.controllers.DbConnection;
+
 import java.io.IOException;
 
 /**
@@ -13,12 +20,9 @@ import java.io.IOException;
  */
 public class App extends Application {
     private static Scene scene;
-
-    public static String emailRemem = "", passRemem = "";
-
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("login"), 1150, 600);
+        scene = new Scene(loadFXML("car"), 1150, 600);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();

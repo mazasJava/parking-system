@@ -1,7 +1,7 @@
 package org.controllers;
 
 
-        import java.net.URL;
+import java.net.URL;
         import java.util.ResourceBundle;
 
         import javafx.collections.FXCollections;
@@ -9,6 +9,8 @@ package org.controllers;
         import javafx.fxml.FXML;
         import javafx.fxml.Initializable;
         import javafx.scene.chart.*;
+        import org.models.Car;
+        import org.models.Parking;
 
 public class Dashboard implements Initializable {
 
@@ -34,8 +36,13 @@ public class Dashboard implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Parking park = new Parking("",10);
+        Parking.addCar(new Car());
+        Parking.addCar(new Car());
+        Parking.addCar(new Car());
+        Parking.addCar(new Car());
         iniBarChart();
-        iniPieChart();
+        iniPieChart(Parking.getState()[1], Parking.getState()[2]);
     }
 
     private void iniBarChart(){
@@ -51,10 +58,10 @@ public class Dashboard implements Initializable {
         set1.getData().add(new XYChart.Data("Sunday",53));
         visitchart.getData().addAll(set1);
     }
-    public void iniPieChart(){
+    public void iniPieChart(int x,int y){
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("Saturé",14),
-                new PieChart.Data("Libre",36)
+                new PieChart.Data("Saturé",x),
+                new PieChart.Data("Libre",y)
         );
         pieChart.setData(pieChartData);
     }
