@@ -61,20 +61,17 @@ public class CarController implements Initializable {
     @FXML
     TableColumn<History, String> colNumber, colCarPlate, colDateEntree, colDateSortie;
     ObservableList<History> data;
-    MongoCollection coll = DbConnection.database.getCollection("historys");
-    MongoCursor<Document> cursor = coll.find().iterator();
     public List attend = new ArrayList();
 
     public void show() {
         attend.clear();
-        List<History> result = getCarsWithHistorique();
-        data = FXCollections.observableArrayList(result);
+        data = FXCollections.observableArrayList(getCarsWithHistorique());
         tableView.setItems(data);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        colNumber.setCellValueFactory(new PropertyValueFactory<History, String>("counterId"));
+//        colNumber.setCellValueFactory(new PropertyValueFactory<History, String>("counterId"));
         colCarPlate.setCellValueFactory(new PropertyValueFactory<History, String>("matricule"));
         colDateEntree.setCellValueFactory(new PropertyValueFactory<History, String>("dateEntered"));
         colDateSortie.setCellValueFactory(new PropertyValueFactory<History, String>("dateRelease"));
@@ -115,8 +112,7 @@ public class CarController implements Initializable {
                         new Document("$arrayElemAt", Arrays.asList("$matricule.matricule", 0))
                 )
         ));
-        results = historyMongoCollection.aggregate(Arrays.asList(Aggregates.lookup("cars", "carId", "_id", "matricule"), project)).into(new ArrayList<>());
-        return results;
+        return results = historyMongoCollection.aggregate(Arrays.asList(Aggregates.lookup("cars", "carId", "_id", "matricule"), project)).into(new ArrayList<>());
     }
 
     /**

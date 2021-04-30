@@ -35,6 +35,7 @@ public class MenuBarController {
     public void handleClick(MouseEvent event) throws IOException {
         if(event.getSource() == btnswitchToParkingDashboard){
             App.setRoot("dashboard");
+//            btnswitchToParkingDashboard.set
         }
         else if(event.getSource() == btnswitchToParkingCar){
             App.setRoot("car");

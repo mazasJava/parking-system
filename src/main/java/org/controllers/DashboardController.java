@@ -12,7 +12,7 @@ import javafx.scene.chart.*;
 import org.models.Car;
 import org.models.Parking;
 
-public class Dashboard implements Initializable {
+public class DashboardController implements Initializable {
 
 //    @FXML
 //    private ResourceBundle resources;

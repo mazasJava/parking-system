@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1150.0" styleClass="parent" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.Dashboard">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1150.0" styleClass="parent" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.DashboardController">
   <top>
      <fx:include source="./commun/menuBar.fxml" />
   </top>
@@ -32,7 +32,7 @@
                <children>
                   <Pane prefHeight="226.0" prefWidth="525.0">
                      <children>
-                        <PieChart fx:id="pieChart" prefHeight="356.0" prefWidth="450.0" title="parking state" />
+                        <PieChart fx:id="pieChart" prefHeight="356.0" prefWidth="450.0" title="Etat parking" />
                      </children>
                   </Pane>
                   <Pane prefHeight="226.0" prefWidth="461.0">
