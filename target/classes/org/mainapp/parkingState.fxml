@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1150.0" styleClass="parent" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1150.0" styleClass="parent" stylesheets="@../../style/style.css" type="BorderPane" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.ParkingStateController">
     <top>
         <fx:include source="./commun/menuBar.fxml" />
     </top>
@@ -54,8 +54,8 @@
             </Pane>
             <Pagination layoutX="855.0" layoutY="431.0" prefHeight="61.0" prefWidth="221.0" style="-fx-background-color: transparent;" />
             <Pane layoutX="23.0" layoutY="149.0" prefHeight="280.0" prefWidth="290.0">
-                <PieChart layoutY="-29.0" prefHeight="309.0" prefWidth="323.0" style="-fx-background-color: green;" styleClass="chart-pie-label" />
+                <PieChart fx:id="pieChart" layoutY="-6.0" prefHeight="286.0" prefWidth="291.0" style="-fx-background-color: green;" styleClass="chart-pie-label" title="Visiter Number" />
             </Pane>
         </Pane>
     </center>
-</BorderPane>
+</fx:root>
