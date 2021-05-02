@@ -154,10 +154,15 @@ public class CarController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
-
+    public static void searchCar(String mat) {
+        for (History carInfo : results) {
+            if (carInfo.getMatricule().equals(mat)) {
+                System.out.println(carInfo);
+            }
+        }
+    }
 
 
     public static void main(String[] args) throws IOException {
