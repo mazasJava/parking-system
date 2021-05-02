@@ -1,10 +1,7 @@
 package org.controllers;
 
 import com.mongodb.client.*;
-import com.mongodb.client.model.Aggregates;
-import com.mongodb.client.model.Filters;
-import com.mongodb.client.model.Projections;
-import com.mongodb.client.model.Updates;
+import com.mongodb.client.model.*;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -34,7 +31,6 @@ import java.net.URL;
 import java.util.*;
 
 import static com.mongodb.client.model.Projections.fields;
-
 
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -71,12 +67,13 @@ public class CarController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        colNumber.setCellValueFactory(new PropertyValueFactory<History, String>("counterId"));
+        // colNumber.setCellValueFactory(new PropertyValueFactory<History,
+        // String>("counterId"));
         colCarPlate.setCellValueFactory(new PropertyValueFactory<History, String>("matricule"));
         colDateEntree.setCellValueFactory(new PropertyValueFactory<History, String>("dateEntered"));
         colDateSortie.setCellValueFactory(new PropertyValueFactory<History, String>("dateRelease"));
-//        data = FXCollections.observableArrayList(attend);
-//        tableView.setItems(data);
+        // data = FXCollections.observableArrayList(attend);
+        // tableView.setItems(data);
         show();
     }
 
@@ -85,7 +82,6 @@ public class CarController implements Initializable {
      */
     @FXML
     public static Car createCar(ObjectId id, String matricule) throws IOException {
-
         MongoCollection<Car> carMongoCollection = DbConnection.database.getCollection("cars", Car.class);
         Car newCar = new Car().setId(id).setMatricule(matricule);
         try {
@@ -102,17 +98,14 @@ public class CarController implements Initializable {
      * @return Return car list with information about the cars
      */
     private static List<History> getCarsWithHistorique() {
-        MongoCollection<History> historyMongoCollection = DbConnection.database.getCollection("historys", History.class);
-        Bson project = project(fields(
-                Projections.include("carId"),
-                Projections.include("dateEntered"),
-                Projections.include("dateRelease"),
-                Projections.computed(
-                        "matricule",
-                        new Document("$arrayElemAt", Arrays.asList("$matricule.matricule", 0))
-                )
-        ));
-        return results = historyMongoCollection.aggregate(Arrays.asList(Aggregates.lookup("cars", "carId", "_id", "matricule"), project)).into(new ArrayList<>());
+        MongoCollection<History> historyMongoCollection = DbConnection.database.getCollection("historys",
+                History.class);
+        Bson project = project(fields(Projections.include("carId"), Projections.include("dateEntered"),
+                Projections.include("dateRelease"), Projections.computed("matricule",
+                        new Document("$arrayElemAt", Arrays.asList("$matricule.matricule", 0)))));
+        return results = historyMongoCollection
+                .aggregate(Arrays.asList(Aggregates.lookup("cars", "carId", "_id", "matricule"), project))
+                .into(new ArrayList<>());
     }
 
     /**
@@ -126,5 +119,15 @@ public class CarController implements Initializable {
         System.out.println("Document update successfully...");
     }
 
+
+
+    public static void main(String[] args) throws IOException {
+        DbConnection.connect();
+//        createCar(new ObjectId(), "40/X/179552");
+//        createCar(new ObjectId(), "11/A/123456");
+//        createCar(new ObjectId(), "33/B/654321");
+        System.out.println(getCarsWithHistorique());
+        System.out.println("<------------------------------------------->");
+    }
 
 }

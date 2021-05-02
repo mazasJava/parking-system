@@ -6,16 +6,22 @@ import com.mongodb.client.MongoCollection;
 import org.bson.types.ObjectId;
 import org.models.History;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class HistoryController {
 
-    public static void setCarHistorique(ObjectId carId) {
+    public static void setCarHistorique(ObjectId carId) throws ParseException {
         Date date = new Date(System.currentTimeMillis());
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        String strDate= formatter.format(date);
+
 
         MongoCollection<History> historyMongoCollection = DbConnection.database.getCollection("historys", History.class);
 
-        History newHistory = new History().setCarId(carId).setDateEntered(date).setDateRelease(null);
+        History newHistory = new History().setCarId(carId).setDateEntered(strDate).setDateRelease(null);
 
         try {
             historyMongoCollection.insertOne(newHistory);

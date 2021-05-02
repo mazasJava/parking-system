@@ -9,7 +9,7 @@ public class History {
 
     private ObjectId id;
     private ObjectId carId;
-    private Date dateEntered;
+    private String dateEntered;
     private Date dateRelease;
     private String matricule;
 
@@ -22,7 +22,7 @@ public class History {
         return this;
     }
 
-    public History(ObjectId id, ObjectId carId, Date dateEntered, Date dateRelease, String matricule) {
+    public History(ObjectId id, ObjectId carId, String dateEntered, Date dateRelease, String matricule) {
         this.id = id;
         this.carId = carId;
         this.dateEntered = dateEntered;
@@ -30,7 +30,7 @@ public class History {
         this.matricule = matricule;
     }
 
-    public History(ObjectId id, ObjectId carId, Date dateEntered, Date dateRelease) {
+    public History(ObjectId id, ObjectId carId, String dateEntered, Date dateRelease) {
         this.id = id;
         this.carId = carId;
         this.dateEntered = dateEntered;
@@ -59,11 +59,11 @@ public class History {
     }
 
 
-    public Date getDateEntered() {
+    public String getDateEntered() {
         return dateEntered;
     }
 
-    public History setDateEntered(Date dateEntered) {
+    public History setDateEntered(String dateEntered) {
         this.dateEntered = dateEntered;
         return this;
     }
