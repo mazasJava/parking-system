@@ -118,6 +118,45 @@ public class CarController implements Initializable {
         collection.updateOne(Filters.eq("_id", id), Updates.set("dateRelease", date));
         System.out.println("Document update successfully...");
     }
+    public static void search(String query) {
+
+        MongoCollection<Document> historyMongoCollection = DbConnection.database.getCollection("historys");
+        MongoCollection<Document> carMongoCollection = DbConnection.database.getCollection("cars");
+
+        historyMongoCollection.createIndex(Indexes.text("dateEntered"));
+        carMongoCollection.createIndex(Indexes.text("matricule"));
+
+        String result = "";
+        try {
+
+            MongoCursor<Document> cursorHistory = null;
+            MongoCursor<Document> cursorCar = null;
+
+            cursorHistory = historyMongoCollection.find(new Document("$text", new Document("$search", query).append("$caseSensitive", false).append("$diacriticSensitive", false))).iterator();
+            cursorCar = carMongoCollection.find(new Document("$text", new Document("$search", query).append("$caseSensitive", false).append("$diacriticSensitive", false))).iterator();
+
+            if (cursorHistory.hasNext()) {
+                while (cursorHistory.hasNext()) {
+//                    Document article = cursor.next();
+                    System.out.println(cursorHistory.next().get("dateEntered"));
+                }
+            } else if (cursorCar.hasNext()) {
+                while (cursorCar.hasNext()) {
+                    result = (String) cursorCar.next().get("matricule");
+                    searchCar(result);
+                }
+            } else {
+                System.out.println("not found");
+            }
+            cursorHistory.close();
+            cursorCar.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 
 
