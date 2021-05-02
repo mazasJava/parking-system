@@ -1,5 +1,6 @@
 package org.controllers;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.client.*;
 import com.mongodb.client.model.*;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -28,6 +29,7 @@ import org.models.History;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.*;
 
 import static com.mongodb.client.model.Projections.fields;
@@ -50,6 +52,7 @@ import static com.mongodb.client.model.Sorts.descending;
 
 public class CarController implements Initializable {
     public static List<History> results;
+    public static List<History> results2;
     public static final ObjectId id = new ObjectId();
     String Number, CarPlate, DateEntree, DateSortie;
     @FXML
@@ -81,16 +84,29 @@ public class CarController implements Initializable {
      * @throws IOException Creat car object and insert object in data base
      */
     @FXML
-    public static Car createCar(ObjectId id, String matricule) throws IOException {
+    public static Car createCar(ObjectId id, String matricule) throws IOException, ParseException {
+
         MongoCollection<Car> carMongoCollection = DbConnection.database.getCollection("cars", Car.class);
+
         Car newCar = new Car().setId(id).setMatricule(matricule);
-        try {
-            carMongoCollection.insertOne(newCar);
-            System.out.println("Successfully inserted Car documents. \n");
-            HistoryController.setCarHistorique(newCar.getId());
-            return newCar;
-        } catch (Exception e) {
+        BasicDBObject checkMatriculIfExists = new BasicDBObject("matricule", matricule);
+
+        FindIterable<Car> test = carMongoCollection.find(checkMatriculIfExists);
+
+        if (test.cursor().hasNext()) {
+            System.out.println(test.cursor().next().getId());
+            HistoryController.setCarHistorique(test.cursor().next().getId());
+            System.out.println("exist");
             return null;
+        } else {
+            try {
+                carMongoCollection.insertOne(newCar);
+                System.out.println("Successfully inserted Car documents. \n");
+                HistoryController.setCarHistorique(newCar.getId());
+                return newCar;
+            } catch (Exception e) {
+                return null;
+            }
         }
     }
 
@@ -118,7 +134,10 @@ public class CarController implements Initializable {
         collection.updateOne(Filters.eq("_id", id), Updates.set("dateRelease", date));
         System.out.println("Document update successfully...");
     }
-    public static void search(String query) {
+
+
+
+    public static List<History> search(String query) {
 
         MongoCollection<Document> historyMongoCollection = DbConnection.database.getCollection("historys");
         MongoCollection<Document> carMongoCollection = DbConnection.database.getCollection("cars");
@@ -126,52 +145,55 @@ public class CarController implements Initializable {
         historyMongoCollection.createIndex(Indexes.text("dateEntered"));
         carMongoCollection.createIndex(Indexes.text("matricule"));
 
-        String result = "";
+        String result;
         try {
-
             MongoCursor<Document> cursorHistory = null;
             MongoCursor<Document> cursorCar = null;
 
             cursorHistory = historyMongoCollection.find(new Document("$text", new Document("$search", query).append("$caseSensitive", false).append("$diacriticSensitive", false))).iterator();
             cursorCar = carMongoCollection.find(new Document("$text", new Document("$search", query).append("$caseSensitive", false).append("$diacriticSensitive", false))).iterator();
 
-            if (cursorHistory.hasNext()) {
-                while (cursorHistory.hasNext()) {
-//                    Document article = cursor.next();
-                    System.out.println(cursorHistory.next().get("dateEntered"));
-                }
-            } else if (cursorCar.hasNext()) {
+            if (cursorHistory.hasNext()) while (cursorHistory.hasNext()) {
+                result = (String) cursorHistory.next().get("dateEntered");
+                return searchCar(result);
+            }
+            else if (cursorCar.hasNext()) {
                 while (cursorCar.hasNext()) {
                     result = (String) cursorCar.next().get("matricule");
-                    searchCar(result);
+                    return searchCar(result);
                 }
-            } else {
-                System.out.println("not found");
-            }
+            } else System.out.println("not found");
             cursorHistory.close();
             cursorCar.close();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 
-    public static void searchCar(String mat) {
+    public static List<History> searchCar(String query) {
         for (History carInfo : results) {
-            if (carInfo.getMatricule().equals(mat)) {
-                System.out.println(carInfo);
+            if (carInfo.getMatricule().equals(query)) {
+//                System.out.println(carInfo);
+                results2.add(carInfo);
+            }
+            else if(carInfo.getDateEntered().equals(query))
+            {
+//                System.out.println(carInfo);
+                results2.add(carInfo);
             }
         }
+        return results2;
     }
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ParseException {
         DbConnection.connect();
-//        createCar(new ObjectId(), "40/X/179552");
-//        createCar(new ObjectId(), "11/A/123456");
-//        createCar(new ObjectId(), "33/B/654321");
-        System.out.println(getCarsWithHistorique());
-        System.out.println("<------------------------------------------->");
+        getCarsWithHistorique();
+        createCar(new ObjectId(), "10/S/123498");
+//        System.out.println(search("02/05/2021"));
+//        System.out.println(searchCar("02/05/2021"));
+//        search("02/05/2021");
     }
 
 }
