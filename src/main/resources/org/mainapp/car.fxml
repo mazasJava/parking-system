@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.TableColumn?>
@@ -15,7 +14,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1150.0" styleClass="parent" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.CarController">
@@ -24,53 +22,28 @@
    </top>
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F0FAF8;" BorderPane.alignment="CENTER">
-         <Pane prefHeight="100.0" prefWidth="1150.0">
-            <Button layoutX="31.0" layoutY="50.0" mnemonicParsing="false" styleClass="btn-green" text="Filter By Date e">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Button>
-            <Button layoutX="165.0" layoutY="51.0" mnemonicParsing="false" styleClass="btn-green" text="Filter By Date s">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Button>
-            <Button layoutX="298.0" layoutY="51.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="123.0" styleClass="btn-green" text="Order Ascending">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Button>
-            <Button layoutX="449.0" layoutY="50.0" mnemonicParsing="false" styleClass="btn-green" text="Order Descending">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Button>
-            <TextField layoutX="850.0" layoutY="37.0" prefHeight="40.0" prefWidth="253.0" promptText="Search" styleClass="searchbar-txt">
+         <Pane layoutX="674.0" prefHeight="100.0" prefWidth="476.0">
+            <TextField layoutX="205.0" layoutY="38.0" prefHeight="40.0" prefWidth="253.0" promptText="Search" styleClass="searchbar-txt">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <ImageView fitHeight="25.0" fitWidth="26.0" layoutX="1069.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="25.0" fitWidth="26.0" layoutX="425.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
                <Image url="@../../imgs/loupe.png" />
             </ImageView>
          </Pane>
 
-            <Pane fx:id="pane" layoutX="4.0" layoutY="113.0" prefHeight="318.0" prefWidth="662.0" styleClass="pane-card-table">
-               
-                  <Label layoutX="14.0" layoutY="6.0" prefHeight="17.0" prefWidth="101.0" text="CARS HISTORY" textFill="#646d82">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font></Label>
-                  <TableView fx:id="tableView" layoutX="4.0" layoutY="34.0" prefHeight="277.0" prefWidth="659.0">
-                     <columns>
-                        <TableColumn fx:id="colNumber" prefWidth="125.00003051757812" text="NO" />
-                        <TableColumn fx:id="colCarPlate" prefWidth="151.0" text="Car plate" />
-                        <TableColumn fx:id="colDateEntree" prefWidth="84.0" text="Date E" />
-                        <TableColumn fx:id="colDateSortie" prefWidth="141.0" text="Date S" />
-                     </columns>
-                  </TableView>
-               
-            </Pane>
+         <Pane fx:id="pane" layoutX="4.0" layoutY="52.0" prefHeight="379.0" prefWidth="662.0" styleClass="pane-card-table">
+            <TableView fx:id="tableView" layoutX="7.0" layoutY="3.0" prefHeight="373.0" prefWidth="646.0">
+               <columns>
+                  <TableColumn fx:id="colNumber" prefWidth="130" resizable="false" text="NO" />
+                  <TableColumn fx:id="colCarPlate" prefWidth="130" resizable="false" text="Car plate" />
+                  <TableColumn fx:id="colDateEntree" prefWidth="190" resizable="false" text="Date E" />
+                  <TableColumn fx:id="colDateSortie" prefWidth="190" resizable="false" text="Date S" />
+               </columns>
+            </TableView>
+
+         </Pane>
          <Pane layoutX="683.0" layoutY="113.0" prefHeight="318.0" prefWidth="462.0" styleClass="pane-card-table">
             <Label layoutX="14.0" layoutY="6.0" prefHeight="17.0" prefWidth="111.0" text="RECENT VISITS" textFill="#646d82">
                <font>
@@ -85,159 +58,211 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
-               <HBox prefHeight="80.0" prefWidth="200.0" styleClass="vbox-carde" GridPane.rowIndex="0">
-
-                  <VBox prefHeight="80.0" prefWidth="112.0" style="-fx-background-color: transparent;">
-
-                     <Label prefHeight="17.0" prefWidth="61.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;" text="08:30 AM">
-                        <VBox.margin>
-                           <Insets left="15.0" top="15.0" />
-                        </VBox.margin>
-                        <font>
-                           <Font size="13.0" />
-                        </font>
-                     </Label>
-                     <Label style="-fx-text-fill: #646D82;" text="02 AUG 2019">
-                        <opaqueInsets>
-                           <Insets />
-                        </opaqueInsets>
-                        <VBox.margin>
-                           <Insets left="15.0" top="10.0" />
-                        </VBox.margin>
-                        <font>
-                           <Font size="13.0" />
-                        </font>
-                     </Label>
-                  </VBox>
-                  <HBox prefHeight="80.0" prefWidth="159.0">
-                     <ImageView fitHeight="37.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
-                        <HBox.margin>
-                           <Insets left="10.0" top="20.0" />
-                        </HBox.margin>
-                        <Image url="@../../imgs/loupe.png" />
-                     </ImageView>
-                     <VBox prefHeight="80.0" prefWidth="112.0" style="-fx-background-color: transparent;">
-                        <HBox.margin>
-                           <Insets left="10.0" />
-                        </HBox.margin>
-                        <Label style="-fx-background-color: white; -fx-text-fill: #2CD889;" text="Theodore Handler">
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
+               <HBox prefHeight="70.0" prefWidth="431.0" styleClass="vbox-carde" GridPane.rowIndex="0">
+                  <Pane prefHeight="38.0" prefWidth="426.0">
+                     <children>
+                        <Label layoutX="20.0" layoutY="2.0" prefHeight="10.0" prefWidth="61.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;" text="08:30 AM">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
                         </Label>
-                     </VBox>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </HBox>
-                  <Label prefHeight="17.0" prefWidth="86.0" style="-fx-text-fill: #646D82;" text="DH425Yhh502">
-                     <HBox.margin>
-                        <Insets left="50.0" top="25.0" />
-                     </HBox.margin>
-                  </Label>
+                        <Label layoutX="12.0" layoutY="21.0" prefHeight="10.0" prefWidth="76.0" style="-fx-text-fill: #646D82;" text="02 AUG 2019">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="37.0" fitWidth="44.0" layoutX="126.0" pickOnBounds="true" preserveRatio="true">
+                           <Image url="@../../images/jimmy-fallon.png" />
+                        </ImageView>
+                        <Label layoutX="190.0" layoutY="9.0" style="-fx-background-color: white; -fx-text-fill: #2CD889;" text="Theodore Handler">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="323.0" layoutY="8.0" prefHeight="17.0" prefWidth="86.0" style="-fx-text-fill: #646D82;" text="DH425Yhh502">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
                </HBox>
                <HBox prefHeight="80.0" prefWidth="200.0" styleClass="vbox-carde" GridPane.rowIndex="1">
-                  <VBox prefHeight="80.0" prefWidth="112.0" style="-fx-background-color: transparent;">
-                     <Label prefHeight="17.0" prefWidth="61.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;" text="08:30 AM">
-                        <VBox.margin>
-                           <Insets left="15.0" top="15.0" />
-                        </VBox.margin>
-                        <font>
-                           <Font size="13.0" />
-                        </font>
-                     </Label>
-                     <Label style="-fx-text-fill: #646D82;" text="02 AUG 2019">
-                        <opaqueInsets>
-                           <Insets />
-                        </opaqueInsets>
-                        <VBox.margin>
-                           <Insets left="15.0" top="10.0" />
-                        </VBox.margin>
-                        <font>
-                           <Font size="13.0" />
-                        </font>
-                     </Label>
-                  </VBox>
-                  <HBox prefHeight="80.0" prefWidth="159.0">
-                     <ImageView fitHeight="37.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
-                        <HBox.margin>
-                           <Insets left="10.0" top="20.0" />
-                        </HBox.margin>
-                        <Image url="@../../imgs/loupe.png" />
-                     </ImageView>
-                     <VBox prefHeight="80.0" prefWidth="112.0" style="-fx-background-color: transparent;">
-                        <HBox.margin>
-                           <Insets left="10.0" />
-                        </HBox.margin>
-                        <Label style="-fx-background-color: white; -fx-text-fill: #2CD889;" text="Theodore Handler">
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
+                  <Pane prefHeight="38.0" prefWidth="426.0">
+                     <children>
+                        <Label layoutX="20.0" layoutY="2.0" prefHeight="10.0" prefWidth="61.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;" text="08:30 AM">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
                         </Label>
-                     </VBox>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </HBox>
-                  <Label prefHeight="17.0" prefWidth="86.0" style="-fx-text-fill: #646D82;" text="DH425Yhh502">
-                     <HBox.margin>
-                        <Insets left="50.0" top="25.0" />
-                     </HBox.margin>
-                  </Label>
+                        <Label layoutX="12.0" layoutY="21.0" prefHeight="10.0" prefWidth="76.0" style="-fx-text-fill: #646D82;" text="02 AUG 2019">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="37.0" fitWidth="44.0" layoutX="126.0" pickOnBounds="true" preserveRatio="true">
+                           <Image url="@../../images/jimmy-fallon.png" />
+                        </ImageView>
+                        <Label layoutX="190.0" layoutY="9.0" style="-fx-background-color: white; -fx-text-fill: #2CD889;" text="Theodore Handler">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="323.0" layoutY="8.0" prefHeight="17.0" prefWidth="86.0" style="-fx-text-fill: #646D82;" text="DH425Yhh502">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
                </HBox>
                <HBox prefHeight="80.0" prefWidth="200.0" styleClass="vbox-carde" GridPane.rowIndex="2">
-                  <VBox prefHeight="80.0" prefWidth="112.0" style="-fx-background-color: transparent;">
-                     <Label prefHeight="17.0" prefWidth="61.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;" text="08:30 AM">
-                        <VBox.margin>
-                           <Insets left="15.0" top="15.0" />
-                        </VBox.margin>
-                        <font>
-                           <Font size="13.0" />
-                        </font>
-                     </Label>
-                     <Label style="-fx-text-fill: #646D82;" text="02 AUG 2019">
-                        <opaqueInsets>
-                           <Insets />
-                        </opaqueInsets>
-                        <VBox.margin>
-                           <Insets left="15.0" top="10.0" />
-                        </VBox.margin>
-                        <font>
-                           <Font size="13.0" />
-                        </font>
-                     </Label>
-                  </VBox>
-                  <HBox prefHeight="80.0" prefWidth="159.0">
-                     <ImageView fitHeight="37.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
-                        <HBox.margin>
-                           <Insets left="10.0" top="20.0" />
-                        </HBox.margin>
-                        <Image url="@../../imgs/loupe.png" />
-                     </ImageView>
-                     <VBox prefHeight="80.0" prefWidth="112.0" style="-fx-background-color: transparent;">
-                        <HBox.margin>
-                           <Insets left="10.0" />
-                        </HBox.margin>
-                        <Label style="-fx-background-color: white; -fx-text-fill: #2CD889;" text="Theodore Handler">
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
+                  <Pane prefHeight="38.0" prefWidth="426.0">
+                     <children>
+                        <Label layoutX="20.0" layoutY="2.0" prefHeight="10.0" prefWidth="61.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;" text="08:30 AM">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
                         </Label>
-                     </VBox>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </HBox>
-                  <Label prefHeight="17.0" prefWidth="86.0" style="-fx-text-fill: #646D82;" text="DH425Yhh502">
-                     <HBox.margin>
-                        <Insets left="50.0" top="25.0" />
-                     </HBox.margin>
-                  </Label>
+                        <Label layoutX="12.0" layoutY="21.0" prefHeight="10.0" prefWidth="76.0" style="-fx-text-fill: #646D82;" text="02 AUG 2019">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="37.0" fitWidth="44.0" layoutX="126.0" pickOnBounds="true" preserveRatio="true">
+                           <Image url="@../../images/jimmy-fallon.png" />
+                        </ImageView>
+                        <Label layoutX="190.0" layoutY="9.0" style="-fx-background-color: white; -fx-text-fill: #2CD889;" text="Theodore Handler">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="323.0" layoutY="8.0" prefHeight="17.0" prefWidth="86.0" style="-fx-text-fill: #646D82;" text="DH425Yhh502">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </HBox>
+               <HBox prefHeight="70.0" prefWidth="431.0" styleClass="vbox-carde" GridPane.rowIndex="3">
+                  <Pane prefHeight="38.0" prefWidth="426.0">
+                     <children>
+                        <Label layoutX="20.0" layoutY="2.0" prefHeight="10.0" prefWidth="61.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;" text="08:30 AM">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="12.0" layoutY="21.0" prefHeight="10.0" prefWidth="76.0" style="-fx-text-fill: #646D82;" text="02 AUG 2019">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="37.0" fitWidth="44.0" layoutX="126.0" pickOnBounds="true" preserveRatio="true">
+                           <Image url="@../../images/jimmy-fallon.png" />
+                        </ImageView>
+                        <Label layoutX="190.0" layoutY="9.0" style="-fx-background-color: white; -fx-text-fill: #2CD889;" text="Theodore Handler">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="323.0" layoutY="8.0" prefHeight="17.0" prefWidth="86.0" style="-fx-text-fill: #646D82;" text="DH425Yhh502">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </HBox>
+               <HBox prefHeight="70.0" prefWidth="431.0" styleClass="vbox-carde" GridPane.rowIndex="4">
+                  <Pane prefHeight="38.0" prefWidth="426.0">
+                     <children>
+                        <Label layoutX="20.0" layoutY="2.0" prefHeight="10.0" prefWidth="61.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;" text="08:30 AM">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="12.0" layoutY="21.0" prefHeight="10.0" prefWidth="76.0" style="-fx-text-fill: #646D82;" text="02 AUG 2019">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="37.0" fitWidth="44.0" layoutX="126.0" pickOnBounds="true" preserveRatio="true">
+                           <Image url="@../../images/jimmy-fallon.png" />
+                        </ImageView>
+                        <Label layoutX="190.0" layoutY="9.0" style="-fx-background-color: white; -fx-text-fill: #2CD889;" text="Theodore Handler">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="323.0" layoutY="8.0" prefHeight="17.0" prefWidth="86.0" style="-fx-text-fill: #646D82;" text="DH425Yhh502">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </HBox>
+               <HBox prefHeight="70.0" prefWidth="431.0" styleClass="vbox-carde" GridPane.rowIndex="5">
+                  <Pane prefHeight="38.0" prefWidth="426.0">
+                     <children>
+                        <Label layoutX="20.0" layoutY="2.0" prefHeight="10.0" prefWidth="61.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;" text="08:30 AM">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="12.0" layoutY="21.0" prefHeight="10.0" prefWidth="76.0" style="-fx-text-fill: #646D82;" text="02 AUG 2019">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="37.0" fitWidth="44.0" layoutX="126.0" pickOnBounds="true" preserveRatio="true">
+                           <Image url="@../../images/jimmy-fallon.png" />
+                        </ImageView>
+                        <Label layoutX="190.0" layoutY="9.0" style="-fx-background-color: white; -fx-text-fill: #2CD889;" text="Theodore Handler">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="323.0" layoutY="8.0" prefHeight="17.0" prefWidth="86.0" style="-fx-text-fill: #646D82;" text="DH425Yhh502">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
                </HBox>
             </GridPane>
          </Pane>
          <Pagination layoutX="834.0" layoutY="431.0" prefHeight="61.0" prefWidth="221.0" style="-fx-background-color: transparent;" />
+
+         <Label layoutX="14.0" layoutY="20.0" prefHeight="21.0" prefWidth="115.0" text="CARS HISTORY" textFill="#646d82">
+            <font>
+               <Font name="System Bold" size="15.0" />
+            </font>
+         </Label>
       </Pane>
    </center>
 </BorderPane>
