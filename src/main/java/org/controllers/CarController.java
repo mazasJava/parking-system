@@ -127,11 +127,17 @@ public class CarController implements Initializable {
     /**
      * Find and update car release date with current date
      */
-    public static void releaseCarFromDataBase(ObjectId id) {
+    public static void releaseCarFromDataBase(String mat) {
         Date date = new Date(System.currentTimeMillis());
 
-        MongoCollection<History> collection = DbConnection.database.getCollection("historys", History.class);
-        collection.updateOne(Filters.eq("_id", id), Updates.set("dateRelease", date));
+        MongoCollection<Car> carMongoCollection = DbConnection.database.getCollection("cars", Car.class);
+        MongoCollection<History> historyMongoCollection = DbConnection.database.getCollection("historys", History.class);
+
+        Car carMat = carMongoCollection.find(eq("matricule", mat)).first();
+
+        if (carMat == null) throw new AssertionError();
+        ObjectId id = new ObjectId(String.valueOf(carMat.getId()));
+        historyMongoCollection.updateOne(Filters.eq("carId", id), Updates.set("dateRelease", date));
         System.out.println("Document update successfully...");
     }
 
