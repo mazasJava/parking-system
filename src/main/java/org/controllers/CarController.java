@@ -150,15 +150,12 @@ public class CarController implements Initializable {
 
         historyMongoCollection.createIndex(Indexes.text("dateEntered"));
         carMongoCollection.createIndex(Indexes.text("matricule"));
-
         String result;
         try {
             MongoCursor<Document> cursorHistory = null;
             MongoCursor<Document> cursorCar = null;
-
             cursorHistory = historyMongoCollection.find(new Document("$text", new Document("$search", query).append("$caseSensitive", false).append("$diacriticSensitive", false))).iterator();
             cursorCar = carMongoCollection.find(new Document("$text", new Document("$search", query).append("$caseSensitive", false).append("$diacriticSensitive", false))).iterator();
-
             if (cursorHistory.hasNext()) while (cursorHistory.hasNext()) {
                 result = (String) cursorHistory.next().get("dateEntered");
                 return searchCar(result);

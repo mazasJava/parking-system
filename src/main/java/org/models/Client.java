@@ -2,6 +2,8 @@ package org.models;
 
 import org.bson.types.ObjectId;
 
+import java.util.Date;
+
 public class Client {
 
     private ObjectId id;
@@ -10,17 +12,29 @@ public class Client {
     private String phone;
     private String password;
     private String carPlate;
+    private Date timeStamp;
 
     public Client() {
     }
 
-    public Client(ObjectId id, String name, String email, String phone, String password, String carPlate) {
+
+    public Client(ObjectId id, String name, String email, String phone, String password, String carPlate, Date timeStamp) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.password = password;
         this.carPlate = carPlate;
+        this.timeStamp = timeStamp;
+    }
+
+    public Date getTimeStamp() {
+        return timeStamp;
+    }
+
+    public Client setTimeStamp(Date timeStamp) {
+        this.timeStamp = timeStamp;
+        return this;
     }
 
     public ObjectId getId() {
@@ -86,6 +100,7 @@ public class Client {
                 ", phone='" + phone + '\'' +
                 ", password='" + password + '\'' +
                 ", carPlate='" + carPlate + '\'' +
+                ", timeStamp=" + timeStamp +
                 '}';
     }
 }
