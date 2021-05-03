@@ -26,6 +26,7 @@ public class Client {
     }
 
     public BufferedReader getReader(Socket socket) {
+        System.out.println("get reader");
         InputStream input = null;
         try {
             input = socket.getInputStream();
@@ -48,9 +49,9 @@ public class Client {
     public static void main(String[] args) throws IOException {
 
         String hostname = "localhost";
-        int port = Integer.parseInt(String.valueOf(8081));
+        int port = Integer.parseInt(String.valueOf(5000));
         Client c = new Client(hostname, port);
-        c.readMEssage(c.getReader(c.getSocket()),10);
+        c.readMEssage(c.getReader(c.getSocket()),2);
 
     }
 }

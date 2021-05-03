@@ -30,6 +30,7 @@ import org.models.History;
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static com.mongodb.client.model.Projections.fields;
@@ -129,7 +130,8 @@ public class CarController implements Initializable {
      */
     public static void releaseCarFromDataBase(String mat) {
         Date date = new Date(System.currentTimeMillis());
-
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        String formattedDate= formatter.format(date);
         MongoCollection<Car> carMongoCollection = DbConnection.database.getCollection("cars", Car.class);
         MongoCollection<History> historyMongoCollection = DbConnection.database.getCollection("historys", History.class);
 
@@ -137,7 +139,7 @@ public class CarController implements Initializable {
 
         if (carMat == null) throw new AssertionError();
         ObjectId id = new ObjectId(String.valueOf(carMat.getId()));
-        historyMongoCollection.updateOne(Filters.eq("carId", id), Updates.set("dateRelease", date));
+        historyMongoCollection.updateOne(Filters.eq("carId", id), Updates.set("dateRelease", formattedDate));
         System.out.println("Document update successfully...");
     }
 
@@ -189,14 +191,36 @@ public class CarController implements Initializable {
         return results2;
     }
 
+    public static void pagination(MongoCollection<Document> cars, int pageNumber, int pageSize) {
+
+        try {
+
+            MongoCursor <Document> cursor = cars.find().skip(pageSize * (pageNumber - 1)).limit(pageSize).iterator();
+
+            while (cursor.hasNext()) {
+                Document person = cursor.next();
+                System.out.println(person);
+            }
+            cursor.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public static void main(String[] args) throws IOException, ParseException {
         DbConnection.connect();
-        getCarsWithHistorique();
-        createCar(new ObjectId(), "10/S/123498");
+//        getCarsWithHistorique();
+//        createCar(new ObjectId(), "10/S/123498");
 //        System.out.println(search("02/05/2021"));
 //        System.out.println(searchCar("02/05/2021"));
 //        search("02/05/2021");
+        MongoCollection <Document> cars = DbConnection.database.getCollection("cars");
+        pagination(cars, 2, 3);
+
+//        releaseCarFromDataBase("40/X/179552");
+
     }
 
 }

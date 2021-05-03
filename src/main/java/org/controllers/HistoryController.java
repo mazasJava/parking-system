@@ -16,12 +16,12 @@ public class HistoryController {
     public static void setCarHistorique(ObjectId carId) throws ParseException {
         Date date = new Date(System.currentTimeMillis());
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-        String strDate= formatter.format(date);
+        String formattedDate= formatter.format(date);
 
 
         MongoCollection<History> historyMongoCollection = DbConnection.database.getCollection("historys", History.class);
 
-        History newHistory = new History().setCarId(carId).setDateEntered(strDate).setDateRelease(null);
+        History newHistory = new History().setCarId(carId).setDateEntered(formattedDate).setDateRelease(null);
 
         try {
             historyMongoCollection.insertOne(newHistory);
