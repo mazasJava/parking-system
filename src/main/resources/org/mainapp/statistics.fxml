@@ -22,7 +22,7 @@
                <children>
                   <Pane prefHeight="252.0" prefWidth="575.0">
                      <children>
-                        <AreaChart fx:id="areaChart" layoutX="2.0" layoutY="2.0" prefHeight="249.0" prefWidth="567.0" title="Number visits">
+                        <AreaChart fx:id="areaChart" layoutX="2.0" layoutY="2.0" prefHeight="249.0" prefWidth="567.0" title="Number visits in two last months">
                             <xAxis>
                                 <NumberAxis side="BOTTOM" fx:id="x" />
                             </xAxis>
@@ -34,7 +34,7 @@
                   </Pane>
                   <Pane prefHeight="252.0" prefWidth="576.0">
                      <children>
-                        <BarChart fx:id="barChart" prefHeight="253.0" prefWidth="574.0" title="Number visits">
+                        <BarChart fx:id="barChart" prefHeight="253.0" prefWidth="574.0" title="Number visits in day">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" fx:id="xB" />
                           </xAxis>
@@ -50,7 +50,7 @@
                <children>
                   <Pane prefHeight="261.0" prefWidth="575.0">
                      <children>
-                         <LineChart fx:id="lineChart" prefHeight="261.0" prefWidth="573.0" title="Number visits">
+                         <LineChart fx:id="lineChart" prefHeight="261.0" prefWidth="573.0" title="Number visits in year">
                              <xAxis>
                                  <NumberAxis side="BOTTOM" fx:id="xAxis" />
                              </xAxis>
