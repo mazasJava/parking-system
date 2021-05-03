@@ -1,8 +1,10 @@
 package org.models;
 
+import org.bson.types.ObjectId;
+
 public class Client {
 
-    private int id;
+    private ObjectId id;
     private String name;
     private String email;
     private String phone;
@@ -12,7 +14,7 @@ public class Client {
     public Client() {
     }
 
-    public Client(int id, String name, String email, String phone, String password, String carPlate) {
+    public Client(ObjectId id, String name, String email, String phone, String password, String carPlate) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -21,11 +23,11 @@ public class Client {
         this.carPlate = carPlate;
     }
 
-    public int getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public Client setId(int id) {
+    public Client setId(ObjectId id) {
         this.id = id;
         return this;
     }
