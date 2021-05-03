@@ -52,7 +52,7 @@ public class StatisticsController implements Initializable {
     }
 
     private void iniAreaChart(){
-        areaChart.setTitle("Number visits ");
+
         XYChart.Series seriesMarch = new XYChart.Series();
         seriesMarch.setName("March");
         seriesMarch.getData().add(new XYChart.Data(1, 20));
