@@ -24,7 +24,7 @@
                      <children>
                         <AreaChart fx:id="areaChart" layoutX="2.0" layoutY="2.0" prefHeight="249.0" prefWidth="567.0" title="Number visits in two last months">
                             <xAxis>
-                                <NumberAxis side="BOTTOM" fx:id="x" />
+                                <NumberAxis  side="BOTTOM" fx:id="x" />
                             </xAxis>
                             <yAxis>
                                 <NumberAxis fx:id="y" side="LEFT" />
