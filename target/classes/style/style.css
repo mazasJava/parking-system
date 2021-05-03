@@ -190,3 +190,8 @@
 .table-row-cell:selected {
     -fx-background-color: #2CD889;
 }
+
+/*-- CURSOR HAND --*/
+.cursor-hand{
+    -fx-cursor: hand;
+}

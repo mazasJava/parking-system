@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
-<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1150.0" styleClass="parent" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.DashboardController">
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1150.0" styleClass="parent" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.DashboardController">
   <top>
      <fx:include source="./commun/menuBar.fxml" />
   </top>
@@ -38,6 +42,87 @@
             </HBox>
             <HBox prefHeight="372.0" prefWidth="1035.0" />
          </children>
+          <HBox alignment="CENTER_LEFT" prefHeight="372.0" prefWidth="1035.0">
+              <opaqueInsets>
+                  <Insets />
+              </opaqueInsets>
+              <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="250.0" prefWidth="250.0" style="-fx-background-color: #e8e8e8;" styleClass="cursor-hand" stylesheets="@../../style/style.css" HBox.hgrow="NEVER">
+                  <HBox.margin>
+                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </HBox.margin>
+                  <HBox alignment="CENTER" style="-fx-background-color: #d62828;">
+                      <padding>
+                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                      </padding>
+                      <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 1.6em; -fx-fill: white;" text="TOTAL PARK A" />
+                  </HBox>
+                  <StackPane>
+                      <Circle fill="DODGERBLUE" radius="70.0" stroke="#9a5050" strokeType="INSIDE" strokeWidth="10.0" style="-fx-fill: transparent;">
+                          <StackPane.margin>
+                              <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                          </StackPane.margin>
+                      </Circle>
+                      <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 1.5em; -fx-font-weight: bold; -fx-fill: #e76f51;" text="200" />
+                  </StackPane>
+              </VBox>
+              <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="250.0" prefWidth="250.0" style="-fx-background-color: #e8e8e8;" styleClass="cursor-hand" stylesheets="@../../style/style.css">
+                  <HBox alignment="CENTER" style="-fx-background-color: #ffba08;">
+                      <padding>
+                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                      </padding>
+                      <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 1.6em; -fx-fill: white;" text="TOTAL PARK B" />
+                  </HBox>
+                  <StackPane>
+                      <Circle fill="DODGERBLUE" radius="70.0" stroke="#ffe66d" strokeType="INSIDE" strokeWidth="10.0" style="-fx-fill: transparent;">
+                          <StackPane.margin>
+                              <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                          </StackPane.margin>
+                      </Circle>
+                      <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 1.5em; -fx-font-weight: bold; -fx-fill: #ccff33;" text="400" />
+                  </StackPane>
+                  <HBox.margin>
+                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </HBox.margin>
+              </VBox>
+              <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="250.0" prefWidth="250.0" style="-fx-background-color: #e8e8e8;" styleClass="cursor-hand" stylesheets="@../../style/style.css">
+                  <HBox alignment="CENTER" style="-fx-background-color: #52b788;">
+                      <padding>
+                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                      </padding>
+                      <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 1.6em; -fx-fill: white;" text="TOTAL PARK C" />
+                  </HBox>
+                  <StackPane>
+                      <Circle fill="DODGERBLUE" radius="70.0" stroke="#007f5f" strokeType="INSIDE" strokeWidth="10.0" style="-fx-fill: transparent;">
+                          <StackPane.margin>
+                              <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                          </StackPane.margin>
+                      </Circle>
+                      <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 1.5em; -fx-font-weight: bold; -fx-fill: #16db93;" text="600" />
+                  </StackPane>
+                  <HBox.margin>
+                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </HBox.margin>
+              </VBox>
+              <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="250.0" prefWidth="250.0" style="-fx-background-color: #e8e8e8;" styleClass="cursor-hand" stylesheets="@../../style/style.css">
+                  <HBox alignment="CENTER" style="-fx-background-color: #3f37c9;">
+                      <padding>
+                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                      </padding>
+                      <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 1.6em; -fx-fill: white;" text="TOTAL PARK D" />
+                  </HBox>
+                  <StackPane>
+                      <Circle fill="DODGERBLUE" radius="70.0" stroke="#00a896" strokeType="INSIDE" strokeWidth="10.0" style="-fx-fill: transparent;">
+                          <StackPane.margin>
+                              <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                          </StackPane.margin>
+                      </Circle>
+                      <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 1.5em; -fx-font-weight: bold; -fx-fill: #065a60;" text="800" />
+                  </StackPane>
+                  <HBox.margin>
+                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </HBox.margin>
+              </VBox>
+          </HBox>
       </VBox>
    </center>
 </BorderPane>
