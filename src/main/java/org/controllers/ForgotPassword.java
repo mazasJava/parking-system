@@ -2,6 +2,7 @@ package org.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.tasks.ForgotPasswordTask;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -28,7 +29,7 @@ public class ForgotPassword {
         String emailSubject = "Reset Password";
 
         getPassword(toEmailAddress);
-        Thread.sleep(5000);
+        Thread.sleep(7000);
 
         if(getPassword == ""){
             return;
@@ -72,8 +73,8 @@ public class ForgotPassword {
         String sendEmail = emilSend;
 
         if(sendEmail != ""){
-//            ForgotPasswordTask forgotPasswordTask = new ForgotPasswordTask(sendEmail);
-//            new Thread(forgotPasswordTask).start();
+           ForgotPasswordTask forgotPasswordTask = new ForgotPasswordTask(sendEmail);
+           new Thread(forgotPasswordTask).start();
         }
     }
 
