@@ -1,32 +1,30 @@
 package org.clientServer;
 
+import org.controllers.CarController;
+import org.controllers.DashboardController;
+import org.controllers.DbConnection;
 import org.models.Car;
+import org.models.Parking;
 
 import java.net.*;
 import java.io.*;
 
-public class Client {
-    private Socket socket;
-    private BufferedReader reader;
+public class Client extends Thread{
+    private static Socket socket;
+    private static BufferedReader reader;
 
-    public Socket getSocket() {
-        return socket;
-    }
+    public static Socket getSocket() { return socket; }
 
-    public BufferedReader getReader() {
+    public static BufferedReader getReader() {
         return reader;
     }
 
-    public void readMEssage(BufferedReader reader,int number) throws IOException {
-        for (int i = 0; i < number; i++) {
-//                receive the matricule
+    public static String readMEssage(BufferedReader reader, int number) throws IOException {
             String matricule = reader.readLine();
-            System.out.println(matricule);
-        }
+        return matricule;
     }
 
-    public BufferedReader getReader(Socket socket) {
-        System.out.println("get reader");
+    public static BufferedReader getReader(Socket socket) {
         InputStream input = null;
         try {
             input = socket.getInputStream();
@@ -47,11 +45,24 @@ public class Client {
     }
 
     public static void main(String[] args) throws IOException {
-
-        String hostname = "localhost";
+        String hostname = "127.0.0.1";
         int port = Integer.parseInt(String.valueOf(5000));
         Client c = new Client(hostname, port);
-        c.readMEssage(c.getReader(c.getSocket()),2);
+        Parking park = new Parking("this is the parking name",10);
+        DbConnection.connect();
+        c.start();
+    }
 
+    @Override
+    public void run() {
+        while (true){
+            try {
+                Parking.carIn(Client.readMEssage(Client.getReader(Client.getSocket()), 10));
+                System.out.println(DashboardController.class.getDeclaredField("pieChart"));
+//                DashboardController.refresh();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

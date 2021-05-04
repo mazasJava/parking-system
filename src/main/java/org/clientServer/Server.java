@@ -7,6 +7,10 @@ import java.net.*;
 import java.util.Random;
 
 public class Server {
+    public static ServerSocket getServer(int port) throws IOException {
+        ServerSocket serverSocket = new ServerSocket(port);
+        return serverSocket;
+    }
 
     public static void doIt(int number, long delay) {
 
@@ -14,8 +18,8 @@ public class Server {
         final String CHAR_UPPERCASE = "abcdefghijklmnopqrstuvwxyz".toUpperCase();
         final char separator = '/';
         final int PASSWORD_LENGTH = 10;
-        try (ServerSocket serverSocket = new ServerSocket(port)) {
-
+        try {
+            ServerSocket serverSocket = getServer(port);
             System.out.println("Server is listening on port " + port);
 
             while (true) {
@@ -23,7 +27,7 @@ public class Server {
                 System.out.println("New client connected");
                 OutputStream output = socket.getOutputStream();
                 PrintWriter writer = new PrintWriter(output, true);
-                for (int i = 0; i < number; i++) {
+                while (true) {
                     StringBuilder result = new StringBuilder(PASSWORD_LENGTH);
 //                    City Identifier
                     for (int j = 0; j < 2; j++) {
@@ -45,6 +49,7 @@ public class Server {
                     }
 //                    ***********************
                     writer.println(result);
+                    System.out.println(result);
 //                    writer.println(result + " =>" + idCar);
                     Thread.sleep(delay);
                 }
@@ -57,6 +62,6 @@ public class Server {
     }
 
     public static void main(String[] args) {
-        Server.doIt(10, 4000);
+        Server.doIt(10, 10000);
     }
 }

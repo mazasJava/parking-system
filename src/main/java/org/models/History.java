@@ -13,6 +13,7 @@ public class History {
     private Date dateRelease;
     private String matricule;
 
+
     public String getMatricule() {
         return matricule;
     }

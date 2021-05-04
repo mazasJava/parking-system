@@ -1,53 +1,51 @@
 package org.models;
 
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.model.Aggregates;
-import com.mongodb.client.model.Projections;
-import org.bson.Document;
-import org.bson.conversions.Bson;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
 import org.bson.types.ObjectId;
 import org.controllers.DbConnection;
 import org.controllers.HistoryController;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 
 public class Parking {
 
-    private String adresse;
-    private static int numberVec;
-    public static List<Car> capacity;
+    private String adress;
+    private static int capacity;
+    public static List<Car> listCars;
 
-    public String getAdresse() {
-        return adresse;
+    public String getadress() {
+        return adress;
     }
 
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
+    public void setadress(String adress) {
+        this.adress = adress;
     }
 
-    public int getNumberVec() {
-        return numberVec;
-    }
-
-    public void setNumberVec(int numberVec) {
-        Parking.numberVec = numberVec;
-    }
-
-    public static List<Car> getcapacity() {
+    public int getcapacity() {
         return capacity;
     }
 
-    public static void setcapacity(List<Car> capacity) {
+    public void setcapacity(int capacity) {
         Parking.capacity = capacity;
+    }
+
+    public static List<Car> getlistCars() {
+        return listCars;
+    }
+
+    public static void setlistCars(List<Car> listCars) {
+        Parking.listCars = listCars;
     }
 
 
     public static Car createCar(ObjectId id, String matricule) throws IOException {
-        id = new ObjectId("ds");
+        id = new ObjectId();
         MongoCollection<Car> carMongoCollection = DbConnection.database.getCollection("cars", Car.class);
         Car newCar = new Car().setId(id).setMatricule(matricule);
         try {
@@ -60,41 +58,67 @@ public class Parking {
         }
     }
 
-    public Parking(String adresse, int numberVec) {
-        this.adresse = adresse;
-        this.numberVec = numberVec;
-        capacity = new ArrayList<Car>();
+    public static boolean releaseCarFromDataBase(ObjectId id) {
+        try {
+            Date date = new Date(System.currentTimeMillis());
+            MongoCollection<History> collection = DbConnection.database.getCollection("historys", History.class);
+            collection.updateOne(Filters.eq("_id", id), Updates.set("dateRelease", date));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+
+    public static boolean carOut(ObjectId id) {
+        return releaseCarFromDataBase(id);
+    }
+
+    public static void carIn(String matricule) throws IOException {
+        addCar(createCar(new ObjectId(), matricule));
+    }
+
+    public Parking(String adress, int capacity) {
+        this.adress = adress;
+        this.capacity = capacity;
+        listCars = new ArrayList<Car>();
     }
 
 
     @Override
     public String toString() {
         return "Parking{" +
-                ", adresse='" + adresse + '\'' +
-                ", numberVec=" + numberVec +
+                ", adress='" + adress + '\'' +
+                ", capacity=" + capacity +
                 '}';
     }
-    public static boolean addCar(Car c){
-        if(capacity.size() == numberVec){
+
+    public static boolean addCar(Car c) throws IOException {
+        if (listCars.size() == capacity) {
             return false;
         }
-        return capacity.add(c);
+        return listCars.add(c);
     }
-    public static boolean removeCar(Car c){
-        return capacity.remove(c);
+
+    public static boolean removeCar(Car c) {
+        return listCars.remove(c);
     }
-    public static Car removeCar(int index){
-        return capacity.remove(index);
+
+    public static Car removeCar(int index) {
+        return listCars.remove(index);
     }
-    public static int[] getState(){
+
+    public static int[] getState() {
         int[] state = new int[3];
-        state[0] = Parking.numberVec;//Total capacity
-        state[1] = Parking.numberVec - capacity.size();//free
-        state[2] = Parking.capacity.size();//
+        state[0] = Parking.capacity;//Total listCars
+        state[1] = Parking.capacity - listCars.size();//free
+        state[2] = Parking.listCars.size();//full
         return state;
     }
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws IOException {
+//        Parking park = new Parking("",10);
+//        DbConnection.connect();
+//        carIn("hasdjhbasjhdbh");
     }
 }
