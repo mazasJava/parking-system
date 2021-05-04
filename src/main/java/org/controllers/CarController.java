@@ -1,26 +1,17 @@
 package org.controllers;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.client.*;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.*;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.Group;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.control.cell.TreeItemPropertyValueFactory;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.util.Callback;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
@@ -30,25 +21,12 @@ import org.models.History;
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static com.mongodb.client.model.Projections.fields;
-
-import org.bson.Document;
-import org.bson.conversions.Bson;
-import org.bson.json.JsonWriterSettings;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.Consumer;
-
-import static com.mongodb.client.model.Accumulators.push;
-import static com.mongodb.client.model.Accumulators.sum;
 import static com.mongodb.client.model.Aggregates.*;
 import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Projections.*;
-import static com.mongodb.client.model.Sorts.descending;
+import static com.mongodb.client.model.Projections.fields;
 
 public class CarController implements Initializable {
     public static List<History> results;
@@ -114,8 +92,7 @@ public class CarController implements Initializable {
      * @return Return car list with information about the cars
      */
     private static List<History> getCarsWithHistorique() {
-        MongoCollection<History> historyMongoCollection = DbConnection.database.getCollection("historys",
-                History.class);
+        MongoCollection<History> historyMongoCollection = DbConnection.database.getCollection("historys", History.class);
         Bson project = project(fields(Projections.include("carId"), Projections.include("dateEntered"),
                 Projections.include("dateRelease"), Projections.computed("matricule",
                         new Document("$arrayElemAt", Arrays.asList("$matricule.matricule", 0)))));
@@ -129,7 +106,8 @@ public class CarController implements Initializable {
      */
     public static void releaseCarFromDataBase(String mat) {
         Date date = new Date(System.currentTimeMillis());
-
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        String formattedDate = formatter.format(date);
         MongoCollection<Car> carMongoCollection = DbConnection.database.getCollection("cars", Car.class);
         MongoCollection<History> historyMongoCollection = DbConnection.database.getCollection("historys", History.class);
 
@@ -137,12 +115,17 @@ public class CarController implements Initializable {
 
         if (carMat == null) throw new AssertionError();
         ObjectId id = new ObjectId(String.valueOf(carMat.getId()));
-        historyMongoCollection.updateOne(Filters.eq("carId", id), Updates.set("dateRelease", date));
+        historyMongoCollection.updateOne(Filters.eq("carId", id), Updates.set("dateRelease", formattedDate));
         System.out.println("Document update successfully...");
     }
 
 
-
+    /**
+     * Search in cars table and history table with the given parameter
+     *
+     * @param query
+     * @return
+     */
     public static List<History> search(String query) {
 
         MongoCollection<Document> historyMongoCollection = DbConnection.database.getCollection("historys");
@@ -179,9 +162,7 @@ public class CarController implements Initializable {
             if (carInfo.getMatricule().equals(query)) {
 //                System.out.println(carInfo);
                 results2.add(carInfo);
-            }
-            else if(carInfo.getDateEntered().equals(query))
-            {
+            } else if (carInfo.getDateEntered().equals(query)) {
 //                System.out.println(carInfo);
                 results2.add(carInfo);
             }
@@ -189,14 +170,43 @@ public class CarController implements Initializable {
         return results2;
     }
 
+    /**
+     * Pagination method update result collection with the page passed in the parameter
+     *
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
+    public static List<History> pagination(int pageNumber, int pageSize) {
+        MongoCollection<History> historyMongoCollection = DbConnection.database.getCollection("historys", History.class);
+        try {
+            results = historyMongoCollection.aggregate(Arrays.asList(
+                    lookup("cars", "carId", "_id", "matricule"),
+                    skip(pageSize * (pageNumber - 1)),
+                    limit(pageSize),
+                    project(fields(Projections.include("carId"), Projections.include("dateEntered"),
+                            Projections.include("dateRelease"), Projections.computed("matricule",
+                                    new Document("$arrayElemAt", Arrays.asList("$matricule.matricule", 0)))))
+            )).into(new ArrayList<>());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return results;
+    }
+
 
     public static void main(String[] args) throws IOException, ParseException {
         DbConnection.connect();
-        getCarsWithHistorique();
-        createCar(new ObjectId(), "10/S/123498");
+//        getCarsWithHistorique();
+//        createCar(new ObjectId(), "10/S/123498");
 //        System.out.println(search("02/05/2021"));
 //        System.out.println(searchCar("02/05/2021"));
 //        search("02/05/2021");
+        System.out.println(pagination(3, 5));
+
+//        releaseCarFromDataBase("40/X/179552");
+
     }
 
 }
