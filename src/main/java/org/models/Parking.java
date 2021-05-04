@@ -117,8 +117,6 @@ public class Parking {
     }
 
     public static void main(String[] args) throws IOException {
-//        Parking park = new Parking("",10);
-//        DbConnection.connect();
-//        carIn("hasdjhbasjhdbh");
+
     }
 }

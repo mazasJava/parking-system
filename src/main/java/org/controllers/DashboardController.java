@@ -1,6 +1,7 @@
 package org.controllers;
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -13,12 +14,6 @@ import org.models.Car;
 import org.models.Parking;
 
 public class DashboardController implements Initializable {
-
-//    @FXML
-//    private ResourceBundle resources;
-//
-//    @FXML
-//    private URL location;
 
     @FXML
     private PieChart pieChart;
@@ -36,12 +31,7 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Parking park = new Parking("",10);
-        Parking.addCar(new Car());
-        Parking.addCar(new Car());
-        Parking.addCar(new Car());
-        Parking.addCar(new Car());
-        iniPieChart(Parking.getState()[1], Parking.getState()[2]);
+//        iniPieChart(Parking.getState()[1], Parking.getState()[2]);
     }
 
     private void iniBarChart(){
@@ -59,8 +49,8 @@ public class DashboardController implements Initializable {
     }
     public void iniPieChart(int x,int y){
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("Saturé",x),
-                new PieChart.Data("Libre",y)
+                new PieChart.Data("FULL",x),
+                new PieChart.Data("FREE",y)
         );
         pieChart.setData(pieChartData);
     }

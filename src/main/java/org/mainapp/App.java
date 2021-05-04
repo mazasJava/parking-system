@@ -46,9 +46,6 @@ public class App extends Application {
         Client c = new Client(hostname, port);
         c.start();
         launch(args);
-//        System.out.println("args launched");
-//        Parking park = new Parking("this is the parking name",10);
-//        DbConnection.connect();
     }
 
 }
