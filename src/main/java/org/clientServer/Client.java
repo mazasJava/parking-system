@@ -58,8 +58,6 @@ public class Client extends Thread{
         while (true){
             try {
                 Parking.carIn(Client.readMEssage(Client.getReader(Client.getSocket()), 10));
-                System.out.println(DashboardController.class.getDeclaredField("pieChart"));
-//                DashboardController.refresh();
             } catch (Exception e) {
                 e.printStackTrace();
             }
