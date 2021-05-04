@@ -10,4 +10,9 @@ module org.example {
     exports org.controllers;
     exports org.controllers.users;
     exports org.models;
+
+    // Mail
+    requires slf4j.api;
+    requires mail;
+
 }

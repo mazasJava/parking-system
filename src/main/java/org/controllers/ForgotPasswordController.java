@@ -10,12 +10,12 @@ public class ForgotPasswordController {
     TextField emailTextField;
 
     public void ConfirmForgotPassword(ActionEvent actionEvent) {
-//        ForgotPassword forgotPassword = new ForgotPassword();
-//        try {
-//            forgotPassword.sendEmail(emailTextField.getText());
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        ForgotPassword forgotPassword = new ForgotPassword();
+        try {
+            forgotPassword.sendEmail(emailTextField.getText());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void clickEnterEmail(ActionEvent actionEvent) {
