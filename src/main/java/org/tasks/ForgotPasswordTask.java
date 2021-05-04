@@ -1,7 +1,6 @@
 package org.tasks;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.client.MongoCollection;
+
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import javafx.application.Platform;
@@ -11,15 +10,8 @@ import org.controllers.DbConnection;
 import org.controllers.ForgotPassword;
 import org.models.User;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ForgotPasswordTask extends Task<Void> {
     private final String emailSend;
-
-    public ForgotPasswordTask(String emailSend) {
-        this.emailSend = emailSend;
-    }
 
     public void alert(String title, String message, String header){
         Platform.runLater(() -> {
@@ -31,14 +23,20 @@ public class ForgotPasswordTask extends Task<Void> {
         });
     }
 
+    public ForgotPasswordTask(String emailSend) {
+        this.emailSend = emailSend;
+    }
+
     @Override
     protected Void call() throws Exception {
         try {
             DbConnection.connect();
             MongoDatabase database = DbConnection.database;
-            User user = database.getCollection("users",User.class).find(Filters.eq("email",emailSend)).first();
+            User user = database.getCollection("users", User.class).find(Filters.eq("email",emailSend)).first();
             if(user != null){
                 ForgotPassword.getPassword = user.getPassword();
+            }else{
+                alert("FORGOT PASSWORD", "THIS EMAIL DOES NOT EXISTS", "ERROR");
             }
         } catch (Exception e) {
             e.printStackTrace();

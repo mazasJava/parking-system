@@ -59,7 +59,8 @@ public class LoginController implements Initializable {
         passwordTextField.requestFocus();
     }
 
-    public void createCount(MouseEvent mouseEvent) throws IOException {
-        App.setRoot("register");
+
+    public void clickForgotPassWord(MouseEvent mouseEvent) throws IOException {
+        App.setRoot("forgotPassword");
     }
 }
