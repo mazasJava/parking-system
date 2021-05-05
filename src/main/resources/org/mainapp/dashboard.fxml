@@ -1,27 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1150.0" styleClass="parent" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.DashboardController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1150.0" styleClass="parent" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.DashboardController">
   <top>
      <fx:include source="./commun/menuBar.fxml" />
   </top>
-
-
-   <left>
-      <AnchorPane prefHeight="512.0" prefWidth="115.0" BorderPane.alignment="CENTER" />
-   </left>
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
@@ -29,7 +23,7 @@
                <children>
                   <Pane prefHeight="255.0" prefWidth="1037.0">
                      <children>
-                        <LineChart fx:id="lineChart" layoutX="6.0" layoutY="2.0" prefHeight="251.0" prefWidth="1027.0" title="Number Visits all parks in last year 2020">
+                        <LineChart fx:id="lineChart" layoutX="6.0" layoutY="2.0" prefHeight="251.0" prefWidth="1050.0" title="Number Visits all parks in last year 2020">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" fx:id="x" />
                           </xAxis>
@@ -125,4 +119,10 @@
           </HBox>
       </VBox>
    </center>
+   <left>
+      <Pane prefHeight="512.0" prefWidth="35.0" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <Pane prefHeight="512.0" prefWidth="35.0" BorderPane.alignment="CENTER" />
+   </right>
 </BorderPane>
