@@ -24,8 +24,8 @@ public class ForgotPassword {
     }
 
     public void sendEmail(String toEmailAddress) throws InterruptedException {
-        String userName = "fadiba318@gmail.com";
-        String password = "Ff123456";
+        String userName = "cefttiznite2021@gmail.com";
+        String password = "Cc123456";
         String emailSubject = "Reset Password";
 
         getPassword(toEmailAddress);
