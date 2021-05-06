@@ -148,6 +148,10 @@ public class StatisticsController implements Initializable {
         return (int) historyMongoCollection.count(regex("dateEntered", "/" + month + "/"));
     }
 
+    public static int visitsNumberInLastTwoMonths(int month,int day) {
+        MongoCollection<Document> historyMongoCollection = DbConnection.database.getCollection("historys");
+        return (int) historyMongoCollection.count(regex("dateEntered", day +"/" + month + "/"));
+    }
 
 
 
