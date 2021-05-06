@@ -53,49 +53,30 @@ public class StatisticsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        iniAreaChart();
+        iniAreaChart();
 //        iniPieChart();
         iniLineChart();
 //        iniBarChart();
     }
 
-//    private void iniAreaChart(){
-//
-//        XYChart.Series seriesMarch = new XYChart.Series();
-//        seriesMarch.setName("March");
-//        seriesMarch.getData().add(new XYChart.Data(1, 20));
-//        seriesMarch.getData().add(new XYChart.Data(3, 15));
-//        seriesMarch.getData().add(new XYChart.Data(6, 13));
-//        seriesMarch.getData().add(new XYChart.Data(9, 12));
-//        seriesMarch.getData().add(new XYChart.Data(12, 14));
-//        seriesMarch.getData().add(new XYChart.Data(15, 18));
-//        seriesMarch.getData().add(new XYChart.Data(18, 25));
-//        seriesMarch.getData().add(new XYChart.Data(21, 25));
-//        seriesMarch.getData().add(new XYChart.Data(24, 23));
-//        seriesMarch.getData().add(new XYChart.Data(27, 26));
-//        seriesMarch.getData().add(new XYChart.Data(31, 26));
-//
-//
-//        XYChart.Series seriesApril= new XYChart.Series();
-//        seriesApril.setName("April");
-//        seriesApril.getData().add(new XYChart.Data(1, 4));
-//        seriesApril.getData().add(new XYChart.Data(3, 10));
-//        seriesApril.getData().add(new XYChart.Data(6, 15));
-//        seriesApril.getData().add(new XYChart.Data(9, 8));
-//        seriesApril.getData().add(new XYChart.Data(12, 5));
-//        seriesApril.getData().add(new XYChart.Data(15, 18));
-//        seriesApril.getData().add(new XYChart.Data(18, 15));
-//        seriesApril.getData().add(new XYChart.Data(21, 13));
-//        seriesApril.getData().add(new XYChart.Data(24, 19));
-//        seriesApril.getData().add(new XYChart.Data(27, 21));
-//        seriesApril.getData().add(new XYChart.Data(30, 21));
-//
-//
-//
-//
-//        areaChart.getData().addAll( seriesMarch,seriesApril);
-//
-//    }
+    private void iniAreaChart() {
+
+        System.out.println("test");
+
+        XYChart.Series seriesMarch = new XYChart.Series();
+        XYChart.Series seriesApril = new XYChart.Series();
+        seriesMarch.setName("March" + getLastTwoMonths()[0]);
+        seriesApril.setName("April" + getLastTwoMonths()[1]);
+
+        for (int i = 1; i < 13; i++) {
+            for (int j = 1; j < 31; j++) {
+                seriesMarch.getData().add(new XYChart.Data(i, visitsNumberInLastTwoMonths(getLastTwoMonths()[0], j)));
+                seriesMarch.getData().add(new XYChart.Data(i, visitsNumberInLastTwoMonths(getLastTwoMonths()[1], j)));
+            }
+        }
+
+        areaChart.getData().addAll(seriesMarch, seriesApril);
+    }
 //    public void iniBarChart(){
 //        XYChart.Series series1 = new XYChart.Series();
 //        series1.setName("Morning");
@@ -148,12 +129,10 @@ public class StatisticsController implements Initializable {
         return (int) historyMongoCollection.count(regex("dateEntered", "/" + month + "/"));
     }
 
-    public static int visitsNumberInLastTwoMonths(int month,int day) {
+    public static int visitsNumberInLastTwoMonths(int month, int day) {
         MongoCollection<Document> historyMongoCollection = DbConnection.database.getCollection("historys");
-        return (int) historyMongoCollection.count(regex("dateEntered", day +"/" + month + "/"));
+        return (int) historyMongoCollection.count(regex("dateEntered", day + "/" + month + "/"));
     }
-
-
 
 
     public static int[] getLastTwoMonths() {
@@ -180,7 +159,18 @@ public class StatisticsController implements Initializable {
     public static void main(String[] args) {
         DbConnection.connect();
 //        visitsNumberPerYear(1);
-        System.out.println(visitsNumberInLastTwoMonths(getLastTwoMonths()[0], 6));
+//        System.out.println(visitsNumberInLastTwoMonths(getLastTwoMonths()[0], 6));
 //        System.out.println(getLastTowMonths()[0]);
+
+        for (int i = 1; i < 13; i++) {
+            if(visitsNumberPerYear(i)!= 0)
+            {
+                for (int j = 1; j < 31; j++) {
+                    System.out.println("Month " + i + "Day " + j + " : "+visitsNumberInLastTwoMonths(getLastTwoMonths()[0], j));
+//                System.out.println("Month " + i + "Day " + j + " : "+visitsNumberInLastTwoMonths(getLastTwoMonths()[1], j));
+                }
+            }
+
+        }
     }
 }

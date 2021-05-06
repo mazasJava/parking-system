@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="68.0" prefWidth="1101.0" styleClass="top-pane" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.MenuBarController">
+<AnchorPane prefHeight="68.0" prefWidth="1101.0" styleClass="top-pane" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.MenuBarController">
 
     <ImageView fitHeight="150.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="5.0">
         <Image url="@../../../imgs/logor.png" />
@@ -56,10 +56,14 @@
                      <Image url="@../../../images/users_car.png" />
                   </image>
                </ImageView>
-               <MenuButton layoutX="230.0" layoutY="2.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="71.0" style="-fx-background-color: transparent;">
+               <MenuButton layoutX="230.0" layoutY="2.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="71.0" style="-fx-background-color: transparent;" styleClass="menu-item" stylesheets="@../../../style/style.css">
                  <items>
-                   <MenuItem mnemonicParsing="false" text="Settings" />
-                   <MenuItem mnemonicParsing="false" text="Log out" />
+                   <MenuItem mnemonicParsing="false" text="Settings">
+
+                   </MenuItem>
+                   <MenuItem mnemonicParsing="false" text="Log out">
+
+                   </MenuItem>
                  </items>
                </MenuButton>
             </children>

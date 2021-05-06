@@ -204,3 +204,15 @@
     -fx-border-color:  #2CD889;
     -fx-alignment: right;
 }
+
+/*-- MenuButton --*/
+.menu-item:hover {
+    -fx-background-color: #2CD889;
+}
+.menu-item:hover {
+    -fx-font-size: 14.0 pt;
+    -fx-font-family: "Bookman Old Style";
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
