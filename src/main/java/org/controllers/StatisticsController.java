@@ -6,10 +6,15 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
+
 import static com.mongodb.client.model.Filters.regex;
+
 import org.bson.Document;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class StatisticsController implements Initializable {
@@ -21,7 +26,7 @@ public class StatisticsController implements Initializable {
     private NumberAxis y = new NumberAxis();
 
     @FXML
-    private AreaChart<Number,Number> areaChart = new AreaChart<Number,Number>(x,y);
+    private AreaChart<Number, Number> areaChart = new AreaChart<Number, Number>(x, y);
 
     @FXML
     private CategoryAxis xB = new CategoryAxis();
@@ -30,7 +35,7 @@ public class StatisticsController implements Initializable {
     private NumberAxis yB = new NumberAxis();
 
     @FXML
-    private BarChart<String,Number> barChart =new BarChart<String,Number>(xB,yB);
+    private BarChart<String, Number> barChart = new BarChart<String, Number>(xB, yB);
 
     @FXML
     private NumberAxis xAxis = new NumberAxis();
@@ -39,7 +44,7 @@ public class StatisticsController implements Initializable {
     private NumberAxis yAxis = new NumberAxis();
 
     @FXML
-    private LineChart<Number,Number> lineChart =new LineChart<Number,Number>(xAxis,yAxis);
+    private LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
 
 
     @FXML
@@ -120,7 +125,7 @@ public class StatisticsController implements Initializable {
 //    }
 
 
-    public void iniLineChart(){
+    public void iniLineChart() {
         XYChart.Series series = new XYChart.Series();
         series.setName("year 2020");
         for (int i = 1; i < 13; i++) {
@@ -139,13 +144,39 @@ public class StatisticsController implements Initializable {
 //    }
 
     public static int visitsNumberPerYear(int month) {
-//        System.out.println("this is " + Integer.toString(month));
         MongoCollection<Document> historyMongoCollection = DbConnection.database.getCollection("historys");
-        return (int)historyMongoCollection.count(regex("dateEntered", "/"+month+"/"));
+        return (int) historyMongoCollection.count(regex("dateEntered", "/" + month + "/"));
+    }
+
+
+
+
+
+    public static int[] getLastTwoMonths() {
+        Date date = new Date();
+        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        int lastMonth = 0;
+        int lastTwoMonth = 0;
+        int month = localDate.getMonthValue();
+
+        if (month == 1) {
+            lastMonth = 12;
+            lastTwoMonth = 11;
+        } else if (month == 2) {
+            lastMonth = month - 1;
+            lastTwoMonth = 12;
+        }
+
+        lastMonth = month - 1;
+        lastTwoMonth = month - 2;
+
+        return new int[]{lastMonth, lastTwoMonth};
     }
 
     public static void main(String[] args) {
         DbConnection.connect();
-        visitsNumberPerYear(1);
+//        visitsNumberPerYear(1);
+        System.out.println(visitsNumberInLastTwoMonths(getLastTwoMonths()[0], 6));
+//        System.out.println(getLastTowMonths()[0]);
     }
 }
