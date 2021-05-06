@@ -1,11 +1,14 @@
 package org.controllers.users;
-import javafx.event.ActionEvent;
+import com.mongodb.client.model.Filters;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import org.controllers.DbConnection;
 import org.mainapp.App;
-import org.tasks.LoginTask;
+import org.models.User;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,38 +25,83 @@ public class LoginController implements Initializable {
 
     @FXML
     CheckBox chkRememberMe;
-
+    public static String rememberEmail = "", rememberPassword = "";
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        logProg.setVisible(false);
-
-        if(!App.emailRemem.equals("") || !App.passRemem.equals("")){
+        if(!rememberEmail.equals("") && !rememberPassword.equals("")){
             chkRememberMe.setSelected(true);
-            emailTextField.setText(App.emailRemem);
-            passwordTextField.setText(App.passRemem);
+            emailTextField.setText(rememberEmail);
+            passwordTextField.setText(rememberPassword);
         }
         else {
             chkRememberMe.setSelected(false);
         }
     }
+    public void alert(String title,String message,String header){
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle(title);
+            alert.setContentText(message);
+            alert.setHeaderText(header);
+            alert.showAndWait();
+        });
+    }
 
-    @FXML
-    public void login(){
-        LoginTask task = new LoginTask(emailTextField.getText(),passwordTextField.getText(),logProg);
-        logProg.progressProperty().bind(task.progressProperty());
-        new Thread(task).start();
+    class LoginTask extends Task<Void>{
 
-        if(chkRememberMe.isSelected()){
-            App.emailRemem = emailTextField.getText();
-            App.passRemem = passwordTextField.getText();
-            System.out.println("is checked" + chkRememberMe.isSelected());
-        }else {
-            App.emailRemem = "";
-            App.passRemem = "";
+        @Override
+        protected Void call() throws Exception {
+            try {
+                logProg.setVisible(true);
+                updateProgress(2, 10);
+                if (!emailTextField.getText().equals("") && !passwordTextField.getText().equals("")) {
+                    if (!emailTextField.getText().matches("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")) {
+                        alert("WARNING", "EMAIL NON VALID!", "LOGIN ERROR");
+                    } else {
+                        updateProgress(4, 10);
+                        User user = DbConnection.database.getCollection("users", User.class).find(Filters.and(Filters.eq("email", emailTextField.getText()), Filters.eq("password", passwordTextField.getText()))).first();
+                        updateProgress(6, 10);
+                        if (user != null) {
+                            updateProgress(8, 10);
+                            App.setRoot("dashboard");
+                        } else {
+                            alert("WARNING", "EMAIL OR PASSWORD IS INCORRECT!", "LOGIN ERROR");
+                        }
+                    }
+                } else {
+                    alert("WARNING", "EMAIL OR PASSWORD IS EMPTY", "LOGIN ERROR");
+                }
+            } catch (Exception e) {
+                System.out.println("Exception Login :" + e.getMessage());
+            } finally {
+                updateProgress(10, 10);
+                logProg.setVisible(false);
+            }
+            return null;
         }
 
     }
+    @FXML
+    public void login(){
 
+        if(chkRememberMe.isSelected()){
+            rememberEmail = emailTextField.getText();
+            rememberPassword = passwordTextField.getText();
+            System.out.println("is checked" + chkRememberMe.isSelected());
+        }else {
+            rememberEmail = "";
+            rememberPassword = "";
+        }
+        try{
+            LoginTask loginTask = new LoginTask();
+            logProg.progressProperty().bind(loginTask.progressProperty());
+            new Thread(loginTask).start();
+        }catch(Exception e){
+            System.out.println("Login Exception : "+e.getMessage());
+        }
+
+
+    }
     // Add focus Enter .
     public void clickEnterUserName() {
         passwordTextField.requestFocus();
