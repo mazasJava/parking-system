@@ -208,7 +208,7 @@ public class CarController implements Initializable {
 
     public static void main(String[] args) throws IOException, ParseException {
         DbConnection.connect();
-//        getCarsWithHistorique();
+        getCarsWithHistorique();
 //        createCar(new ObjectId(), "10/S/123498");
 //        System.out.println(search("02/05/2021"));
 //        System.out.println(search("10/H/47424"));

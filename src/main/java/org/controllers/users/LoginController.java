@@ -7,7 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import org.controllers.DbConnection;
-import org.mainapp.App;
+import org.bootstrap.App;
 import org.models.User;
 
 import java.io.IOException;

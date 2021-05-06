@@ -7,9 +7,8 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.skin.TableCellSkin;
 import org.controllers.DbConnection;
-import org.mainapp.App;
+import org.bootstrap.App;
 import org.models.User;
 
 import java.io.IOException;

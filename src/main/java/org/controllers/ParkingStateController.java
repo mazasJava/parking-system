@@ -1,13 +1,7 @@
 package org.controllers;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.PieChart;
-import org.mainapp.App;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 

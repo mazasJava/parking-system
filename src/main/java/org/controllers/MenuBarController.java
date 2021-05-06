@@ -5,7 +5,7 @@ package org.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import org.mainapp.App;
+import org.bootstrap.App;
 
 import java.io.IOException;
 

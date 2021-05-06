@@ -1,18 +1,14 @@
 package org.controllers;
 
 import java.io.IOException;
-import java.net.URL;
-import java.nio.channels.IllegalBlockingModeException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import org.mainapp.App;
+import org.bootstrap.App;
 
 public class PrimaryController {
 

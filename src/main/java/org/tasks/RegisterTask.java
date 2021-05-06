@@ -8,7 +8,7 @@ import javafx.concurrent.Task;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ProgressIndicator;
 import org.controllers.DbConnection;
-import org.mainapp.App;
+import org.bootstrap.App;
 import org.models.User;
 
 import java.util.ArrayList;
