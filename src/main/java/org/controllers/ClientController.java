@@ -16,9 +16,6 @@ public class ClientController {
     {
         MongoCollection<Client> clientMongoCollection = DbConnection.database.getCollection("clients", Client.class);
         List<Client> clients = clientMongoCollection.find().into(new ArrayList<>());
-        for (Client client : clients) {
-            System.out.println(client.getPassword());
-        }
 
         return clients;
     }
