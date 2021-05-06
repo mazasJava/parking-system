@@ -268,7 +268,7 @@
             </font>
          </Label>
          <Button fx:id="btnswitchToSettings1" layoutX="1002.0" layoutY="399.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="134.0" styleClass="btn-green" stylesheets="@../../style/style.css" text="MORE" />
-         <ComboBox layoutX="524.0" layoutY="402.0" prefWidth="150.0" promptText="LIST" styleClass="combobox-designe" stylesheets="@../../style/style.css">
+         <ComboBox layoutX="606.0" layoutY="41.0" prefHeight="35.0" prefWidth="66.0" promptText="LIST" styleClass="combobox-designe" stylesheets="@../../style/style.css">
             <items>
                <FXCollections fx:factory="observableArrayList">
                   <String fx:id="paginationSm" fx:value="4" />
