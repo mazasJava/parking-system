@@ -15,7 +15,7 @@ public class HistoryController {
 
     public static void setCarHistorique(ObjectId carId) throws ParseException {
         Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
         String formattedDate= formatter.format(date);
 
 

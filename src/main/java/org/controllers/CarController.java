@@ -141,12 +141,15 @@ public class CarController implements Initializable {
             cursorCar = carMongoCollection.find(new Document("$text", new Document("$search", query).append("$caseSensitive", false).append("$diacriticSensitive", false))).iterator();
             if (cursorHistory.hasNext()) while (cursorHistory.hasNext()) {
                 result = (String) cursorHistory.next().get("dateEntered");
-                return searchCar(result);
+                System.out.println(result);
+//                return searchCar(result);
             }
             else if (cursorCar.hasNext()) {
                 while (cursorCar.hasNext()) {
                     result = (String) cursorCar.next().get("matricule");
-                    return searchCar(result);
+                    System.out.println(result);
+
+//                    return searchCar(result);
                 }
             } else System.out.println("not found");
             cursorHistory.close();
@@ -157,18 +160,18 @@ public class CarController implements Initializable {
         return null;
     }
 
-    public static List<History> searchCar(String query) {
-        for (History carInfo : results) {
-            if (carInfo.getMatricule().equals(query)) {
-//                System.out.println(carInfo);
-                results2.add(carInfo);
-            } else if (carInfo.getDateEntered().equals(query)) {
-//                System.out.println(carInfo);
-                results2.add(carInfo);
-            }
-        }
-        return results2;
-    }
+//    public static List<History> searchCar(String query) {
+//        for (History carInfo : results) {
+//            if (carInfo.getMatricule().equals(query)) {
+////                System.out.println(carInfo);
+//                results2.add(carInfo);
+//            } else if (carInfo.getDateEntered().equals(query)) {
+////                System.out.println(carInfo);
+//                results2.add(carInfo);
+//            }
+//        }
+//        return results2;
+//    }
 
     /**
      * Pagination method update result collection with the page passed in the parameter
@@ -199,11 +202,12 @@ public class CarController implements Initializable {
     public static void main(String[] args) throws IOException, ParseException {
         DbConnection.connect();
 //        getCarsWithHistorique();
-//        createCar(new ObjectId(), "10/S/123498");
+        createCar(new ObjectId(), "10/S/123498");
 //        System.out.println(search("02/05/2021"));
-//        System.out.println(searchCar("02/05/2021"));
+//        System.out.println(search("10/H/47424"));
 //        search("02/05/2021");
-        System.out.println(pagination(3, 5));
+//        System.out.println(pagination(3, 5));
+
 
 //        releaseCarFromDataBase("40/X/179552");
 

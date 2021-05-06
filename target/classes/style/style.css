@@ -195,3 +195,12 @@
 .cursor-hand{
     -fx-cursor: hand;
 }
+
+/*--COMBOBOX--*/
+.combobox-designe{
+    -fx-background-color: white;
+    -fx-text-fill: #2CD889;
+    -fx-border-width: 1 1 1 1;
+    -fx-border-color:  #2CD889;
+    -fx-alignment: right;
+}
