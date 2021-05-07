@@ -60,6 +60,7 @@ public class StatisticsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         parkingList.setValue(parkingList.getItems().get(0));
+        System.out.println(totalPerMonth);
         EventHandler<ActionEvent> event =
                 new EventHandler<ActionEvent>() {
                     public void handle(ActionEvent e) {
@@ -118,8 +119,8 @@ public class StatisticsController implements Initializable {
         XYChart.Series series = new XYChart.Series();
         series.setName(String.valueOf((new Date()).getYear()));
         Random r = new Random();
-        for (int i = 1; i < 13; i++) {
-            series.getData().add(new XYChart.Data(i, totalPerMonth[i]));
+        for (int i = 0; i < 12; i++) {
+            series.getData().add(new XYChart.Data(i,totalPerMonth[i]));
         }
         return series;
     }
@@ -170,9 +171,6 @@ public class StatisticsController implements Initializable {
     }
 
 
-//    public static void getData() {
-//
-//    }
 
 
     public static int[] getYearState(){
@@ -210,16 +208,6 @@ public class StatisticsController implements Initializable {
         }
 
         return dayData;
-
-    }
-
-
-    public static void main(String[] args) {
-
-        DbConnection.connect();
-
-        System.out.println(getLastTowMonthsState()[3][3]);
-
 
     }
 
