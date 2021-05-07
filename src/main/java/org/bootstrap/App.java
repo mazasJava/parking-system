@@ -19,7 +19,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("car"), 1150, 600);
+        scene = new Scene(loadFXML("statistics"), 1150, 600);
         stage.setScene(scene);
 //        stage.setResizable(false);
         stage.show();
@@ -36,7 +36,7 @@ public class App extends Application {
     }
 
     public static void main(String[] args) throws IOException {
-        DbConnection.connect();
+//        DbConnection.connect();
 //        Parking park = new Parking("this is the parking name",10);
 //        String hostname = "localhost";
 //        int port = Integer.parseInt(String.valueOf(8081));

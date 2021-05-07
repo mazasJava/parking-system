@@ -2,9 +2,8 @@
 
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.AreaChart?>
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
@@ -14,76 +13,85 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1150.0" styleClass="parent" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.StatisticsController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1150.0" styleClass="parent" stylesheets="@../../../../../../../Important/parking-system.v2/src/main/resources/style/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.StatisticsController">
     <top>
         <fx:include source="./commun/menuBar.fxml" />
     </top>
-   <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-             <HBox prefHeight="58.0" prefWidth="1150.0">
-               <Pane prefHeight="38.0" prefWidth="503.0" />
-                 <ComboBox editable="true" prefHeight="27.0" prefWidth="162.0" promptText="PARKS LISTS" styleClass="combobox-designe" stylesheets="@../../style/style.css">
-                     <items>
-                         <FXCollections fx:factory="observableArrayList">
-                             <String fx:id="parkA" fx:value="park A" />
-                             <String fx:id="parkB" fx:value="park B" />
-                             <String fx:id="parkC" fx:value="park C" />
-                             <String fx:id="parkD" fx:value="park D" />
-                         </FXCollections>
-                     </items>
-                 </ComboBox>
-             </HBox>
-            <HBox prefHeight="253.0" prefWidth="1004.0">
-               <children>
-                  <Pane prefHeight="252.0" prefWidth="575.0">
-                     <children>
-                        <AreaChart fx:id="areaChart" layoutX="2.0" layoutY="2.0" prefHeight="230.0" prefWidth="566.0" title="Number visits in two last months">
-                            <xAxis>
-                                <NumberAxis side="BOTTOM" fx:id="x" />
-                            </xAxis>
-                            <yAxis>
-                                <NumberAxis fx:id="y" side="LEFT" />
-                            </yAxis>
-                        </AreaChart>
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="252.0" prefWidth="576.0">
-                     <children>
-                        <BarChart fx:id="barChart" layoutX="2.0" prefHeight="232.0" prefWidth="572.0" title="Number visits in day">
-                          <xAxis>
-                            <CategoryAxis side="BOTTOM" fx:id="xB" />
-                          </xAxis>
-                          <yAxis>
-                            <NumberAxis fx:id="yB" side="LEFT" />
-                          </yAxis>
-                        </BarChart>
-                     </children>
-                  </Pane>
-               </children>
-            </HBox>
-            <HBox prefHeight="262.0" prefWidth="1150.0">
-               <children>
-                  <Pane prefHeight="261.0" prefWidth="575.0">
-                     <children>
-                         <LineChart fx:id="lineChart" layoutX="11.0" prefHeight="235.0" prefWidth="554.0" title="Number visits in year">
-                             <xAxis>
-                                 <NumberAxis side="BOTTOM" fx:id="xAxis" />
-                             </xAxis>
-                             <yAxis>
-                                 <NumberAxis fx:id="yAxis" side="LEFT" />
-                             </yAxis>
-                         </LineChart>
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="261.0" prefWidth="575.0">
-                     <children>
-                         <PieChart fx:id="pieChart" layoutX="1.0" layoutY="10.0" prefHeight="229.0" prefWidth="573.0" title="Parking state" />
-                     </children>
-                  </Pane>
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-   </center>
+    <center>
+        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <children>
+                <HBox prefHeight="36.0" prefWidth="1150.0">
+                    <children>
+                        <Pane prefHeight="40.0" prefWidth="503.0" />
+                        <ComboBox fx:id="parkingList" editable="false" prefHeight="27.0" prefWidth="162.0" promptText="PARKS LISTS" styleClass="combobox-designe" stylesheets="@../../../../../../../Important/parking-system.v2/src/main/resources/style/style.css">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:id="parkA" fx:value="park A" />
+                                    <String fx:id="parkB" fx:value="park B" />
+                                    <String fx:id="parkC" fx:value="park C" />
+                                    <String fx:id="parkD" fx:value="park D" />
+                                </FXCollections>
+                            </items>
+                            <HBox.margin>
+                                <Insets top="15.0" />
+                            </HBox.margin>
+                        </ComboBox>
+                    </children>
+                </HBox>
+                <HBox prefHeight="471.0" prefWidth="1150.0">
+                    <children>
+                        <HBox prefHeight="383.0" prefWidth="593.0">
+                            <children>
+                                <VBox prefHeight="471.0" prefWidth="603.0">
+                                    <children>
+                                        <HBox prefHeight="227.0" prefWidth="593.0">
+                                            <children>
+                                                <Pane prefHeight="252.0" prefWidth="575.0">
+                                                    <children>
+                                                        <AreaChart fx:id="areaChart" layoutX="2.0" layoutY="2.0" prefHeight="230.0" prefWidth="566.0" title="Number visits in two last months">
+                                                            <xAxis>
+                                                                <NumberAxis side="BOTTOM" fx:id="x" />
+                                                            </xAxis>
+                                                            <yAxis>
+                                                                <NumberAxis fx:id="y" side="LEFT" />
+                                                            </yAxis>
+                                                        </AreaChart>
+                                                    </children>
+                                                </Pane>
+                                            </children>
+                                        </HBox>
+                                        <HBox layoutX="10.0" layoutY="10.0" prefHeight="246.0" prefWidth="593.0">
+                                            <children>
+                                                <Pane prefHeight="261.0" prefWidth="575.0">
+                                                    <children>
+                                                        <LineChart fx:id="lineChart" layoutX="11.0" prefHeight="235.0" prefWidth="554.0" title="Number visits in year">
+                                                            <xAxis>
+                                                                <NumberAxis side="BOTTOM" fx:id="xAxis" />
+                                                            </xAxis>
+                                                            <yAxis>
+                                                                <NumberAxis fx:id="yAxis" side="LEFT" />
+                                                            </yAxis>
+                                                        </LineChart>
+                                                    </children>
+                                                </Pane>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="471.0" prefWidth="557.0">
+                            <children>
+                                <Pane prefHeight="307.0" prefWidth="551.0">
+                                    <children>
+                                        <PieChart fx:id="pieChart" layoutX="25.0" layoutY="61.0" prefHeight="311.0" prefWidth="501.0" title="Parking state" />
+                                    </children>
+                                </Pane>
+                            </children>
+                        </HBox>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </center>
 </BorderPane>
