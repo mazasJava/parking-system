@@ -1,41 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1150.0" styleClass="parent" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.ClientController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1150.0" styleClass="parent" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.ClientController">
     <top>
         <fx:include source="./commun/menuBar.fxml" />
     </top>
     <center>
         <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F0FAF8;" BorderPane.alignment="CENTER">
             <Pane prefHeight="100.0" prefWidth="1150.0">
-                <TextField fx:id="txtSearch" layoutX="713.0" layoutY="44.0" prefHeight="40.0" prefWidth="289.0" promptText="Search" styleClass="searchbar-txt" stylesheets="@../../style/style.css">
+                <TextField fx:id="txtSearch" layoutX="655.0" layoutY="44.0" prefHeight="40.0" prefWidth="289.0" promptText="Search" styleClass="searchbar-txt" stylesheets="@../../style/style.css">
                     <font>
                         <Font size="14.0" />
                     </font>f
                 </TextField>
-                <ImageView fx:id="imgSearch" fitHeight="25.0" fitWidth="26.0" layoutX="970.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="imgSearch" fitHeight="25.0" fitWidth="26.0" layoutX="914.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../imgs/loupe.png" />
                 </ImageView>
             </Pane>
-            <Pane layoutX="234.0" layoutY="107.0" prefHeight="318.0" prefWidth="539.0" styleClass="pane-card-table">
+            <Pane layoutX="177.0" layoutY="107.0" prefHeight="318.0" prefWidth="769.0" styleClass="pane-card-table">
                 <Label layoutX="14.0" layoutY="6.0" prefHeight="17.0" prefWidth="119.0" text="ERROR LOG" textFill="#646d82">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Label>
-                <TableView fx:id="tableView" layoutX="12.0" layoutY="34.0" prefHeight="277.0" prefWidth="521.0">
+                <TableView fx:id="tableView" layoutX="12.0" layoutY="11.0" prefHeight="300.0" prefWidth="739.0">
                     <columns>
-                        <TableColumn fx:id="colName" prefWidth="193.00003051757812" resizable="false" text="Name" />
-                        <TableColumn fx:id="colEmail" prefWidth="193.00003051757812" resizable="false" text="Email" />
-                        <TableColumn fx:id="colCarPlate" prefWidth="193.00003051757812" resizable="false" text="Car plate" />
+                        <TableColumn fx:id="colName" prefWidth="231.0" resizable="false" text="Name" />
+                        <TableColumn fx:id="colEmail" prefWidth="276.0" resizable="false" text="Email" />
+                        <TableColumn fx:id="colCarPlate" prefWidth="75.0" resizable="false" text="Car plate" />
                     </columns>
                 </TableView>
             </Pane>
-            <Pagination fx:id="pagination" layoutX="552.0" layoutY="431.0" prefHeight="61.0" prefWidth="221.0" style="-fx-background-color: transparent;" />
+            <Pagination fx:id="pagination" layoutX="736.0" layoutY="425.0" prefHeight="61.0" prefWidth="221.0" style="-fx-background-color: transparent;" />
         </Pane>
     </center>
 </BorderPane>

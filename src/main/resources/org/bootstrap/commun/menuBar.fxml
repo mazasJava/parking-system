@@ -58,10 +58,10 @@
                </ImageView>
                <MenuButton layoutX="230.0" layoutY="2.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="71.0" style="-fx-background-color: transparent;" styleClass="menu-item" stylesheets="@../../../style/style.css">
                  <items>
-                   <MenuItem mnemonicParsing="false" text="Settings">
+                   <MenuItem onAction="#clickItemSettings" mnemonicParsing="false" text="Settings">
 
                    </MenuItem>
-                   <MenuItem mnemonicParsing="false" text="Log out">
+                   <MenuItem onAction="#clickItemClose" mnemonicParsing="false" text="Log out">
 
                    </MenuItem>
                  </items>

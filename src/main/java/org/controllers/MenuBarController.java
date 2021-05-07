@@ -2,6 +2,7 @@ package org.controllers;
 
 
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
@@ -49,10 +50,13 @@ public class MenuBarController {
         else if(event.getSource() == btnswitchToClients){
             App.setRoot("client");
         }
-        else if(event.getSource() == btnswitchToSettings){
-            App.setRoot("settings");
-        }else if(event.getSource() == btnClose){
-            App.setRoot("login");
-        }
+    }
+
+    public void clickItemSettings(ActionEvent actionEvent) throws IOException {
+        App.setRoot("settings");
+    }
+
+    public void clickItemClose(ActionEvent actionEvent) throws IOException {
+        App.setRoot("login");
     }
 }
