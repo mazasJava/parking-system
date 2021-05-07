@@ -20,6 +20,7 @@ import java.text.DateFormatSymbols;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class StatisticsController implements Initializable {
@@ -62,32 +63,43 @@ public class StatisticsController implements Initializable {
                 new EventHandler<ActionEvent>() {
                     public void handle(ActionEvent e)
                     {
-
-//                        switch (parkingList.getValue().toString()){
-//                            case "park A":
-//                                iniAreaChart(getVisitsNumberInLastTwoMonths(getLastTwoMonths()[0]), getVisitsNumberInLastTwoMonths(getLastTwoMonths()[1]));
-                                iniPieChart(Parking.getState()[1], Parking.getState()[2]);
-//                                iniLineChart(getVisitsNumberPerYear());
-//                                break;
-//                            case "park B" :
+                        Random r = new Random();
+                        lineChart.getData().clear();
+                        pieChart.getData().clear();
+                        areaChart.getData().clear();
+                        switch (parkingList.getValue().toString()){
+                            case "park A":
 //                                iniAreaChart(getVisitsNumberInLastTwoMonths(getLastTwoMonths()[0]), getVisitsNumberInLastTwoMonths(getLastTwoMonths()[1]));
 //                                iniPieChart(Parking.getState()[1], Parking.getState()[2]);
-//                                iniLineChart(getVisitsNumberPerYear());
+                                iniAreaChart(getVisitsNumberInLastTwoMonths(r.nextInt(12)),getVisitsNumberInLastTwoMonths(r.nextInt(23)));
+                                iniPieChart(r.nextInt(100),r.nextInt(100));
+                                iniLineChart(getVisitsNumberPerYear());
+                                break;
+                            case "park B" :
+//                                iniAreaChart(getVisitsNumberInLastTwoMonths(getLastTwoMonths()[0]), getVisitsNumberInLastTwoMonths(getLastTwoMonths()[1]));
+//                                iniPieChart(Parking.getState()[1], Parking.getState()[2]);
+                                iniAreaChart(getVisitsNumberInLastTwoMonths(r.nextInt(12)),getVisitsNumberInLastTwoMonths(r.nextInt(23)));
+                                iniPieChart(r.nextInt(100),r.nextInt(100));
+                                iniLineChart(getVisitsNumberPerYear());
 //                                System.out.println("park B");
-//                                break;
-//                            case "park C" :
+                                break;
+                            case "park C" :
 //                                iniAreaChart(getVisitsNumberInLastTwoMonths(getLastTwoMonths()[0]), getVisitsNumberInLastTwoMonths(getLastTwoMonths()[1]));
 //                                iniPieChart(Parking.getState()[1], Parking.getState()[2]);
-//                                iniLineChart(getVisitsNumberPerYear());
+                                iniAreaChart(getVisitsNumberInLastTwoMonths(r.nextInt(12)),getVisitsNumberInLastTwoMonths(r.nextInt(23)));
+                                iniPieChart(r.nextInt(100),r.nextInt(100));
+                                iniLineChart(getVisitsNumberPerYear());
 //                                System.out.println("park C");
-//                                break;
-//                            case "park D":
+                                break;
+                            case "park D":
 //                                iniAreaChart(getVisitsNumberInLastTwoMonths(getLastTwoMonths()[0]), getVisitsNumberInLastTwoMonths(getLastTwoMonths()[1]));
 //                                iniPieChart(Parking.getState()[1], Parking.getState()[2]);
-//                                iniLineChart(getVisitsNumberPerYear());
+                                iniAreaChart(getVisitsNumberInLastTwoMonths(r.nextInt(12)),getVisitsNumberInLastTwoMonths(r.nextInt(23)));
+                                iniPieChart(r.nextInt(100),r.nextInt(100));
+                                iniLineChart(getVisitsNumberPerYear());
 //                                System.out.println("park D");
-//                                break;
-//                        }
+                                break;
+                        }
                         System.out.println((parkingList.getValue() + " selected"));
                     }
                 };
@@ -98,12 +110,15 @@ public class StatisticsController implements Initializable {
 
     public XYChart.Series getVisitsNumberInLastTwoMonths(int month) {
         XYChart.Series seriesMarch = new XYChart.Series();
+//        seriesMarch.setName(new DateFormatSymbols().getMonths()[getLastTwoMonths()[0]-1] + "");
         seriesMarch.setName(new DateFormatSymbols().getMonths()[getLastTwoMonths()[0]-1] + "");
-        for (int i = 1; i < 13; i++) {
-            for (int j = 1; j < 31; j++) {
-                seriesMarch.getData().add(new XYChart.Data(i, visitsNumberInLastTwoMonths(month, j)));
+        Random r = new Random();
+        for (int i = 1; i < 9; i++) {
+//            for (int j = 1; j < 31; j++) {
+                seriesMarch.getData().add(new XYChart.Data(i*3, r.nextInt(100)));
+//                seriesMarch.getData().add(new XYChart.Data(i, visitsNumberInLastTwoMonths(month, j)));
             }
-        }
+//        }
         return seriesMarch;
     }
 
@@ -114,8 +129,10 @@ public class StatisticsController implements Initializable {
     private XYChart.Series getVisitsNumberPerYear() {
         XYChart.Series series = new XYChart.Series();
         series.setName(String.valueOf((new Date()).getYear()));
+        Random r = new Random();
         for (int i = 1; i < 13; i++) {
-            series.getData().add(new XYChart.Data(i, visitsNumberPerYear(i)));
+            series.getData().add(new XYChart.Data(i, r.nextInt(1000)));
+//            series.getData().add(new XYChart.Data(i, visitsNumberPerYear(i)));
         }
         return series;
     }
