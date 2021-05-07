@@ -62,6 +62,6 @@ public class Server {
     }
 
     public static void main(String[] args) {
-        Server.doIt(10, 10000);
+        Server.doIt(10, 2000);
     }
 }

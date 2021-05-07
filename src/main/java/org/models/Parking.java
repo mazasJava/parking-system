@@ -4,10 +4,12 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import org.bson.types.ObjectId;
+import org.controllers.CarController;
 import org.controllers.DbConnection;
 import org.controllers.HistoryController;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,19 +46,6 @@ public class Parking {
     }
 
 
-    public static Car createCar(ObjectId id, String matricule) throws IOException {
-        id = new ObjectId();
-        MongoCollection<Car> carMongoCollection = DbConnection.database.getCollection("cars", Car.class);
-        Car newCar = new Car().setId(id).setMatricule(matricule);
-        try {
-            carMongoCollection.insertOne(newCar);
-            System.out.println("Successfully inserted Car documents. \n");
-            HistoryController.setCarHistorique(newCar.getId());
-            return newCar;
-        } catch (Exception e) {
-            return null;
-        }
-    }
 
     public static boolean releaseCarFromDataBase(ObjectId id) {
         try {
@@ -70,12 +59,12 @@ public class Parking {
 
     }
 
-    public static boolean carOut(ObjectId id) {
-        return releaseCarFromDataBase(id);
+    public static boolean carOut(String matricule) {
+        return CarController.releaseCarFromDataBase(matricule);
     }
 
-    public static void carIn(String matricule) throws IOException {
-        addCar(createCar(new ObjectId(), matricule));
+    public static void carIn(String matricule) throws IOException, ParseException {
+        addCar(CarController.createCar(new ObjectId(), matricule));
     }
 
     public Parking(String adress, int capacity) {

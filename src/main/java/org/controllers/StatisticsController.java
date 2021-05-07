@@ -50,7 +50,8 @@ public class StatisticsController implements Initializable {
 
     @FXML
     private LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
-
+    private int[] totalPerMonth = getYearState();
+    private int[][] totalMonth = getLastTowMonthsState();
 
     @FXML
     private PieChart pieChart;
@@ -68,24 +69,24 @@ public class StatisticsController implements Initializable {
                         areaChart.getData().clear();
                         switch (parkingList.getValue().toString()) {
                             case "park A":
-                                iniAreaChart(getVisitsNumberInLastTwoMonths(r.nextInt(12)), getVisitsNumberInLastTwoMonths(r.nextInt(23)));
+                                iniAreaChart(getVisitsNumberInLastTwoMonths(3), getVisitsNumberInLastTwoMonths(4));
                                 iniPieChart(r.nextInt(100), r.nextInt(100));
                                 iniLineChart(getVisitsNumberPerYear());
                                 break;
                             case "park B":
-                                iniAreaChart(getVisitsNumberInLastTwoMonths(r.nextInt(12)), getVisitsNumberInLastTwoMonths(r.nextInt(23)));
+                                iniAreaChart(getVisitsNumberInLastTwoMonths(6), getVisitsNumberInLastTwoMonths(5));
                                 iniPieChart(r.nextInt(100), r.nextInt(100));
                                 iniLineChart(getVisitsNumberPerYear());
 //                                System.out.println("park B");
                                 break;
                             case "park C":
-                                iniAreaChart(getVisitsNumberInLastTwoMonths(r.nextInt(12)), getVisitsNumberInLastTwoMonths(r.nextInt(23)));
+                                iniAreaChart(getVisitsNumberInLastTwoMonths(4), getVisitsNumberInLastTwoMonths(5));
                                 iniPieChart(r.nextInt(100), r.nextInt(100));
                                 iniLineChart(getVisitsNumberPerYear());
 //                                System.out.println("park C");
                                 break;
                             case "park D":
-                                iniAreaChart(getVisitsNumberInLastTwoMonths(r.nextInt(12)), getVisitsNumberInLastTwoMonths(r.nextInt(23)));
+                                iniAreaChart(getVisitsNumberInLastTwoMonths(2), getVisitsNumberInLastTwoMonths(3));
                                 iniPieChart(r.nextInt(100), r.nextInt(100));
                                 iniLineChart(getVisitsNumberPerYear());
 //                                System.out.println("park D");
@@ -102,9 +103,8 @@ public class StatisticsController implements Initializable {
     public XYChart.Series getVisitsNumberInLastTwoMonths(int month) {
         XYChart.Series seriesMarch = new XYChart.Series();
         seriesMarch.setName(new DateFormatSymbols().getMonths()[getLastTwoMonths()[0] - 1] + "");
-        Random r = new Random();
-        for (int i = 1; i < 9; i++) {
-            seriesMarch.getData().add(new XYChart.Data(i * 3, r.nextInt(100)));
+        for (int i = 1; i < 30; i++) {
+            seriesMarch.getData().add(new XYChart.Data(i , totalMonth[month][i]));
         }
 //        }
         return seriesMarch;
@@ -119,7 +119,7 @@ public class StatisticsController implements Initializable {
         series.setName(String.valueOf((new Date()).getYear()));
         Random r = new Random();
         for (int i = 1; i < 13; i++) {
-            series.getData().add(new XYChart.Data(i, r.nextInt(1000)));
+            series.getData().add(new XYChart.Data(i, totalPerMonth[i]));
         }
         return series;
     }

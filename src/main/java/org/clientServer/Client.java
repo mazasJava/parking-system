@@ -68,22 +68,23 @@ public class Client extends Thread {
     }
 
     public static void main(String[] args) throws IOException {
+        DbConnection.connect();
         String hostname = "127.0.0.1";
-        int port = 5000;
+        int port = 8081;
         Client c = new Client(hostname, port);
         Parking park = new Parking("this is the parking name", 10);
         c.start();
     }
     @Override
     public void run() {
-//        while (true) {
+        while (true) {
             try {
-//                Parking.carIn((Client.readMEssage(Client.getReader(Client.getSocket()))));
-                System.out.println((Client.readMEssage(Client.getReader(Client.getSocket()))));
+                Parking.carIn((Client.readMEssage(Client.getReader(Client.getSocket()))));
+//                System.out.println((Client.readMEssage(Client.getReader(Client.getSocket()))));
             } catch (Exception e) {
                 e.printStackTrace();
             }
-//            }
+            }
 //        }
 
     }

@@ -7,11 +7,16 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import org.bootstrap.App;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
@@ -30,15 +35,16 @@ import static com.mongodb.client.model.Projections.fields;
 
 public class CarController implements Initializable {
     public static List<History> results;
-    public static List<History> results2;
     public static final ObjectId id = new ObjectId();
-    String Number, CarPlate, DateEntree, DateSortie;
     @FXML
     TableView<History> tableView;
+    @FXML
+    Button btnMoreClients;
     @FXML
     TableColumn<History, String> colNumber, colCarPlate, colDateEntree, colDateSortie;
     ObservableList<History> data;
     public List attend = new ArrayList();
+
 
     public void show() {
         attend.clear();
@@ -48,14 +54,21 @@ public class CarController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // colNumber.setCellValueFactory(new PropertyValueFactory<History,
-        // String>("counterId"));
         colCarPlate.setCellValueFactory(new PropertyValueFactory<History, String>("matricule"));
         colDateEntree.setCellValueFactory(new PropertyValueFactory<History, String>("dateEntered"));
         colDateSortie.setCellValueFactory(new PropertyValueFactory<History, String>("dateRelease"));
-        // data = FXCollections.observableArrayList(attend);
-        // tableView.setItems(data);
         show();
+        btnMoreClients.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent arg0) {
+                // TODO Auto-generated method stub
+                try {
+                    App.setRoot("client");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     /**
@@ -104,19 +117,24 @@ public class CarController implements Initializable {
     /**
      * Find and update car release date with current date
      */
-    public static void releaseCarFromDataBase(String mat) {
-        Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-        String formattedDate = formatter.format(date);
-        MongoCollection<Car> carMongoCollection = DbConnection.database.getCollection("cars", Car.class);
-        MongoCollection<History> historyMongoCollection = DbConnection.database.getCollection("historys", History.class);
+    public static boolean releaseCarFromDataBase(String mat) {
+        try {
+            Date date = new Date(System.currentTimeMillis());
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+            String formattedDate = formatter.format(date);
+            MongoCollection<Car> carMongoCollection = DbConnection.database.getCollection("cars", Car.class);
+            MongoCollection<History> historyMongoCollection = DbConnection.database.getCollection("historys", History.class);
 
-        Car carMat = carMongoCollection.find(eq("matricule", mat)).first();
+            Car carMat = carMongoCollection.find(eq("matricule", mat)).first();
 
-        if (carMat == null) throw new AssertionError();
-        ObjectId id = new ObjectId(String.valueOf(carMat.getId()));
-        historyMongoCollection.updateOne(Filters.eq("carId", id), Updates.set("dateRelease", formattedDate));
-        System.out.println("Document update successfully...");
+            if (carMat == null) throw new AssertionError();
+            ObjectId id = new ObjectId(String.valueOf(carMat.getId()));
+            historyMongoCollection.updateOne(Filters.eq("carId", id), Updates.set("dateRelease", formattedDate));
+            System.out.println("Document update successfully...");
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 
@@ -204,31 +222,4 @@ public class CarController implements Initializable {
         }
         return results;
     }
-
-
-    public static void main(String[] args) throws IOException, ParseException {
-        DbConnection.connect();
-        getCarsWithHistorique();
-//        createCar(new ObjectId(), "10/S/123498");
-//        System.out.println(search("02/05/2021"));
-//        System.out.println(search("10/H/47424"));
-//        search("02/05/2021");
-//        System.out.println(pagination(3, 5));
-
-//        releaseCarFromDataBase("40/X/179552");
-
-//        createCar(new ObjectId(),"40/X/179552");
-//        createCar(new ObjectId(),"90/S/123498");
-//        createCar(new ObjectId(),"20/R/474245");
-
-
-//        System.out.println("-------------------------------------------");
-//        System.out.println("-------------------------------------------");
-//        System.out.println("-------------------------------------------");
-//        System.out.println("-------------------------------------------");
-//        search("40/X/179552");
-
-
-    }
-
 }
