@@ -1,20 +1,32 @@
 package org.models.Statistic;
 
+import org.bson.types.ObjectId;
+
 import java.util.Arrays;
 import java.util.List;
 
 public class VisitsNumberPerYear {
 
+    ObjectId id;
     private int year;
-    private List<Integer> months;
-
+    private List<VisitsNumberPerMonth> months;
 
     public VisitsNumberPerYear() {
     }
 
-    public VisitsNumberPerYear(int year, List<Integer> months) {
+    public VisitsNumberPerYear(ObjectId id, int year, List<VisitsNumberPerMonth> months) {
+        this.id = id;
         this.year = year;
         this.months = months;
+    }
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public VisitsNumberPerYear setId(ObjectId id) {
+        this.id = id;
+        return this;
     }
 
     public int getYear() {
@@ -26,11 +38,11 @@ public class VisitsNumberPerYear {
         return this;
     }
 
-    public List<Integer> getMonths() {
+    public List<VisitsNumberPerMonth> getMonths() {
         return months;
     }
 
-    public VisitsNumberPerYear setMonths(List<Integer> months) {
+    public VisitsNumberPerYear setMonths(List<VisitsNumberPerMonth> months) {
         this.months = months;
         return this;
     }
@@ -38,8 +50,9 @@ public class VisitsNumberPerYear {
     @Override
     public String toString() {
         return "VisitsNumberPerYear{" +
-                "year=" + year +
-//                ", months=" + Arrays.toString(months) +
+                "id=" + id +
+                ", year=" + year +
+                ", months=" + months +
                 '}';
     }
 }

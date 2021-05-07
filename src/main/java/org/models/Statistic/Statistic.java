@@ -1,34 +1,29 @@
 package org.models.Statistic;
 
+import org.bson.types.ObjectId;
+
 public class Statistic {
 
 
-    private VisitsNumberInTwoLastMonths visitsNumberInTwoLastMonths;
+    ObjectId id;
     private VisitsNumberPerYear visitsNumberPerYear;
+
 
 
     public Statistic() {
     }
 
-    public Statistic(VisitsNumberInTwoLastMonths visitsNumberInTwoLastMonths) {
-        this.visitsNumberInTwoLastMonths = visitsNumberInTwoLastMonths;
-    }
-
-    public Statistic(VisitsNumberPerYear visitsNumberPerYear) {
+    public Statistic(ObjectId id, VisitsNumberPerYear visitsNumberPerYear) {
+        this.id = id;
         this.visitsNumberPerYear = visitsNumberPerYear;
     }
 
-    public Statistic(VisitsNumberInTwoLastMonths visitsNumberInTwoLastMonths, VisitsNumberPerYear visitsNumberPerYear) {
-        this.visitsNumberInTwoLastMonths = visitsNumberInTwoLastMonths;
-        this.visitsNumberPerYear = visitsNumberPerYear;
+    public ObjectId getId() {
+        return id;
     }
 
-    public VisitsNumberInTwoLastMonths getVisitsNumberInTwoLastMonths() {
-        return visitsNumberInTwoLastMonths;
-    }
-
-    public Statistic setVisitsNumberInTwoLastMonths(VisitsNumberInTwoLastMonths visitsNumberInTwoLastMonths) {
-        this.visitsNumberInTwoLastMonths = visitsNumberInTwoLastMonths;
+    public Statistic setId(ObjectId id) {
+        this.id = id;
         return this;
     }
 
@@ -44,7 +39,7 @@ public class Statistic {
     @Override
     public String toString() {
         return "Statistic{" +
-                "visitsNumberInTwoLastMonths=" + visitsNumberInTwoLastMonths +
+                "id=" + id +
                 ", visitsNumberPerYear=" + visitsNumberPerYear +
                 '}';
     }
