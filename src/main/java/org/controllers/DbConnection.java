@@ -27,7 +27,6 @@ public class DbConnection {
                 .applyConnectionString(connectionString)
                 .codecRegistry(codecRegistry)
                 .build();
-
         try {
             MongoClient mongoClient = MongoClients.create(clientSettings);
             database = mongoClient.getDatabase("PARKING_MANAGEMENT_SYSTEM");

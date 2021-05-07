@@ -70,7 +70,7 @@
                               <Font size="11.0" />
                            </font>
                         </Label>
-                        <Label layoutX="150.0" layoutY="9.0" style="-fx-background-color: white; -fx-text-fill: #2CD889;" text="Theodore Handler">
+                        <Label layoutX="155.0" layoutY="9.0" style="-fx-background-color: white; -fx-text-fill: #2CD889;" text="Theodore Handler">
                            <font>
                               <Font size="11.0" />
                            </font>
@@ -99,10 +99,7 @@
                               <Font size="11.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="37.0" fitWidth="44.0" layoutX="126.0" pickOnBounds="true" preserveRatio="true">
-                           <Image url="@../../images/jimmy-fallon.png" />
-                        </ImageView>
-                        <Label layoutX="190.0" layoutY="9.0" style="-fx-background-color: white; -fx-text-fill: #2CD889;" text="Theodore Handler">
+                        <Label layoutX="160.0" layoutY="10.0" style="-fx-background-color: white; -fx-text-fill: #2CD889;" text="Theodore Handler">
                            <font>
                               <Font size="11.0" />
                            </font>
@@ -131,10 +128,7 @@
                               <Font size="11.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="37.0" fitWidth="44.0" layoutX="126.0" pickOnBounds="true" preserveRatio="true">
-                           <Image url="@../../images/jimmy-fallon.png" />
-                        </ImageView>
-                        <Label layoutX="190.0" layoutY="9.0" style="-fx-background-color: white; -fx-text-fill: #2CD889;" text="Theodore Handler">
+                        <Label layoutX="160.0" layoutY="9.0" style="-fx-background-color: white; -fx-text-fill: #2CD889;" text="Theodore Handler">
                            <font>
                               <Font size="11.0" />
                            </font>
@@ -163,10 +157,7 @@
                               <Font size="11.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="37.0" fitWidth="44.0" layoutX="126.0" pickOnBounds="true" preserveRatio="true">
-                           <Image url="@../../images/jimmy-fallon.png" />
-                        </ImageView>
-                        <Label layoutX="190.0" layoutY="9.0" style="-fx-background-color: white; -fx-text-fill: #2CD889;" text="Theodore Handler">
+                        <Label layoutX="160.0" layoutY="9.0" style="-fx-background-color: white; -fx-text-fill: #2CD889;" text="Theodore Handler">
                            <font>
                               <Font size="11.0" />
                            </font>
@@ -195,10 +186,7 @@
                               <Font size="11.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="37.0" fitWidth="44.0" layoutX="126.0" pickOnBounds="true" preserveRatio="true">
-                           <Image url="@../../images/jimmy-fallon.png" />
-                        </ImageView>
-                        <Label layoutX="190.0" layoutY="9.0" style="-fx-background-color: white; -fx-text-fill: #2CD889;" text="Theodore Handler">
+                        <Label layoutX="160.0" layoutY="9.0" style="-fx-background-color: white; -fx-text-fill: #2CD889;" text="Theodore Handler">
                            <font>
                               <Font size="11.0" />
                            </font>
@@ -227,10 +215,7 @@
                               <Font size="11.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="37.0" fitWidth="44.0" layoutX="126.0" pickOnBounds="true" preserveRatio="true">
-                           <Image url="@../../images/jimmy-fallon.png" />
-                        </ImageView>
-                        <Label layoutX="190.0" layoutY="9.0" style="-fx-background-color: white; -fx-text-fill: #2CD889;" text="Theodore Handler">
+                        <Label layoutX="166.0" layoutY="9.0" style="-fx-background-color: white; -fx-text-fill: #2CD889;" text="Theodore Handler">
                            <font>
                               <Font size="11.0" />
                            </font>
