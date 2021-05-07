@@ -68,24 +68,24 @@ public class StatisticsController implements Initializable {
                         areaChart.getData().clear();
                         switch (parkingList.getValue().toString()) {
                             case "park A":
-                                iniAreaChart(getVisitsNumberInLastTwoMonths(r.nextInt(12)), getVisitsNumberInLastTwoMonths(r.nextInt(23)));
+                                iniAreaChart(getVisitsNumberInLastTwoMonths(3), getVisitsNumberInLastTwoMonths(4));
                                 iniPieChart(r.nextInt(100), r.nextInt(100));
                                 iniLineChart(getVisitsNumberPerYear());
                                 break;
                             case "park B":
-                                iniAreaChart(getVisitsNumberInLastTwoMonths(r.nextInt(12)), getVisitsNumberInLastTwoMonths(r.nextInt(23)));
+//                                iniAreaChart(getVisitsNumberInLastTwoMonths(r.nextInt(12)), getVisitsNumberInLastTwoMonths(r.nextInt(23)));
                                 iniPieChart(r.nextInt(100), r.nextInt(100));
                                 iniLineChart(getVisitsNumberPerYear());
 //                                System.out.println("park B");
                                 break;
                             case "park C":
-                                iniAreaChart(getVisitsNumberInLastTwoMonths(r.nextInt(12)), getVisitsNumberInLastTwoMonths(r.nextInt(23)));
+//                                iniAreaChart(getVisitsNumberInLastTwoMonths(r.nextInt(12)), getVisitsNumberInLastTwoMonths(r.nextInt(23)));
                                 iniPieChart(r.nextInt(100), r.nextInt(100));
                                 iniLineChart(getVisitsNumberPerYear());
 //                                System.out.println("park C");
                                 break;
                             case "park D":
-                                iniAreaChart(getVisitsNumberInLastTwoMonths(r.nextInt(12)), getVisitsNumberInLastTwoMonths(r.nextInt(23)));
+//                                iniAreaChart(getVisitsNumberInLastTwoMonths(r.nextInt(12)), getVisitsNumberInLastTwoMonths(r.nextInt(23)));
                                 iniPieChart(r.nextInt(100), r.nextInt(100));
                                 iniLineChart(getVisitsNumberPerYear());
 //                                System.out.println("park D");
@@ -104,7 +104,7 @@ public class StatisticsController implements Initializable {
         seriesMarch.setName(new DateFormatSymbols().getMonths()[getLastTwoMonths()[0] - 1] + "");
         Random r = new Random();
         for (int i = 1; i < 9; i++) {
-            seriesMarch.getData().add(new XYChart.Data(i * 3, r.nextInt(100)));
+            seriesMarch.getData().add(new XYChart.Data(i * 2, getLastTowMonthsState()[month][i*2]));
         }
 //        }
         return seriesMarch;
@@ -208,9 +208,7 @@ public class StatisticsController implements Initializable {
                 dayData[monthId][dayId] = statisticList.getVisitsNumberPerYear().getMonths().get(monthId).getDay().get(dayId);
             }
         }
-
         return dayData;
-
     }
 
 
@@ -218,7 +216,7 @@ public class StatisticsController implements Initializable {
 
         DbConnection.connect();
 
-        System.out.println(getLastTowMonthsState()[3][3]);
+        System.out.println(getLastTowMonthsState()[2][2]);
 
 
     }

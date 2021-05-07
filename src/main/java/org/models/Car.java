@@ -82,8 +82,8 @@ public final class Car {
         return "Car{" +
                 "id=" + id +
                 ", matricule='" + matricule + '\'' +
-                ",Entered Date=" + carInfo.getDateEntered() +
-                ", Release Date=" + carInfo.getDateRelease() +
+//                ",Entered Date=" + carInfo.getDateEntered() +
+//                ", Release Date=" + carInfo.getDateRelease() +
                 "\n" +
                 '}';
     }

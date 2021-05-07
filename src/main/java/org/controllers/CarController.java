@@ -126,59 +126,45 @@ public class CarController implements Initializable {
      * @param query
      * @return
      */
-//    public static List<History> search(String query) {
-//
-//
-//        List<History> tr;
-//        MongoCollection<History> historyMongoCollection = DbConnection.database.getCollection("historys", History.class);
-//        MongoCollection<Car> carMongoCollection = DbConnection.database.getCollection("cars", Car.class);
-//
-//        historyMongoCollection.createIndex(Indexes.text("dateEntered"));
-//        carMongoCollection.createIndex(Indexes.text("matricule"));
-//        String result;
-//        try {
-//            MongoCursor<History> cursorHistory = null;
-//            MongoCursor<Car> cursorCar = null;
-//            cursorHistory = historyMongoCollection.find(new Document("$text", new Document("$search", query).append("$caseSensitive", false).append("$diacriticSensitive", false))).iterator();
-//            cursorCar = carMongoCollection.find(new Document("$text", new Document("$search", query).append("$caseSensitive", false).append("$diacriticSensitive", false))).iterator();
-//            if (cursorHistory.hasNext()) while (cursorHistory.hasNext()) {
-//                result = (String) cursorHistory.next().getDateEntered();
-//                System.out.println(result);
-//            }
-//            else if (cursorCar.hasNext()) {
-//                while (cursorCar.hasNext()) {
-//                    Car car = cursorCar.next();
-//                    ObjectId carId = car.getId();
-//                    String mat = car.getMatricule();
-//                    historyMongoCollection.find(eq("carId", carId)).first();
-//                    tr = historyMongoCollection.find(eq("carId", carId)).into((new ArrayList<>()));
-//
-//                    tr.get(i++).setMatricule(mat);
-//                    System.out.println(tr);
-//
-//                    return tr;
-//                }
-//            } else System.out.println("not found");
-//            cursorHistory.close();
-//            cursorCar.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
+    public static List<History> search(String query) {
 
-//    public static List<History> searchCar(String query) {
-//        for (History carInfo : results) {
-//            if (carInfo.getMatricule().equals(query)) {
-////                System.out.println(carInfo);
-//                results2.add(carInfo);
-//            } else if (carInfo.getDateEntered().equals(query)) {
-////                System.out.println(carInfo);
-//                results2.add(carInfo);
-//            }
-//        }
-//        return results2;
-//    }
+
+        List<History> tr = new ArrayList<>();
+        MongoCollection<History> historyMongoCollection = DbConnection.database.getCollection("historys", History.class);
+        MongoCollection<Car> carMongoCollection = DbConnection.database.getCollection("cars", Car.class);
+
+
+        historyMongoCollection.createIndex(Indexes.text("dateEntered"));
+        carMongoCollection.createIndex(Indexes.text("matricule"));
+        String result;
+        Bson project = project(fields(Projections.include("carId"), Projections.include("dateEntered"),
+                Projections.include("dateRelease"), Projections.computed("matricule",
+                        new Document("$arrayElemAt", Arrays.asList("$matricule.matricule", 0)))));
+        try {
+            MongoCursor<History> cursorHistory = null;
+            MongoCursor<Car> cursorCar = null;
+            cursorHistory = historyMongoCollection.find(new Document("$text", new Document("$search", query).append("$caseSensitive", false).append("$diacriticSensitive", false))).iterator();
+            cursorCar = carMongoCollection.find(new Document("$text", new Document("$search", query).append("$caseSensitive", false).append("$diacriticSensitive", false))).iterator();
+
+            if (cursorHistory.hasNext()) {
+//                System.out.println(query);
+                tr = historyMongoCollection
+                        .aggregate(Arrays.asList(match(Filters.eq("dateEntered",query)),Aggregates.lookup("cars", "carId", "_id", "matricule"), project))
+                        .into(new ArrayList<>());
+            }
+            if (cursorCar.hasNext()) {
+                    System.out.println(cursorCar.next().getId());
+                    tr = historyMongoCollection
+                            .aggregate(Arrays.asList(match(Filters.eq("carId", cursorCar.next().getId())), Aggregates.lookup("cars", "carId", "_id", "matricule"), project))
+                            .into(new ArrayList<>());
+            } else System.out.println("not found");
+            cursorHistory.close();
+            cursorCar.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tr;
+    }
 
     /**
      * Pagination method update result collection with the page passed in the parameter
@@ -208,25 +194,8 @@ public class CarController implements Initializable {
 
     public static void main(String[] args) throws IOException, ParseException {
         DbConnection.connect();
-        getCarsWithHistorique();
-//        createCar(new ObjectId(), "10/S/123498");
-//        System.out.println(search("02/05/2021"));
-//        System.out.println(search("10/H/47424"));
-//        search("02/05/2021");
-//        System.out.println(pagination(3, 5));
-
-//        releaseCarFromDataBase("40/X/179552");
-
-//        createCar(new ObjectId(),"40/X/179552");
-//        createCar(new ObjectId(),"90/S/123498");
-//        createCar(new ObjectId(),"20/R/474245");
-
-
-//        System.out.println("-------------------------------------------");
-//        System.out.println("-------------------------------------------");
-//        System.out.println("-------------------------------------------");
-//        System.out.println("-------------------------------------------");
-//        search("40/X/179552");
+        System.out.println(search("40/X/179552"));
+//        System.out.println(search("04/4/2021 06:02:03"));
 
 
     }
