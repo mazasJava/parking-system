@@ -10,6 +10,14 @@ public class Statistic {
     public Statistic() {
     }
 
+    public Statistic(VisitsNumberInTwoLastMonths visitsNumberInTwoLastMonths) {
+        this.visitsNumberInTwoLastMonths = visitsNumberInTwoLastMonths;
+    }
+
+    public Statistic(VisitsNumberPerYear visitsNumberPerYear) {
+        this.visitsNumberPerYear = visitsNumberPerYear;
+    }
+
     public Statistic(VisitsNumberInTwoLastMonths visitsNumberInTwoLastMonths, VisitsNumberPerYear visitsNumberPerYear) {
         this.visitsNumberInTwoLastMonths = visitsNumberInTwoLastMonths;
         this.visitsNumberPerYear = visitsNumberPerYear;

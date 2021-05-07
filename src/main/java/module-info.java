@@ -10,5 +10,6 @@ module org.example {
     exports org.controllers;
     exports org.controllers.users;
     exports org.models;
+    exports org.models.Statistic;
 
 }
