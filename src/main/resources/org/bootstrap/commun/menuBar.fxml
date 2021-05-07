@@ -38,7 +38,7 @@
                 <Font name="System Bold" size="12.0" />
             </font>
         </Button>
-        <Button fx:id="btnswitchToErrLog" mnemonicParsing="false" onMouseClicked="#handleClick" prefHeight="62.0" prefWidth="86.0" styleClass="btn-menuchoises" stylesheets="@../../../style/style.css" text="Error log">
+        <Button fx:id="btnswitchToClients" mnemonicParsing="false" onMouseClicked="#handleClick" prefHeight="62.0" prefWidth="86.0" styleClass="btn-menuchoises" stylesheets="@../../../style/style.css" text="Clients">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>

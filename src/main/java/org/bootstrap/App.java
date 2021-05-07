@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.controllers.DbConnection;
+import org.models.Parking;
 
 import java.io.IOException;
 
@@ -36,8 +37,8 @@ public class App extends Application {
     }
 
     public static void main(String[] args) throws IOException {
-//        DbConnection.connect();
-//        Parking park = new Parking("this is the parking name",10);
+        DbConnection.connect();
+        Parking park = new Parking("this is the parking name",10);
 //        String hostname = "localhost";
 //        int port = Integer.parseInt(String.valueOf(8081));
 //        Client c = new Client(hostname, port);

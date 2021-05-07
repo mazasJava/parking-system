@@ -24,7 +24,7 @@ public class MenuBarController {
     private Button btnswitchToParkingStatistics;
 
     @FXML
-    private Button btnswitchToErrLog;
+    private Button btnswitchToClients;
 
     @FXML
     private Button btnswitchToSettings;
@@ -46,8 +46,8 @@ public class MenuBarController {
         else if(event.getSource() == btnswitchToParkingStatistics){
             App.setRoot("statistics");
         }
-        else if(event.getSource() == btnswitchToErrLog){
-            App.setRoot("logProgError");
+        else if(event.getSource() == btnswitchToClients){
+            App.setRoot("client");
         }
         else if(event.getSource() == btnswitchToSettings){
             App.setRoot("settings");

@@ -63,31 +63,31 @@ public class StatisticsController implements Initializable {
                     public void handle(ActionEvent e)
                     {
 
-                        switch (parkingList.getValue().toString()){
-                            case "park A":
-                                iniAreaChart(getVisitsNumberInLastTwoMonths(getLastTwoMonths()[0]), getVisitsNumberInLastTwoMonths(getLastTwoMonths()[1]));
+//                        switch (parkingList.getValue().toString()){
+//                            case "park A":
+//                                iniAreaChart(getVisitsNumberInLastTwoMonths(getLastTwoMonths()[0]), getVisitsNumberInLastTwoMonths(getLastTwoMonths()[1]));
                                 iniPieChart(Parking.getState()[1], Parking.getState()[2]);
-                                iniLineChart(getVisitsNumberPerYear());
-                                break;
-                            case "park B" :
-                                iniAreaChart(getVisitsNumberInLastTwoMonths(getLastTwoMonths()[0]), getVisitsNumberInLastTwoMonths(getLastTwoMonths()[1]));
-                                iniPieChart(Parking.getState()[1], Parking.getState()[2]);
-                                iniLineChart(getVisitsNumberPerYear());
-                                System.out.println("park B");
-                                break;
-                            case "park C" :
-                                iniAreaChart(getVisitsNumberInLastTwoMonths(getLastTwoMonths()[0]), getVisitsNumberInLastTwoMonths(getLastTwoMonths()[1]));
-                                iniPieChart(Parking.getState()[1], Parking.getState()[2]);
-                                iniLineChart(getVisitsNumberPerYear());
-                                System.out.println("park C");
-                                break;
-                            case "park D":
-                                iniAreaChart(getVisitsNumberInLastTwoMonths(getLastTwoMonths()[0]), getVisitsNumberInLastTwoMonths(getLastTwoMonths()[1]));
-                                iniPieChart(Parking.getState()[1], Parking.getState()[2]);
-                                iniLineChart(getVisitsNumberPerYear());
-                                System.out.println("park D");
-                                break;
-                        }
+//                                iniLineChart(getVisitsNumberPerYear());
+//                                break;
+//                            case "park B" :
+//                                iniAreaChart(getVisitsNumberInLastTwoMonths(getLastTwoMonths()[0]), getVisitsNumberInLastTwoMonths(getLastTwoMonths()[1]));
+//                                iniPieChart(Parking.getState()[1], Parking.getState()[2]);
+//                                iniLineChart(getVisitsNumberPerYear());
+//                                System.out.println("park B");
+//                                break;
+//                            case "park C" :
+//                                iniAreaChart(getVisitsNumberInLastTwoMonths(getLastTwoMonths()[0]), getVisitsNumberInLastTwoMonths(getLastTwoMonths()[1]));
+//                                iniPieChart(Parking.getState()[1], Parking.getState()[2]);
+//                                iniLineChart(getVisitsNumberPerYear());
+//                                System.out.println("park C");
+//                                break;
+//                            case "park D":
+//                                iniAreaChart(getVisitsNumberInLastTwoMonths(getLastTwoMonths()[0]), getVisitsNumberInLastTwoMonths(getLastTwoMonths()[1]));
+//                                iniPieChart(Parking.getState()[1], Parking.getState()[2]);
+//                                iniLineChart(getVisitsNumberPerYear());
+//                                System.out.println("park D");
+//                                break;
+//                        }
                         System.out.println((parkingList.getValue() + " selected"));
                     }
                 };
