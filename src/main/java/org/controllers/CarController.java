@@ -40,8 +40,11 @@ public class CarController implements Initializable {
     ObservableList<History> data;
     public List attend = new ArrayList();
 
+    /*
+    hskdhksksjdk
+     */
     public void show() {
-        attend.clear();
+//        attend.clear();
         data = FXCollections.observableArrayList(getCarsWithHistorique());
         tableView.setItems(data);
     }
@@ -100,6 +103,7 @@ public class CarController implements Initializable {
                 .aggregate(Arrays.asList(Aggregates.lookup("cars", "carId", "_id", "matricule"), project))
                 .into(new ArrayList<>());
     }
+
 
     /**
      * Find and update car release date with current date

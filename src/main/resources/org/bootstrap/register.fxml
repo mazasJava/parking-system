@@ -28,7 +28,7 @@
             </ImageView>
 
             <TextField fx:id="fullNameTextField" layoutX="105.0" layoutY="160.0" prefHeight="27.0" prefWidth="315.0" promptText="Full name" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" styleClass="prompt-txt" stylesheets="@../../style/style.css" />
-            <TextField fx:id="emailTextField" layoutX="105.0" layoutY="214.0" prefHeight="25.0" prefWidth="313.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" styleClass="prompt-txt" stylesheets="@../../style/style.css" />
+            <TextField fx:id="emailTextField"  layoutX="105.0" layoutY="214.0" prefHeight="25.0" prefWidth="313.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" styleClass="prompt-txt" stylesheets="@../../style/style.css" />
             <PasswordField fx:id="passwordTextField" layoutX="105.0" layoutY="267.0" prefHeight="25.0" prefWidth="318.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" styleClass="prompt-txt" stylesheets="@../../style/style.css" />
             <PasswordField fx:id="confirmPasswordTextField" layoutX="105.0" layoutY="320.0" prefHeight="25.0" prefWidth="318.0" promptText="Confirm password" style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-width: 0px 0px 2px 0px;" styleClass="prompt-txt" stylesheets="@../../style/style.css" />
 

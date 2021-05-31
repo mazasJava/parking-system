@@ -59,9 +59,9 @@ public class Parking {
 
     }
 
-    public static boolean carOut(String matricule) {
-        return CarController.releaseCarFromDataBase(matricule);
-    }
+//    public static boolean carOut(String matricule) {
+//        return CarController.releaseCarFromDataBase(matricule);
+//    }
 
     public static void carIn(String matricule) throws IOException, ParseException {
         addCar(CarController.createCar(new ObjectId(), matricule));
@@ -88,6 +88,12 @@ public class Parking {
         }
         return listCars.add(c);
     }
+    public static boolean addAllCar(List<Car> clistCars) throws IOException {
+        if (listCars.size() == capacity) {
+            return false;
+        }
+        return listCars.addAll(clistCars);
+    }
 
     public static boolean removeCar(Car c) {
         return listCars.remove(c);
@@ -105,7 +111,9 @@ public class Parking {
         return state;
     }
 
-    public static void main(String[] args) throws IOException {
-
+    public static List<Car> getClientList() {
+        MongoCollection<Car> clientMongoCollection = DbConnection.database.getCollection("cars", Car.class);
+        List<Car> clients = clientMongoCollection.find().into(new ArrayList<>());
+        return clients;
     }
 }

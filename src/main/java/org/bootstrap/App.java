@@ -5,7 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.controllers.CarController;
 import org.controllers.DbConnection;
+import org.models.Car;
 import org.models.Parking;
 
 import java.io.IOException;
@@ -20,9 +22,8 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("statistics"), 1150, 600);
+        scene = new Scene(loadFXML("client"), 1150, 600);
         stage.setScene(scene);
-//        stage.setResizable(false);
         stage.show();
     }
 
@@ -38,7 +39,15 @@ public class App extends Application {
 
     public static void main(String[] args) throws IOException {
         DbConnection.connect();
-        Parking park = new Parking("this is the parking name",10);
+        Parking park = new Parking("this is the parking name",100);
+        Parking.addAllCar(Parking.getClientList());
+//        park.addCar(new Car());
+//        park.addCar(new Car());
+//        park.addCar(new Car());
+//        park.addCar(new Car());
+//        park.addCar(new Car());
+//        park.addCar(new Car());
+//        park.addCar(new Car());
 //        String hostname = "localhost";
 //        int port = Integer.parseInt(String.valueOf(8081));
 //        Client c = new Client(hostname, port);

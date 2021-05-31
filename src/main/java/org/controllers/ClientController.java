@@ -22,11 +22,9 @@ public class ClientController implements Initializable {
     TableView tableView;
     @FXML
     TableColumn<Client,String> colName,colEmail,colCarPlate;
-    ObservableList<Client> data;
-    private List attend = new ArrayList();
+
 
     private void show(List<Client> list) {
-        attend.clear();
         tableView.setItems(FXCollections.observableArrayList(list));
     }
 
@@ -36,10 +34,6 @@ public class ClientController implements Initializable {
         return clients;
     }
 
-    public static void main(String[] args) {
-        DbConnection.connect();
-        System.out.println(getClientList());
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

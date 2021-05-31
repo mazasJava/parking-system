@@ -27,6 +27,7 @@ public class DashboardController implements Initializable {
 
     @FXML
     LineChart<String, Number> lineChart = new LineChart<String, Number>(x, y);
+    int[] year =  StatisticsController.getYearState();
 
     public void setParksTotal(String totalA, String totalB, String totalC, String totalD) {
         txtTotalA.setText(totalA);
@@ -38,18 +39,18 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        setParksTotal(""+(new Random()).nextInt(1000), ""+(new Random()).nextInt(1000), ""+(new Random()).nextInt(1000), ""+(new Random()).nextInt(1000));
-        iniLineChart(getTotalPerMonth1("park A",generateData()), getTotalPerMonth1("park B",generateData()), getTotalPerMonth1("park C",generateData()), getTotalPerMonth1("park D",generateData()));
+        setParksTotal(""+year[0], ""+year[2], ""+year[3], ""+year[4]);
+        iniLineChart(getTotalPerMonth1("park",year));
     }
 
-    public int[] generateData() {
-        Random r = new Random();
-        int[] array = new int[12];
-        for(int i=0;i<12;i++){
-            array[i] = r.nextInt(100);
-        }
-        return array;
-    }
+//    public int[] generateData() {
+//        Random r = new Random();
+//        int[] array = new int[12];
+//        for(int i=0;i<12;i++){
+//            array[i] = r.nextInt(100);
+//        }
+//        return array;
+//    }
 
 
     public XYChart.Series getTotalPerMonth1(String name, int[] values) {
@@ -62,8 +63,8 @@ public class DashboardController implements Initializable {
         return series1;
     }
 
-    private void iniLineChart(XYChart.Series seriesA, XYChart.Series seriesB, XYChart.Series seriesC, XYChart.Series seriesD) {
-        lineChart.getData().addAll(seriesA, seriesB, seriesC, seriesD);
+    private void iniLineChart(XYChart.Series seriesA) {
+        lineChart.getData().add(seriesA);
     }
 
 

@@ -50,63 +50,29 @@ public class StatisticsController implements Initializable {
 
     @FXML
     private LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
-
-
+    int[] year =  getYearState();
     @FXML
     private PieChart pieChart;
 
-
+    int[][] lastTowMounths = getLastTowMonthsState();
+    int[] lastMounth = lastTowMounths[0];
+    int[] beforeLastMounth = lastTowMounths[1];
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        parkingList.setValue(parkingList.getItems().get(0));
-        EventHandler<ActionEvent> event =
-                new EventHandler<ActionEvent>() {
-                    public void handle(ActionEvent e) {
-                        Random r = new Random();
-                        lineChart.getData().clear();
-                        pieChart.getData().clear();
-                        areaChart.getData().clear();
-                        switch (parkingList.getValue().toString()) {
-                            case "park A":
-                                iniAreaChart(getVisitsNumberInLastTwoMonths(r.nextInt(12)), getVisitsNumberInLastTwoMonths(r.nextInt(23)));
-                                iniPieChart(r.nextInt(100), r.nextInt(100));
-                                iniLineChart(getVisitsNumberPerYear());
-                                break;
-                            case "park B":
-                                iniAreaChart(getVisitsNumberInLastTwoMonths(r.nextInt(12)), getVisitsNumberInLastTwoMonths(r.nextInt(23)));
-                                iniPieChart(r.nextInt(100), r.nextInt(100));
-                                iniLineChart(getVisitsNumberPerYear());
-//                                System.out.println("park B");
-                                break;
-                            case "park C":
-                                iniAreaChart(getVisitsNumberInLastTwoMonths(r.nextInt(12)), getVisitsNumberInLastTwoMonths(r.nextInt(23)));
-                                iniPieChart(r.nextInt(100), r.nextInt(100));
-                                iniLineChart(getVisitsNumberPerYear());
-//                                System.out.println("park C");
-                                break;
-                            case "park D":
-                                iniAreaChart(getVisitsNumberInLastTwoMonths(r.nextInt(12)), getVisitsNumberInLastTwoMonths(r.nextInt(23)));
-                                iniPieChart(r.nextInt(100), r.nextInt(100));
-                                iniLineChart(getVisitsNumberPerYear());
-//                                System.out.println("park D");
-                                break;
-                        }
-                        System.out.println((parkingList.getValue() + " selected"));
-                    }
-                };
-        // Set on action
-        parkingList.setOnAction(event);
+        Random r = new Random();
+        iniAreaChart(getVisitsNumberInLastTwoMonths(0), getVisitsNumberInLastTwoMonths(1));
+        iniPieChart(Parking.getState()[1], Parking.getState()[2]);
+        iniLineChart(getVisitsNumberPerYear());
+//
 
     }
 
     public XYChart.Series getVisitsNumberInLastTwoMonths(int month) {
         XYChart.Series seriesMarch = new XYChart.Series();
         seriesMarch.setName(new DateFormatSymbols().getMonths()[getLastTwoMonths()[0] - 1] + "");
-        Random r = new Random();
-        for (int i = 1; i < 9; i++) {
-            seriesMarch.getData().add(new XYChart.Data(i * 3, r.nextInt(100)));
+        for (int i = 1; i < 29; i++) {
+            seriesMarch.getData().add(new XYChart.Data(i, lastTowMounths[month][i]));
         }
-//        }
         return seriesMarch;
     }
 
@@ -119,7 +85,7 @@ public class StatisticsController implements Initializable {
         series.setName(String.valueOf((new Date()).getYear()));
         Random r = new Random();
         for (int i = 1; i < 13; i++) {
-            series.getData().add(new XYChart.Data(i, r.nextInt(1000)));
+            series.getData().add(new XYChart.Data(i, year[i-1]));
         }
         return series;
     }
@@ -170,21 +136,16 @@ public class StatisticsController implements Initializable {
     }
 
 
-//    public static void getData() {
-//
-//    }
-
-
-    public static int[] getYearState(){
+    public static int[] getYearState() {
         MongoCollection<Statistic> statisticMongoCollection = DbConnection.database.getCollection("statistics", Statistic.class);
 
         Statistic statisticList = statisticMongoCollection.find().first();
         List<VisitsNumberPerMonth> monthsList = new ArrayList<>();
 
-        int [] data = new int[12];
+        int[] data = new int[12];
         for (int monthId = 0; monthId < 12; monthId++) {
             int some = 0;
-            for (int dayId = 0; dayId < 29; dayId++){
+            for (int dayId = 0; dayId < 29; dayId++) {
                 some += statisticList.getVisitsNumberPerYear().getMonths().get(monthId).getDay().get(dayId);
                 data[monthId] = some;
             }
@@ -194,33 +155,21 @@ public class StatisticsController implements Initializable {
     }
 
 
-    public static int[][] getLastTowMonthsState(){
+    public static int[][] getLastTowMonthsState() {
         MongoCollection<Statistic> statisticMongoCollection = DbConnection.database.getCollection("statistics", Statistic.class);
         Statistic statisticList = statisticMongoCollection.find().first();
         List<VisitsNumberPerMonth> monthsList = new ArrayList<>();
 
 
-        int [] MonthData = new int[12];
-        int [][] dayData = new int[12][30];
+        int[] MonthData = new int[12];
+        int[][] dayData = new int[12][30];
 
         for (int monthId = 0; monthId < 12; monthId++) {
-            for (int dayId = 0; dayId < 29; dayId++){
+            for (int dayId = 0; dayId < 29; dayId++) {
                 dayData[monthId][dayId] = statisticList.getVisitsNumberPerYear().getMonths().get(monthId).getDay().get(dayId);
             }
         }
-
         return dayData;
-
-    }
-
-
-    public static void main(String[] args) {
-
-        DbConnection.connect();
-
-        System.out.println(getLastTowMonthsState()[3][3]);
-
-
     }
 
 

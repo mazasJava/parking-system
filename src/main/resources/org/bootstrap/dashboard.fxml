@@ -4,10 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
-
-<?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.*?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1150.0" styleClass="parent" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controllers.DashboardController">
   <top>
      <fx:include source="./commun/menuBar.fxml" />
@@ -44,7 +41,7 @@
                       <padding>
                           <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                       </padding>
-                      <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 1.6em; -fx-fill: white;" text="TOTAL PARK A" />
+                      <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 1.6em; -fx-fill: white;" text="MAY" />
                   </HBox>
                   <StackPane>
                       <Circle fill="DODGERBLUE" radius="70.0" stroke="#9a5050" strokeType="INSIDE" strokeWidth="10.0" style="-fx-fill: transparent;">
@@ -60,7 +57,7 @@
                       <padding>
                           <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                       </padding>
-                      <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 1.6em; -fx-fill: white;" text="TOTAL PARK B" />
+                      <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 1.6em; -fx-fill: white;" text="APRIL" />
                   </HBox>
                   <StackPane>
                       <Circle fill="DODGERBLUE" radius="70.0" stroke="#ffe66d" strokeType="INSIDE" strokeWidth="10.0" style="-fx-fill: transparent;">
@@ -79,7 +76,7 @@
                       <padding>
                           <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                       </padding>
-                      <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 1.6em; -fx-fill: white;" text="TOTAL PARK C" />
+                      <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 1.6em; -fx-fill: white;" text="MARCH" />
                   </HBox>
                   <StackPane>
                       <Circle fill="DODGERBLUE" radius="70.0" stroke="#007f5f" strokeType="INSIDE" strokeWidth="10.0" style="-fx-fill: transparent;">
@@ -98,7 +95,7 @@
                       <padding>
                           <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                       </padding>
-                      <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 1.6em; -fx-fill: white;" text="TOTAL PARK D" />
+                      <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 1.6em; -fx-fill: white;" text="FEBRUARY" />
                   </HBox>
                   <StackPane>
                       <Circle fill="DODGERBLUE" radius="70.0" stroke="#00a896" strokeType="INSIDE" strokeWidth="10.0" style="-fx-fill: transparent;">
