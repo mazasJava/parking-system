@@ -42,7 +42,7 @@
 
          </Pane>
          <Pane layoutX="681.0" layoutY="74.0" prefHeight="318.0" prefWidth="462.0" styleClass="pane-card-table">
-            <GridPane layoutX="16.0" layoutY="23.0" prefHeight="285.0" prefWidth="431.0">
+            <GridPane fx:id="gridPaneContainer" layoutX="16.0" layoutY="23.0" prefHeight="285.0" prefWidth="431.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="440.0" minWidth="10.0" prefWidth="440.0" />
                </columnConstraints>
@@ -199,35 +199,7 @@
                      </children>
                   </Pane>
                </HBox>
-               <HBox prefHeight="70.0" prefWidth="431.0" styleClass="vbox-carde" GridPane.rowIndex="5">
-                  <Pane prefHeight="38.0" prefWidth="426.0">
-                     <children>
-                        <Label layoutX="20.0" layoutY="2.0" prefHeight="10.0" prefWidth="61.0" style="-fx-background-color: transparent; -fx-text-fill: #646D82;" text="08:30 AM">
-                           <font>
-                              <Font size="11.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="12.0" layoutY="21.0" prefHeight="10.0" prefWidth="76.0" style="-fx-text-fill: #646D82;" text="02 AUG 2019">
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <font>
-                              <Font size="11.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="166.0" layoutY="9.0" style="-fx-background-color: white; -fx-text-fill: #2CD889;" text="Theodore Handler">
-                           <font>
-                              <Font size="11.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="323.0" layoutY="8.0" prefHeight="17.0" prefWidth="86.0" style="-fx-text-fill: #646D82;" text="DH425Yhh502">
-                           <font>
-                              <Font size="11.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Pane>
-               </HBox>
+               <HBox prefHeight="70.0" prefWidth="431.0" styleClass="vbox-carde" GridPane.rowIndex="5" />
             </GridPane>
          </Pane>
          <Pagination fx:id="pagination" layoutX="468.0" layoutY="392.0" prefHeight="61.0" prefWidth="221.0" style="-fx-background-color: transparent;" />

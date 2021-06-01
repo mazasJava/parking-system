@@ -14,6 +14,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
@@ -48,6 +50,8 @@ public class CarController implements Initializable {
     private ImageView searchImage;
     @FXML
     private TextField searchQuery;
+    @FXML
+    private GridPane gridPaneContainer;
 
     /*
     hskdhksksjdk
@@ -75,6 +79,7 @@ public class CarController implements Initializable {
             show(search(searchQuery.getText()));
             System.out.println(search(searchQuery.getText()));
         });
+//        gridPaneContainer.addColumn(1,new Pane().getChildren());.add(new Label("sdsd"))
 
 //        searchImage.setOnKeyPressed(keyEvent -> {
 ////            show(search(searchQuery.getText()));
