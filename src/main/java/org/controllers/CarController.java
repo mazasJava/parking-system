@@ -11,10 +11,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Pagination;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
@@ -43,7 +42,12 @@ public class CarController implements Initializable {
     @FXML
     TableColumn<History, String> colNumber, colCarPlate, colDateEntree, colDateSortie;
     ObservableList<History> data;
-    public List attend = new ArrayList();
+//    public List attend = new ArrayList();
+
+    @FXML
+    private ImageView searchImage;
+    @FXML
+    private TextField searchQuery;
 
     /*
     hskdhksksjdk
@@ -64,9 +68,20 @@ public class CarController implements Initializable {
         pagination.currentPageIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                show((pagination((int) newValue+1, 6)));
+                show((pagination((int) newValue + 1, 6)));
             }
         });
+        searchImage.setOnMouseClicked(mouseEvent -> {
+            show(search(searchQuery.getText()));
+            System.out.println(search(searchQuery.getText()));
+        });
+
+//        searchImage.setOnKeyPressed(keyEvent -> {
+////            show(search(searchQuery.getText()));
+//        });
+//        searchQuery.textProperty().addListener((observableValue, oldValue, newValue) -> {
+//
+//        });
     }
 
     /**
@@ -146,14 +161,14 @@ public class CarController implements Initializable {
         try {
             MongoCursor<History> cursorHistory = null;
             MongoCursor<Car> cursorCar = null;
-            cursorHistory = historyMongoCollection.find(new Document("$text", new Document("$search", query).append("$caseSensitive", false).append("$diacriticSensitive", false))).iterator();
-            cursorCar = carMongoCollection.find(new Document("$text", new Document("$search", query).append("$caseSensitive", false).append("$diacriticSensitive", false))).iterator();
+            cursorHistory = historyMongoCollection.find(new Document("$text", new Document("$search", query).append("$caseSensitive", false).append("$diacriticSensitive", true))).limit(1).iterator();
+            cursorCar = carMongoCollection.find(new Document("$text", new Document("$search", query).append("$caseSensitive", false).append("$diacriticSensitive", true))).limit(1).iterator();
 
             if (cursorHistory.hasNext()) {
                 List<History> yy = new ArrayList<>();
                 cursorHistory.forEachRemaining(history -> {
                     yy.addAll(historyMongoCollection
-                            .aggregate(Arrays.asList(match(Filters.eq("dateEntered", history.getDateEntered())),Aggregates.lookup("cars", "carId", "_id", "matricule"), project))
+                            .aggregate(Arrays.asList(match(Filters.eq("dateEntered", history.getDateEntered())), Aggregates.lookup("cars", "carId", "_id", "matricule"), project))
                             .into(new ArrayList<>()));
                 });
                 return yy;
@@ -167,10 +182,8 @@ public class CarController implements Initializable {
                             .aggregate(Arrays.asList(match(eq("carId", new ObjectId(car.getId().toHexString()))), lookup("cars", "carId", "_id", "matricule"), project))
                             .into(new ArrayList<>()));
                 });
-                return  xx;
-            }
-
-            else System.out.println("not found");
+                return xx;
+            } else System.out.println("not found");
             cursorHistory.close();
             cursorCar.close();
         } catch (Exception e) {
@@ -178,7 +191,6 @@ public class CarController implements Initializable {
         }
         return tr;
     }
-
 
 
     /**
@@ -227,7 +239,7 @@ public class CarController implements Initializable {
 //        System.out.println("-------------------------------------------");
 //        System.out.println("-------------------------------------------");
 //        System.out.println("-------------------------------------------");
-//        search("40/X/179552");
+        System.out.println(search("40/X/179552"));
 
 
     }
