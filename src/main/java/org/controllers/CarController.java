@@ -20,6 +20,7 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import org.models.Car;
+import org.models.Client;
 import org.models.History;
 
 import java.io.IOException;
@@ -42,8 +43,13 @@ public class CarController implements Initializable {
     @FXML
     TableView<History> tableView;
     @FXML
+    TableView<Client> tableViewClient;
+    @FXML
     TableColumn<History, String> colNumber, colCarPlate, colDateEntree, colDateSortie;
+    @FXML
+    private TableColumn<Client,String> colName,colCarPlateClient;
     ObservableList<History> data;
+    ObservableList<Client> dataClient;
 //    public List attend = new ArrayList();
 
     @FXML
@@ -62,12 +68,25 @@ public class CarController implements Initializable {
         data = FXCollections.observableArrayList(list);
         tableView.setItems(data);
     }
-
+    public void showClients(List<Client> list) {
+        tableViewClient.refresh();
+//        data.clear();
+        dataClient = FXCollections.observableArrayList(list);
+        tableViewClient.setItems(dataClient);
+    }
+    public  List<Client> getClients() {
+        MongoCollection<Client> clientMongoCollection = DbConnection.database.getCollection("clients", Client.class);
+        List<Client> clients = clientMongoCollection.find().limit(5).into(new ArrayList<>());
+        return clients;
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         colCarPlate.setCellValueFactory(new PropertyValueFactory<History, String>("matricule"));
         colDateEntree.setCellValueFactory(new PropertyValueFactory<History, String>("dateEntered"));
         colDateSortie.setCellValueFactory(new PropertyValueFactory<History, String>("dateRelease"));
+        colName.setCellValueFactory(new PropertyValueFactory<Client,String>("name"));
+        colCarPlateClient.setCellValueFactory(new PropertyValueFactory<Client,String>("carPlate"));
+        showClients(getClients());
         show((pagination(1, 6)));
         pagination.currentPageIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -79,14 +98,6 @@ public class CarController implements Initializable {
             show(search(searchQuery.getText()));
             System.out.println(search(searchQuery.getText()));
         });
-//        gridPaneContainer.addColumn(1,new Pane().getChildren());.add(new Label("sdsd"))
-
-//        searchImage.setOnKeyPressed(keyEvent -> {
-////            show(search(searchQuery.getText()));
-//        });
-//        searchQuery.textProperty().addListener((observableValue, oldValue, newValue) -> {
-//
-//        });
     }
 
     /**

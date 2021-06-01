@@ -46,7 +46,6 @@ public class ClientController implements Initializable {
     public  List<Client> pagination(int pageNumber, int pageSize) {
         MongoCollection<Client> clientMongoCollection = DbConnection.database.getCollection("clients", Client.class);
         List<Client> clients = clientMongoCollection.find().skip(pageSize * (pageNumber - 1)).limit(pageSize).into(new ArrayList<>());
-
         return clients;
     }
     @Override
