@@ -150,27 +150,17 @@ public class CarController implements Initializable {
             cursorCar = carMongoCollection.find(new Document("$text", new Document("$search", query).append("$caseSensitive", false).append("$diacriticSensitive", false))).iterator();
 
             if (cursorHistory.hasNext()) {
-                  List<History> yy = new ArrayList<>();
-                  cursorHistory.forEachRemaining(history -> {
-                      yy.addAll(historyMongoCollection
-                              .aggregate(Arrays.asList(match(Filters.eq("dateEntered", history.getDateEntered())),Aggregates.lookup("cars", "carId", "_id", "matricule"), project))
-                              .into(new ArrayList<>()));
-                  });
-                  return yy;
-
+                //                System.out.println(query);
+                tr = historyMongoCollection
+                        .aggregate(Arrays.asList(match(Filters.eq("dateEntered",query)),Aggregates.lookup("cars", "carId", "_id", "matricule"), project))
+                        .into(new ArrayList<>());
             }
-
             if (cursorCar.hasNext()) {
-                List<History> xx = new ArrayList<>();
-                cursorCar.forEachRemaining(car -> {
-                    xx.addAll(historyMongoCollection
-                            .aggregate(Arrays.asList(match(eq("carId", new ObjectId(car.getId().toHexString()))), lookup("cars", "carId", "_id", "matricule"), project))
-                            .into(new ArrayList<>()));
-                });
-                return  xx;
-            }
-
-            else System.out.println("not found");
+                System.out.println(cursorCar.next().getId());
+                tr = historyMongoCollection
+                        .aggregate(Arrays.asList(match(Filters.eq("carId", cursorCar.next().getId())), Aggregates.lookup("cars", "carId", "_id", "matricule"), project))
+                        .into(new ArrayList<>());
+            } else System.out.println("not found");
             cursorHistory.close();
             cursorCar.close();
         } catch (Exception e) {
@@ -209,12 +199,12 @@ public class CarController implements Initializable {
 
     public static void main(String[] args) throws IOException, ParseException {
         DbConnection.connect();
-//        getCarsWithHistorique();
+        getCarsWithHistorique();
 //        createCar(new ObjectId(), "10/S/123498");
 //        System.out.println(search("02/05/2021"));
 //        System.out.println(search("10/H/47424"));
 //        search("02/05/2021");
-//        System.out.println(pagination(3, 5));
+        System.out.println(pagination(3, 5));
 
 //        releaseCarFromDataBase("40/X/179552");
 
@@ -227,8 +217,7 @@ public class CarController implements Initializable {
 //        System.out.println("-------------------------------------------");
 //        System.out.println("-------------------------------------------");
 //        System.out.println("-------------------------------------------");
-//        System.out.println(search("04-4"));
-        System.out.println(search("90/S/123498"));
+//        search("40/X/179552");
 
 
     }
