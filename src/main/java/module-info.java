@@ -5,10 +5,10 @@ module org.example {
 
     opens org.bootstrap to javafx.fxml;
     opens org.controllers to javafx.fxml;
-//    opens org.controllers.users to javafx.fxml;
+    opens org.controllers.users to javafx.fxml;
     exports org.bootstrap;
     exports org.controllers;
-//    exports org.controllers.users;
+    exports org.controllers.users;
     exports org.models;
     exports org.models.Statistic;
 

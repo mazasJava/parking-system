@@ -173,4 +173,9 @@ public class StatisticsController implements Initializable {
     }
 
 
+    public static void main(String[] args) {
+        DbConnection.connect();
+        System.out.println(visitsNumberPerYear(6));
+    }
+
 }

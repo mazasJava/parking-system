@@ -1,18 +1,27 @@
 package org.models;
 
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Projections;
 import com.mongodb.client.model.Updates;
+import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import org.controllers.CarController;
 import org.controllers.DbConnection;
-import org.controllers.HistoryController;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
+import static com.mongodb.client.model.Aggregates.match;
+import static com.mongodb.client.model.Aggregates.project;
+import static com.mongodb.client.model.Projections.fields;
 
 
 public class Parking {
@@ -111,9 +120,19 @@ public class Parking {
         return state;
     }
 
-    public static List<Car> getClientList() {
-        MongoCollection<Car> clientMongoCollection = DbConnection.database.getCollection("cars", Car.class);
-        List<Car> clients = clientMongoCollection.find().into(new ArrayList<>());
-        return clients;
+    public static List<Car> getListCars() {
+        MongoCollection<Car> carMongoCollection = DbConnection.database.getCollection("cars", Car.class);
+//        List<Car> clients = clientMongoCollection.find(Filters.eq("dateEntered",null)).into(new ArrayList<>());
+        Bson project = project(fields(Projections.include("_id"),
+                Projections.include("matricule"),
+                Projections.computed("dateRelease",
+                new Document("$arrayElemAt", Arrays.asList("$dateRelease.dateRelease", 0)))));
+        return carMongoCollection.aggregate(Arrays.asList(match(Filters.exists("dateRelease",false)),Aggregates.lookup("historys","_id","carId","dateRelease"),project)).into(new ArrayList<>());
+
+    }
+
+    public static void main(String[] args) {
+        DbConnection.connect();
+        System.out.println(getListCars());
     }
 }

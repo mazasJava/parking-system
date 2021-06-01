@@ -96,6 +96,7 @@ public class CarController implements Initializable {
         });
         searchImage.setOnMouseClicked(mouseEvent -> {
             show(search(searchQuery.getText()));
+            System.out.println("show");
             System.out.println(search(searchQuery.getText()));
         });
     }
@@ -114,14 +115,14 @@ public class CarController implements Initializable {
         FindIterable<Car> test = carMongoCollection.find(checkMatriculIfExists);
 
         if (test.cursor().hasNext()) {
-            System.out.println(test.cursor().next().getId());
+//            System.out.println(test.cursor().next().getId());
             HistoryController.setCarHistorique(test.cursor().next().getId());
-            System.out.println("exist");
+//            System.out.println("exist");
             return null;
         } else {
             try {
                 carMongoCollection.insertOne(newCar);
-                System.out.println("Successfully inserted Car documents. \n");
+//                System.out.println("Successfully inserted Car documents. \n");
                 HistoryController.setCarHistorique(newCar.getId());
                 return newCar;
             } catch (Exception e) {
@@ -160,10 +161,14 @@ public class CarController implements Initializable {
         if (carMat == null) throw new AssertionError();
         ObjectId id = new ObjectId(String.valueOf(carMat.getId()));
         historyMongoCollection.updateOne(Filters.eq("carId", id), Updates.set("dateRelease", formattedDate));
-        System.out.println("Document update successfully...");
     }
 
+
+    /*
+    full text search
+     */
     public static List<History> search(String query) {
+        System.out.println(query);
         List<History> tr = new ArrayList<>();
         MongoCollection<History> historyMongoCollection = DbConnection.database.getCollection("historys", History.class);
         MongoCollection<Car> carMongoCollection = DbConnection.database.getCollection("cars", Car.class);
@@ -174,11 +179,11 @@ public class CarController implements Initializable {
         Bson project = project(fields(Projections.include("carId"), Projections.include("dateEntered"),
                 Projections.include("dateRelease"), Projections.computed("matricule",
                         new Document("$arrayElemAt", Arrays.asList("$matricule.matricule", 0)))));
-        try {
+//        try {
             MongoCursor<History> cursorHistory = null;
             MongoCursor<Car> cursorCar = null;
-            cursorHistory = historyMongoCollection.find(new Document("$text", new Document("$search", query).append("$caseSensitive", false).append("$diacriticSensitive", true))).limit(1).iterator();
-            cursorCar = carMongoCollection.find(new Document("$text", new Document("$search", query).append("$caseSensitive", false).append("$diacriticSensitive", true))).limit(1).iterator();
+            cursorHistory = historyMongoCollection.find(new Document("$text", new Document("$search", query).append("$caseSensitive", false).append("$diacriticSensitive", true))).limit(4).iterator();
+            cursorCar = carMongoCollection.find(new Document("$text", new Document("$search", query).append("$caseSensitive", false).append("$diacriticSensitive", true))).limit(4).iterator();
 
             if (cursorHistory.hasNext()) {
                 List<History> yy = new ArrayList<>();
@@ -202,9 +207,9 @@ public class CarController implements Initializable {
             } else System.out.println("not found");
             cursorHistory.close();
             cursorCar.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         return tr;
     }
 
@@ -242,9 +247,9 @@ public class CarController implements Initializable {
 //        System.out.println(search("02/05/2021"));
 //        System.out.println(search("10/H/47424"));
 //        search("02/05/2021");
-        System.out.println(pagination(3, 5));
+//        System.out.println(pagination(3, 5));
 
-//        releaseCarFromDataBase("40/X/179552");
+        releaseCarFromDataBase("14/G/07734");
 
 //        createCar(new ObjectId(),"40/X/179552");
 //        createCar(new ObjectId(),"90/S/123498");
@@ -255,7 +260,8 @@ public class CarController implements Initializable {
 //        System.out.println("-------------------------------------------");
 //        System.out.println("-------------------------------------------");
 //        System.out.println("-------------------------------------------");
-        System.out.println(search("40/X/179552"));
+//        System.out.println(search("40/X/179552"));
+//        System.out.println(search("4000/X/179552"));
 
 
     }
