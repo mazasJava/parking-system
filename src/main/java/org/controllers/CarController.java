@@ -5,10 +5,13 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Pagination;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -32,7 +35,9 @@ public class CarController implements Initializable {
     public static List<History> results;
     public static List<History> results2;
     public static final ObjectId id = new ObjectId();
-    String Number, CarPlate, DateEntree, DateSortie;
+    @FXML
+    private Pagination pagination;
+
     @FXML
     TableView<History> tableView;
     @FXML
@@ -43,22 +48,25 @@ public class CarController implements Initializable {
     /*
     hskdhksksjdk
      */
-    public void show() {
-//        attend.clear();
-        data = FXCollections.observableArrayList(getCarsWithHistorique());
+    public void show(List<History> list) {
+        tableView.refresh();
+//        data.clear();
+        data = FXCollections.observableArrayList(list);
         tableView.setItems(data);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // colNumber.setCellValueFactory(new PropertyValueFactory<History,
-        // String>("counterId"));
         colCarPlate.setCellValueFactory(new PropertyValueFactory<History, String>("matricule"));
         colDateEntree.setCellValueFactory(new PropertyValueFactory<History, String>("dateEntered"));
         colDateSortie.setCellValueFactory(new PropertyValueFactory<History, String>("dateRelease"));
-        // data = FXCollections.observableArrayList(attend);
-        // tableView.setItems(data);
-        show();
+        show((pagination(1, 6)));
+        pagination.currentPageIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                show((pagination((int) newValue+1, 6)));
+            }
+        });
     }
 
     /**
@@ -99,9 +107,10 @@ public class CarController implements Initializable {
         Bson project = project(fields(Projections.include("carId"), Projections.include("dateEntered"),
                 Projections.include("dateRelease"), Projections.computed("matricule",
                         new Document("$arrayElemAt", Arrays.asList("$matricule.matricule", 0)))));
-        return results = historyMongoCollection
+        results = historyMongoCollection
                 .aggregate(Arrays.asList(Aggregates.lookup("cars", "carId", "_id", "matricule"), project))
                 .into(new ArrayList<>());
+        return results;
     }
 
 
@@ -217,7 +226,7 @@ public class CarController implements Initializable {
 //        System.out.println(search("02/05/2021"));
 //        System.out.println(search("10/H/47424"));
 //        search("02/05/2021");
-//        System.out.println(pagination(3, 5));
+        System.out.println(pagination(3, 5));
 
 //        releaseCarFromDataBase("40/X/179552");
 
