@@ -112,11 +112,12 @@ public class Parking {
         return listCars.add(c);
     }
 
-    public static boolean addAllCar(List<Car> listCars) throws IOException {
-        if (listCars.size() == capacity && listCars.size() > getState()[1]) {
+    public static boolean addAllCar(List<Car> listCar) throws IOException {
+        if (listCars.size() == capacity && listCar.size() >getState()[1] ) {
             return false;
         }
-        return listCars.addAll(listCars);
+
+        return listCars.addAll(listCar);
     }
     public static boolean removeCar(Car c) {
         return listCars.remove(c);
@@ -143,6 +144,9 @@ public class Parking {
                         new Document("$arrayElemAt", Arrays.asList("$dateRelease.dateRelease", 0)))));
         return carMongoCollection.aggregate(Arrays.asList(match(Filters.exists("dateRelease", false)), Aggregates.lookup("historys", "_id", "carId", "dateRelease"), project)).into(new ArrayList<>());
     }
+
+
+
 
 
 }

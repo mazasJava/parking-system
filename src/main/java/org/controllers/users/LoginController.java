@@ -55,10 +55,12 @@ public class LoginController implements Initializable {
         else{
             preloader.setVisible(true);
             if (userMongoCollection.find(Filters.eq("email",emailTextField.getText())).iterator().hasNext() && userMongoCollection.find(Filters.eq("password",passwordTextField.getText())).iterator().hasNext()) {
+                preloader.setVisible(false);
                 App.setRoot("car");
                 labelError.setVisible(false);
             }else{
                 labelError.setVisible(true);
+                preloader.setVisible(false);
             }
 
         }

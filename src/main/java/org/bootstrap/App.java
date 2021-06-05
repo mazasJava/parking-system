@@ -18,7 +18,6 @@ public class App extends Application {
     private static Scene scene;
 
 
-
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("login"), 1150, 600);
@@ -36,18 +35,24 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
+    /**
+     * MAIN BOOTSTRAP
+     *
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
         DbConnection.connect();
         Server server = new Server();
         server.start();
         launch(args);
-      MenuBarController.btnLogOut.setOnAction(v->{
-          try {
-              App.setRoot("login");
-          } catch (IOException e) {
-              e.printStackTrace();
-          }
-      });
+        MenuBarController.btnLogOut.setOnAction(v -> {
+            try {
+                App.setRoot("login");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
 }

@@ -1,5 +1,9 @@
 package org.clientServer;
 
+import com.mongodb.client.MongoCollection;
+import org.controllers.DbConnection;
+import org.models.Car;
+import org.models.Client;
 import org.models.Parking;
 
 import java.io.BufferedReader;
@@ -8,6 +12,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Server extends Thread {
 
@@ -32,6 +38,13 @@ public class Server extends Thread {
     @Override
     public void run() {
         Parking park = new Parking("this is the parking name",100);
+        MongoCollection<Car> clientMongoCollection = DbConnection.database.getCollection("cars", Car.class);
+        List<Car> cars = clientMongoCollection.find().into(new ArrayList<>());
+        try {
+            Parking.addAllCar(cars);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         try {
             ServerSocket server;
             server = new ServerSocket(8080);
