@@ -50,7 +50,7 @@
                    <MenuItem mnemonicParsing="false" onAction="#clickItemSettings" text="Settings">
 
                    </MenuItem>
-                   <MenuItem mnemonicParsing="false" onAction="#clickItemClose" text="Log out">
+                   <MenuItem fx:id="btnLogOut" mnemonicParsing="false" onAction="#clickItemClose" text="Log out">
 
                    </MenuItem>
                  </items>

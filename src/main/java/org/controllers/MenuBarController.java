@@ -5,6 +5,7 @@ package org.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import org.bootstrap.App;
 
@@ -32,6 +33,8 @@ public class MenuBarController {
 
     @FXML
     private Button btnClose;
+    @FXML
+   public static MenuItem btnLogOut;
 
     public void handleClick(MouseEvent event) throws IOException {
         if(event.getSource() == btnswitchToParkingDashboard){

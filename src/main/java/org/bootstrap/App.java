@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.clientServer.Server;
 import org.controllers.DbConnection;
+import org.controllers.MenuBarController;
 
 import java.io.IOException;
 
@@ -40,6 +41,13 @@ public class App extends Application {
         Server server = new Server();
         server.start();
         launch(args);
+      MenuBarController.btnLogOut.setOnAction(v->{
+          try {
+              App.setRoot("login");
+          } catch (IOException e) {
+              e.printStackTrace();
+          }
+      });
     }
 
 }
