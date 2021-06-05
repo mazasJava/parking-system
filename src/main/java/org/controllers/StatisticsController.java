@@ -16,6 +16,7 @@ import org.bson.Document;
 import org.models.Parking;
 import org.models.Statistic.Statistic;
 import org.models.Statistic.VisitsNumberPerMonth;
+import org.models.Statistic.VisitsNumberPerYear;
 
 import java.net.URL;
 import java.text.DateFormatSymbols;
@@ -50,13 +51,14 @@ public class StatisticsController implements Initializable {
 
     @FXML
     private LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
-    int[] year =  getYearState();
+    int[] year = getYearState();
     @FXML
     private PieChart pieChart;
 
     int[][] lastTowMounths = getLastTowMonthsState();
     int[] lastMounth = lastTowMounths[0];
     int[] beforeLastMounth = lastTowMounths[1];
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Random r = new Random();
@@ -85,7 +87,7 @@ public class StatisticsController implements Initializable {
         series.setName(String.valueOf((new Date()).getYear()));
         Random r = new Random();
         for (int i = 1; i < 13; i++) {
-            series.getData().add(new XYChart.Data(i, year[i-1]));
+            series.getData().add(new XYChart.Data(i, year[i - 1]));
         }
         return series;
     }
@@ -113,6 +115,24 @@ public class StatisticsController implements Initializable {
         return (int) historyMongoCollection.count(regex("dateEntered", day + "/" + month + "/"));
     }
 
+    public static Statistic calculateStatistic() {
+        Statistic statistic = new Statistic();
+        VisitsNumberPerYear visitsNumberPerYear = new VisitsNumberPerYear();
+        List<VisitsNumberPerMonth> listMounths = new ArrayList<VisitsNumberPerMonth>();
+        for (int monthId = 0; monthId < 12; monthId++) {
+            VisitsNumberPerMonth visitsNumberPerMonth = new VisitsNumberPerMonth();
+            List<Integer> list = new ArrayList<Integer>();
+             for (int dayId = 0; dayId < 30; dayId++) {
+                list.add(visitsNumberInLastTwoMonths(monthId,dayId));
+            }
+             visitsNumberPerMonth.setDay(list);
+            listMounths.add(visitsNumberPerMonth);
+        }
+        visitsNumberPerYear.setMonths(listMounths);
+        visitsNumberPerYear.setYear(LocalDate.now().getYear());
+        statistic.setVisitsNumberPerYear(visitsNumberPerYear);
+        return statistic;
+    }
 
     public static int[] getLastTwoMonths() {
         Date date = new Date();
@@ -154,7 +174,10 @@ public class StatisticsController implements Initializable {
         return data;
     }
 
-
+    /**
+     *
+     * @return
+     */
     public static int[][] getLastTowMonthsState() {
         MongoCollection<Statistic> statisticMongoCollection = DbConnection.database.getCollection("statistics", Statistic.class);
         Statistic statisticList = statisticMongoCollection.find().first();
@@ -173,9 +196,12 @@ public class StatisticsController implements Initializable {
     }
 
 
-    public static void main(String[] args) {
-        DbConnection.connect();
-        System.out.println(visitsNumberPerYear(6));
-    }
+//    public static void main(String[] args) {
+//        DbConnection.connect();
+//        MongoCollection<Statistic> coll = DbConnection.database.getCollection("statistics",Statistic.class);
+//        Statistic statistic = calculateStatistic();
+//        coll.insertOne(statistic);
+//
+//    }
 
 }

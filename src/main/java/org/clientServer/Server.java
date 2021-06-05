@@ -1,8 +1,5 @@
 package org.clientServer;
 
-import com.mongodb.client.model.Filters;
-import org.controllers.DbConnection;
-import org.models.Car;
 import org.models.Parking;
 
 import java.io.BufferedReader;
@@ -14,9 +11,7 @@ import java.net.Socket;
 
 public class Server extends Thread {
 
-/*
-*   get the message
-* */
+
     public static String inputStreamAsString(InputStream stream) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(stream));
         String line = null;
@@ -46,7 +41,6 @@ public class Server extends Thread {
                 }
                 client.close();
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
