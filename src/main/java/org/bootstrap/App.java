@@ -5,13 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.clientServer.Client;
 import org.clientServer.Server;
-import org.clientServer.Test;
-import org.controllers.CarController;
 import org.controllers.DbConnection;
-import org.models.Car;
-import org.models.Parking;
 
 import java.io.IOException;
 

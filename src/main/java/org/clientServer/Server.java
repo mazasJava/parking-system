@@ -13,12 +13,6 @@ import java.net.Socket;
 
 public class Server extends Thread {
 
-    public static void main(String[] args) {
-//        DbConnection.connect();
-
-        Test test = new Test();
-        test.start();
-    }
 
     public static String inputStreamAsString(InputStream stream) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(stream));
@@ -48,7 +42,7 @@ public class Server extends Thread {
                 InputStream input;
                 client = server.accept();
                 input = client.getInputStream();
-                String inputString = Test.inputStreamAsString(input);
+                String inputString = Server.inputStreamAsString(input);
                 park.carIn(inputString);
                 System.out.println(inputString);
                 Parking.carIn(inputString);
