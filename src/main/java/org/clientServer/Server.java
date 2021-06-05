@@ -13,16 +13,14 @@ import java.net.Socket;
 
 public class Server extends Thread {
 
-
+/*
+*   get the message
+* */
     public static String inputStreamAsString(InputStream stream) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(stream));
         StringBuilder sb = new StringBuilder();
         String line = null;
-
-//        while ((line = br.readLine()) != null) {
         line = br.readLine();
-//            sb.append(line + "\n");
-//        }
 
         br.close();
         return line.toString();
@@ -31,7 +29,6 @@ public class Server extends Thread {
     @Override
     public void run() {
         Parking park = new Parking("this is the parking name",100);
-//        super.run();
         try {
             ServerSocket server;
             server = new ServerSocket(8080);

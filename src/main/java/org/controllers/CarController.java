@@ -59,9 +59,7 @@ public class CarController implements Initializable {
     @FXML
     private GridPane gridPaneContainer;
 
-    /*
-    hskdhksksjdk
-     */
+
     public void show(List<History> list) {
         tableView.refresh();
 //        data.clear();

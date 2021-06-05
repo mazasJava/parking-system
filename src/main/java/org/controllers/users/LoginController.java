@@ -33,22 +33,11 @@ public class LoginController implements Initializable {
     ImageView preloader;
 
     @FXML
-    CheckBox chkRememberMe;
+    Label labelError;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        MongoCollection<User> userMongoCollection = DbConnection.database.getCollection("users", User.class);
-
-//        MongoCollection<Document> historyMongoCollection = DbConnection.database.getCollection("users");
-//        if (historyMongoCollection.find(Filters.eq("email","zakria@gmail.com")).iterator().hasNext() && historyMongoCollection.find(Filters.eq("password","123456")).iterator().hasNext()) {
-//            System.out.println("yes");
-//        }
-//        else
-//        {
-//            System.out.println("no");
-//        }
-
+        labelError.setVisible(false);
     }
 
     @FXML
@@ -57,14 +46,18 @@ public class LoginController implements Initializable {
 
         if(emailTextField.getText().equals("") || passwordTextField.getText().equals("")  )
         {
-            System.out.println("weewew");
+            labelError.setVisible(true);
         }
         else{
             preloader.setVisible(true);
             if (userMongoCollection.find(Filters.eq("email",emailTextField.getText())).iterator().hasNext() && userMongoCollection.find(Filters.eq("password",passwordTextField.getText())).iterator().hasNext()) {
                 App.setRoot("car");
-            }        }
+                labelError.setVisible(false);
+            }else{
+                labelError.setVisible(true);
+            }
 
+        }
 
     }
 
