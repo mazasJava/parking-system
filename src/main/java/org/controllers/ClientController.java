@@ -32,17 +32,32 @@ public class ClientController implements Initializable {
     @FXML
     private Pagination pagination;
 
+    /**
+     * show the list passed in parameter
+     * @param list
+     */
     private void show(List<Client> list) {
         tableView.refresh();
         tableView.setItems(FXCollections.observableArrayList(list));
     }
 
+    /**
+     * get the full list of clients from the  database
+     *
+     * @return
+     */
     public static List<Client> getClientList() {
         MongoCollection<Client> clientMongoCollection = DbConnection.database.getCollection("clients", Client.class);
         List<Client> clients = clientMongoCollection.find().into(new ArrayList<>());
         return clients;
     }
 
+    /**
+     * realise the pagination basing on the page size and number
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
     public  List<Client> pagination(int pageNumber, int pageSize) {
         MongoCollection<Client> clientMongoCollection = DbConnection.database.getCollection("clients", Client.class);
         List<Client> clients = clientMongoCollection.find().skip(pageSize * (pageNumber - 1)).limit(pageSize).into(new ArrayList<>());
@@ -53,7 +68,6 @@ public class ClientController implements Initializable {
         colCarPlate.setCellValueFactory(new PropertyValueFactory<Client, String>("carPlate"));
         colName.setCellValueFactory(new PropertyValueFactory<Client, String>("name"));
         colEmail.setCellValueFactory(new PropertyValueFactory<Client, String>("email"));
-//        show(getClientList());
         show((pagination(1, 2)));
         pagination.currentPageIndexProperty().addListener(new ChangeListener<Number>() {
             @Override

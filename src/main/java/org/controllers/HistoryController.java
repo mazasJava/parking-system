@@ -12,7 +12,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class HistoryController {
-
+    /**
+     * inserted the car with the ObjectId passed on parameter on history collection
+     * @param carId
+     * @throws ParseException
+     */
     public static void setCarHistorique(ObjectId carId) throws ParseException {
         Date date = new Date(System.currentTimeMillis());
         SimpleDateFormat formatter = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");

@@ -47,43 +47,56 @@ public class CarController implements Initializable {
     @FXML
     TableColumn<History, String> colNumber, colCarPlate, colDateEntree, colDateSortie;
     @FXML
-    private TableColumn<Client,String> colName,colCarPlateClient;
+    private TableColumn<Client, String> colName, colCarPlateClient;
     ObservableList<History> data;
     ObservableList<Client> dataClient;
-//    public List attend = new ArrayList();
 
     @FXML
     private ImageView searchImage;
     @FXML
     private TextField searchQuery;
-    @FXML
-    private GridPane gridPaneContainer;
 
 
+    /**
+     * showing the list passed on parameter on the table view
+     *
+     * @param list
+     */
     public void show(List<History> list) {
         tableView.refresh();
-//        data.clear();
         data = FXCollections.observableArrayList(list);
         tableView.setItems(data);
     }
+
+    /**
+     * show the list of clients passed on parameter
+     *
+     * @param list
+     */
     public void showClients(List<Client> list) {
         tableViewClient.refresh();
-//        data.clear();
         dataClient = FXCollections.observableArrayList(list);
         tableViewClient.setItems(dataClient);
     }
-    public  List<Client> getClients() {
+
+    /**
+     * get the full list of clients from the  database
+     *
+     * @return
+     */
+    public List<Client> getClients() {
         MongoCollection<Client> clientMongoCollection = DbConnection.database.getCollection("clients", Client.class);
         List<Client> clients = clientMongoCollection.find().limit(5).into(new ArrayList<>());
         return clients;
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         colCarPlate.setCellValueFactory(new PropertyValueFactory<History, String>("matricule"));
         colDateEntree.setCellValueFactory(new PropertyValueFactory<History, String>("dateEntered"));
         colDateSortie.setCellValueFactory(new PropertyValueFactory<History, String>("dateRelease"));
-        colName.setCellValueFactory(new PropertyValueFactory<Client,String>("name"));
-        colCarPlateClient.setCellValueFactory(new PropertyValueFactory<Client,String>("carPlate"));
+        colName.setCellValueFactory(new PropertyValueFactory<Client, String>("name"));
+        colCarPlateClient.setCellValueFactory(new PropertyValueFactory<Client, String>("carPlate"));
         showClients(getClients());
         show((pagination(1, 6)));
         pagination.currentPageIndexProperty().addListener(new ChangeListener<Number>() {
@@ -94,8 +107,7 @@ public class CarController implements Initializable {
         });
         searchImage.setOnMouseClicked(mouseEvent -> {
             show(search(searchQuery.getText()));
-            System.out.println("show");
-            System.out.println(search(searchQuery.getText()));
+
         });
     }
 
@@ -113,14 +125,11 @@ public class CarController implements Initializable {
         FindIterable<Car> test = carMongoCollection.find(checkMatriculIfExists);
 
         if (test.cursor().hasNext()) {
-//            System.out.println(test.cursor().next().getId());
             HistoryController.setCarHistorique(test.cursor().next().getId());
-//            System.out.println("exist");
             return null;
         } else {
             try {
                 carMongoCollection.insertOne(newCar);
-//                System.out.println("Successfully inserted Car documents. \n");
                 HistoryController.setCarHistorique(newCar.getId());
                 return newCar;
             } catch (Exception e) {
@@ -163,8 +172,11 @@ public class CarController implements Initializable {
     }
 
 
-    /*
-    full text search
+    /**
+     * search in the database basing on the query passed on parameter
+     *
+     * @param query
+     * @return
      */
     public static List<History> search(String query) {
         System.out.println(query);
@@ -178,37 +190,34 @@ public class CarController implements Initializable {
         Bson project = project(fields(Projections.include("carId"), Projections.include("dateEntered"),
                 Projections.include("dateRelease"), Projections.computed("matricule",
                         new Document("$arrayElemAt", Arrays.asList("$matricule.matricule", 0)))));
-//        try {
-            MongoCursor<History> cursorHistory = null;
-            MongoCursor<Car> cursorCar = null;
-            cursorHistory = historyMongoCollection.find(new Document("$text", new Document("$search", query).append("$caseSensitive", false).append("$diacriticSensitive", true))).limit(4).iterator();
-            cursorCar = carMongoCollection.find(new Document("$text", new Document("$search", query).append("$caseSensitive", false).append("$diacriticSensitive", true))).limit(4).iterator();
+        MongoCursor<History> cursorHistory = null;
+        MongoCursor<Car> cursorCar = null;
+        cursorHistory = historyMongoCollection.find(new Document("$text", new Document("$search", query).append("$caseSensitive", false).append("$diacriticSensitive", true))).limit(4).iterator();
+        cursorCar = carMongoCollection.find(new Document("$text", new Document("$search", query).append("$caseSensitive", false).append("$diacriticSensitive", true))).limit(4).iterator();
 
-            if (cursorHistory.hasNext()) {
-                List<History> yy = new ArrayList<>();
-                cursorHistory.forEachRemaining(history -> {
-                    yy.addAll(historyMongoCollection
-                            .aggregate(Arrays.asList(match(Filters.eq("dateEntered", history.getDateEntered())), Aggregates.lookup("cars", "carId", "_id", "matricule"), project))
-                            .into(new ArrayList<>()));
-                });
-                return yy;
+        if (cursorHistory.hasNext()) {
+            List<History> yy = new ArrayList<>();
+            cursorHistory.forEachRemaining(history -> {
+                yy.addAll(historyMongoCollection
+                        .aggregate(Arrays.asList(match(Filters.eq("dateEntered", history.getDateEntered())), Aggregates.lookup("cars", "carId", "_id", "matricule"), project))
+                        .into(new ArrayList<>()));
+            });
+            return yy;
 
-            }
+        }
 
-            if (cursorCar.hasNext()) {
-                List<History> xx = new ArrayList<>();
-                cursorCar.forEachRemaining(car -> {
-                    xx.addAll(historyMongoCollection
-                            .aggregate(Arrays.asList(match(eq("carId", new ObjectId(car.getId().toHexString()))), lookup("cars", "carId", "_id", "matricule"), project))
-                            .into(new ArrayList<>()));
-                });
-                return xx;
-            } else System.out.println("not found");
-            cursorHistory.close();
-            cursorCar.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        if (cursorCar.hasNext()) {
+            List<History> xx = new ArrayList<>();
+            cursorCar.forEachRemaining(car -> {
+                xx.addAll(historyMongoCollection
+                        .aggregate(Arrays.asList(match(eq("carId", new ObjectId(car.getId().toHexString()))), lookup("cars", "carId", "_id", "matricule"), project))
+                        .into(new ArrayList<>()));
+            });
+            return xx;
+        } else System.out.println("not found");
+        cursorHistory.close();
+        cursorCar.close();
+
         return tr;
     }
 
@@ -238,31 +247,5 @@ public class CarController implements Initializable {
         return results;
     }
 
-
-    public static void main(String[] args) throws IOException, ParseException {
-        DbConnection.connect();
-        getCarsWithHistorique();
-//        createCar(new ObjectId(), "10/S/123498");
-//        System.out.println(search("02/05/2021"));
-//        System.out.println(search("10/H/47424"));
-//        search("02/05/2021");
-//        System.out.println(pagination(3, 5));
-
-        releaseCarFromDataBase("14/G/07734");
-
-//        createCar(new ObjectId(),"40/X/179552");
-//        createCar(new ObjectId(),"90/S/123498");
-//        createCar(new ObjectId(),"20/R/474245");
-
-
-//        System.out.println("-------------------------------------------");
-//        System.out.println("-------------------------------------------");
-//        System.out.println("-------------------------------------------");
-//        System.out.println("-------------------------------------------");
-//        System.out.println(search("40/X/179552"));
-//        System.out.println(search("4000/X/179552"));
-
-
-    }
 
 }

@@ -29,13 +29,13 @@ public class MenuBarController {
     private Button btnswitchToClients;
 
     @FXML
-    private Button btnswitchToSettings;
-
-    @FXML
-    private Button btnClose;
-    @FXML
    public static MenuItem btnLogOut;
 
+    /**
+     * handle the navigation in the MENU BAR
+     * @param event
+     * @throws IOException
+     */
     public void handleClick(MouseEvent event) throws IOException {
         if(event.getSource() == btnswitchToParkingDashboard){
             App.setRoot("dashboard");

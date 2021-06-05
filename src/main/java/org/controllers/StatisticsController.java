@@ -65,10 +65,14 @@ public class StatisticsController implements Initializable {
         iniAreaChart(getVisitsNumberInLastTwoMonths(0), getVisitsNumberInLastTwoMonths(1));
         iniPieChart(Parking.getState()[1], Parking.getState()[2]);
         iniLineChart(getVisitsNumberPerYear());
-//
 
     }
 
+    /**
+     * get the number of visits in last month and return the chart series
+     * @param month
+     * @return
+     */
     public XYChart.Series getVisitsNumberInLastTwoMonths(int month) {
         XYChart.Series seriesMarch = new XYChart.Series();
         seriesMarch.setName(new DateFormatSymbols().getMonths()[getLastTwoMonths()[0] - 1] + "");
@@ -82,6 +86,10 @@ public class StatisticsController implements Initializable {
         areaChart.getData().addAll(lastSerie, beforeLastSerie);
     }
 
+    /**
+     * get the number of visits by year and return the chart series
+     * @return
+     */
     private XYChart.Series getVisitsNumberPerYear() {
         XYChart.Series series = new XYChart.Series();
         series.setName(String.valueOf((new Date()).getYear()));
@@ -96,7 +104,11 @@ public class StatisticsController implements Initializable {
         lineChart.getData().add(series);
     }
 
-
+    /**
+     * initialize the PIE CHAR by data passed on parameter
+     * @param free
+     * @param full
+     */
     public void iniPieChart(double free, double full) {
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
                 new PieChart.Data("free", free),
@@ -110,11 +122,21 @@ public class StatisticsController implements Initializable {
         return (int) historyMongoCollection.count(regex("dateEntered", "/" + month + "/"));
     }
 
+    /**
+     * get the total of cars entered in a specific day in month
+     * @param month
+     * @param day
+     * @return
+     */
     public static int visitsNumberInLastTwoMonths(int month, int day) {
         MongoCollection<Document> historyMongoCollection = DbConnection.database.getCollection("historys");
         return (int) historyMongoCollection.count(regex("dateEntered", day + "/" + month + "/"));
     }
 
+    /**
+     * GENERATE THE STATISTIC OF THE YEAR
+     * @return
+     */
     public static Statistic calculateStatistic() {
         Statistic statistic = new Statistic();
         VisitsNumberPerYear visitsNumberPerYear = new VisitsNumberPerYear();
@@ -134,6 +156,10 @@ public class StatisticsController implements Initializable {
         return statistic;
     }
 
+    /**
+     * get the index of last 2 months
+     * @return
+     */
     public static int[] getLastTwoMonths() {
         Date date = new Date();
         LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -155,7 +181,10 @@ public class StatisticsController implements Initializable {
         return new int[]{lastMonth, lastTwoMonth};
     }
 
-
+    /**
+     * get the total of cars entered in a year by months
+     * @return
+     */
     public static int[] getYearState() {
         MongoCollection<Statistic> statisticMongoCollection = DbConnection.database.getCollection("statistics", Statistic.class);
 
@@ -175,16 +204,14 @@ public class StatisticsController implements Initializable {
     }
 
     /**
-     *
+     *  get the full year state
      * @return
      */
     public static int[][] getLastTowMonthsState() {
         MongoCollection<Statistic> statisticMongoCollection = DbConnection.database.getCollection("statistics", Statistic.class);
         Statistic statisticList = statisticMongoCollection.find().first();
-        List<VisitsNumberPerMonth> monthsList = new ArrayList<>();
 
 
-        int[] MonthData = new int[12];
         int[][] dayData = new int[12][30];
 
         for (int monthId = 0; monthId < 12; monthId++) {
@@ -196,12 +223,6 @@ public class StatisticsController implements Initializable {
     }
 
 
-//    public static void main(String[] args) {
-//        DbConnection.connect();
-//        MongoCollection<Statistic> coll = DbConnection.database.getCollection("statistics",Statistic.class);
-//        Statistic statistic = calculateStatistic();
-//        coll.insertOne(statistic);
-//
-//    }
+
 
 }

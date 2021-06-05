@@ -40,6 +40,10 @@ public class LoginController implements Initializable {
         labelError.setVisible(false);
     }
 
+    /**
+     * check user auth  and login to the main app
+     * @throws IOException
+     */
     @FXML
     public void login() throws IOException {
         MongoCollection<User> userMongoCollection = DbConnection.database.getCollection("users", User.class);

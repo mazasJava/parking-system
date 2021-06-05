@@ -11,7 +11,12 @@ import java.net.Socket;
 
 public class Server extends Thread {
 
-
+    /**
+     * read the message received from NODEjs api
+     * @param stream
+     * @return
+     * @throws IOException
+     */
     public static String inputStreamAsString(InputStream stream) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(stream));
         String line = null;
@@ -21,6 +26,9 @@ public class Server extends Thread {
         return line.toString();
     }
 
+    /**
+     * repeat the process and waiting for other clients to send news
+     */
     @Override
     public void run() {
         Parking park = new Parking("this is the parking name",100);

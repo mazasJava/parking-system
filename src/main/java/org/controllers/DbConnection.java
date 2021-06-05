@@ -18,6 +18,9 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 public class DbConnection {
     public static MongoDatabase database;
 
+    /**
+     * connect to the database
+     */
     public static void connect() {
 
         ConnectionString connectionString = new ConnectionString("mongodb+srv://mehdi-java:Password1234@cluster0.dw27l.mongodb.net");
@@ -36,9 +39,6 @@ public class DbConnection {
         }
     }
 
-    public static void main(String[] args) {
-        connect();
-    }
 
 
 }

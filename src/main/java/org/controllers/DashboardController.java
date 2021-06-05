@@ -29,11 +29,18 @@ public class DashboardController implements Initializable {
     LineChart<String, Number> lineChart = new LineChart<String, Number>(x, y);
     int[] year =  StatisticsController.getYearState();
 
-    public void setParksTotal(String totalA, String totalB, String totalC, String totalD) {
-        txtTotalA.setText(totalA);
-        txtTotalB.setText(totalB);
-        txtTotalC.setText(totalC);
-        txtTotalD.setText(totalD);
+    /**
+     *  set the total of last 4 months in the specific charts
+     * @param monthA
+     * @param monthB
+     * @param monthC
+     * @param monthD
+     */
+    public void setParksTotal(String monthA, String monthB, String monthC, String monthD) {
+        txtTotalA.setText(monthA);
+        txtTotalB.setText(monthB);
+        txtTotalC.setText(monthC);
+        txtTotalD.setText(monthD);
     }
 
 
@@ -43,16 +50,13 @@ public class DashboardController implements Initializable {
         iniLineChart(getTotalPerMonth1("park",year));
     }
 
-//    public int[] generateData() {
-//        Random r = new Random();
-//        int[] array = new int[12];
-//        for(int i=0;i<12;i++){
-//            array[i] = r.nextInt(100);
-//        }
-//        return array;
-//    }
 
-
+    /**
+     * get the total of cars in within the year
+     * @param name
+     * @param values
+     * @return
+     */
     public XYChart.Series getTotalPerMonth1(String name, int[] values) {
         String[] months = new String[]{"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
         XYChart.Series series1 = new XYChart.Series();
