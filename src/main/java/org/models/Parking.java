@@ -54,6 +54,14 @@ public class Parking {
         Parking.listCars = listCars;
     }
 
+    public static Car search(String matricule) {
+        for(Car car :listCars){
+            if(car.getMatricule().equals(matricule)){
+                return car;
+            }
+        }
+        return null;
+    }
 
 
     public static boolean releaseCarFromDataBase(ObjectId id) {
@@ -68,9 +76,15 @@ public class Parking {
 
     }
 
-//    public static boolean carOut(String matricule) {
-//        return CarController.releaseCarFromDataBase(matricule);
-//    }
+    public static boolean carOut(String matricule) {
+        try {
+            removeCar(search(matricule));
+            CarController.releaseCarFromDataBase(matricule);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
     public static void carIn(String matricule) throws IOException, ParseException {
         addCar(CarController.createCar(new ObjectId(), matricule));
@@ -97,13 +111,13 @@ public class Parking {
         }
         return listCars.add(c);
     }
-    public static boolean addAllCar(List<Car> clistCars) throws IOException {
-        if (listCars.size() == capacity) {
+
+    public static boolean addAllCar(List<Car> listCars) throws IOException {
+        if (listCars.size() == capacity && listCars.size() > getState()[1]) {
             return false;
         }
-        return listCars.addAll(clistCars);
+        return listCars.addAll(listCars);
     }
-
     public static boolean removeCar(Car c) {
         return listCars.remove(c);
     }
@@ -111,6 +125,7 @@ public class Parking {
     public static Car removeCar(int index) {
         return listCars.remove(index);
     }
+
 
     public static int[] getState() {
         int[] state = new int[3];
@@ -122,17 +137,12 @@ public class Parking {
 
     public static List<Car> getListCars() {
         MongoCollection<Car> carMongoCollection = DbConnection.database.getCollection("cars", Car.class);
-//        List<Car> clients = clientMongoCollection.find(Filters.eq("dateEntered",null)).into(new ArrayList<>());
         Bson project = project(fields(Projections.include("_id"),
                 Projections.include("matricule"),
                 Projections.computed("dateRelease",
-                new Document("$arrayElemAt", Arrays.asList("$dateRelease.dateRelease", 0)))));
-        return carMongoCollection.aggregate(Arrays.asList(match(Filters.exists("dateRelease",false)),Aggregates.lookup("historys","_id","carId","dateRelease"),project)).into(new ArrayList<>());
-
+                        new Document("$arrayElemAt", Arrays.asList("$dateRelease.dateRelease", 0)))));
+        return carMongoCollection.aggregate(Arrays.asList(match(Filters.exists("dateRelease", false)), Aggregates.lookup("historys", "_id", "carId", "dateRelease"), project)).into(new ArrayList<>());
     }
 
-    public static void main(String[] args) {
-        DbConnection.connect();
-        System.out.println(getListCars());
-    }
+
 }

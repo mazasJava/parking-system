@@ -159,6 +159,7 @@ public class CarController implements Initializable {
         if (carMat == null) throw new AssertionError();
         ObjectId id = new ObjectId(String.valueOf(carMat.getId()));
         historyMongoCollection.updateOne(Filters.eq("carId", id), Updates.set("dateRelease", formattedDate));
+        System.out.println("car released successfully");
     }
 
 

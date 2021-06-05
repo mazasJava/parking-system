@@ -1,5 +1,6 @@
 package org.clientServer;
 
+import com.mongodb.client.model.Filters;
 import org.controllers.DbConnection;
 import org.models.Car;
 import org.models.Parking;
@@ -18,7 +19,6 @@ public class Server extends Thread {
 * */
     public static String inputStreamAsString(InputStream stream) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(stream));
-        StringBuilder sb = new StringBuilder();
         String line = null;
         line = br.readLine();
 
@@ -34,15 +34,16 @@ public class Server extends Thread {
             server = new ServerSocket(8080);
             int i = 0;
             while (true) {
-                System.out.println("CLient n " + i++);
                 Socket client;
                 InputStream input;
                 client = server.accept();
                 input = client.getInputStream();
                 String inputString = Server.inputStreamAsString(input);
-                park.carIn(inputString);
-                System.out.println(inputString);
-                Parking.carIn(inputString);
+                if (Parking.search(inputString) == null) {
+                    park.carIn(inputString);
+                }else{
+                    park.carOut(inputString);
+                }
                 client.close();
             }
 
